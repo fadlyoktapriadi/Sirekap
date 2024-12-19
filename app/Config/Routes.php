@@ -6,8 +6,9 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
+$routes->post('/login', 'Home::login');
 
-$routes->get('/dashboard', 'Home::index');
+$routes->get('/dashboard', 'Home::dashboard');
 
 $routes->get('/users', 'Users::index');
 $routes->get('/users/tambah', 'Users::tambah');
