@@ -8,7 +8,7 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title><?= $title ?> - Sirekap</title>
+  <title><?= $title ?> | Sirekap</title>
 
   <meta name="description" content="" />
 
@@ -37,6 +37,7 @@
 
   <link rel="stylesheet" href="<?= base_url('assets') ?>/assets/vendor/libs/apex-charts/apex-charts.css" />
 
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
   <!-- Page CSS -->
 
   <!-- Helpers -->
@@ -78,19 +79,63 @@
             </a>
           </li>
 
-          <li class="menu-item <?= ($title == 'User Management' || $title == 'Tambah User' || $title == 'Edit User') ? 'active' : '' ?>">
-              <a
-                href=" <?= base_url('users') ?>" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-user"></i>
-            <div data-i18n="Documentation">User Management</div>
+          <?php if ($user_login['role'] == 'Kepala Puskesmas'): ?>
+            <li
+              class="menu-item <?= ($title == 'Data Program Kerja' || $title == 'Tambah Program Kerja' || $title == 'Edit Program Kerja') ? 'active' : '' ?>">
+              <a href=" <?= base_url('proker') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-task"></i>
+                <div data-i18n="Documentation">Data Program Kerja</div>
+              </a>
+            </li>
+            <li class="menu-item <?= ($title == 'Data Karyawan') ? 'active' : '' ?>">
+              <a href=" <?= base_url('karyawan') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-user-detail"></i>
+                <div data-i18n="Documentation">Data Karyawan</div>
+              </a>
+            </li>
+          <?php endif; ?>
+
+          <li
+            class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-task"></i>
+              <div data-i18n="Layouts">Kegiatan</div>
             </a>
+
+            <ul class="menu-sub">
+              <li
+                class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
+                <a href="<?= base_url('kak') ?>" class="menu-link">
+                  <div data-i18n="Without menu">Kerangka Acuan Kerja (KAK)</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="layouts-without-navbar.html" class="menu-link">
+                  <div data-i18n="Without navbar">LPJ KAK</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="layouts-container.html" class="menu-link">
+                  <div data-i18n="Container">Riwayat KAK</div>
+                </a>
+              </li>
+            </ul>
           </li>
+
+          <?php if ($user_login['role'] == 'Administrator'): ?>
+            <li
+              class="menu-item <?= ($title == 'User Management' || $title == 'Tambah User' || $title == 'Edit User') ? 'active' : '' ?>">
+              <a href=" <?= base_url('users') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Documentation">User Management</div>
+              </a>
+            </li>
+          <?php endif; ?>
 
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Account</span></li>
 
           <li class="menu-item">
-            <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/" target="_blank"
-              class="menu-link">
+            <a href="<?= base_url('logout') ?>" class="menu-link">
               <i class="menu-icon tf-icons bx bx-log-out"></i>
               <div data-i18n="Documentation">Logout</div>
             </a>
@@ -129,8 +174,7 @@
               <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                   <div class="avatar avatar-online">
-                    <img src="<?= base_url('assets/images/user.png') ?>" alt
-                      class="w-px-40 h-auto rounded-circle" />
+                    <img src="<?= base_url('assets/images/user.png') ?>" alt class="w-px-40 h-auto rounded-circle" />
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -144,8 +188,8 @@
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-semibold d-block">John Doe</span>
-                          <small class="text-muted">Admin</small>
+                          <span class="fw-semibold d-block"><?= $user_login['nama_pengguna'] ?></span>
+                          <small class="text-muted"><?= $user_login['role'] ?></small>
                         </div>
                       </div>
                     </a>
@@ -163,7 +207,7 @@
                     <div class="dropdown-divider"></div>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="auth-login-basic.html">
+                    <a class="dropdown-item" href="<?= base_url('logout') ?>">
                       <i class="bx bx-power-off me-2"></i>
                       <span class="align-middle">Log Out</span>
                     </a>
@@ -243,6 +287,23 @@
 
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- DataTables JS -->
+  <script src="https:////cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable({
+        columnDefs: [{
+          "defaultContent": "-",
+          "targets": "_all"
+        }],
+        bLengthChange: true,
+        lengthMenu: [[10, 25, -1], [10, 25, 50, "All"]],
+        bFilter: true,
+        bSort: true,
+        bPaginate: true
+      });
+    });    
+  </script>
 </body>
 
 </html>

@@ -4,18 +4,20 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
+    public function __construct() {
+        $this->session = \Config\Services::session();   
+    }
+
     public function index(): string
     {
         $data = [
-            'title' => 'Login',
+            'title' => 'Login | Sirekap',
         ];
 
         return view('pages/login', $data);
     }
 
     public function login(){
-
-        $session = session();
 
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
@@ -35,16 +37,16 @@ class Home extends BaseController
                     'logged_in' => true
                 ];
 
-                $session->set($ses_data);
+                $this->session->set($ses_data);
                 
                 return redirect()->to('/dashboard');
                 
             } else {
-                $session->setFlashdata('error', 'Password salah. Silahkan coba lagi.');
+                $this->session->setFlashdata('error', 'Password salah. Silahkan coba lagi.');
                 return redirect()->to('/');
             }
         } else {
-            $session->setFlashdata('error', 'Username tidak ditemukan. Silahkan coba lagi.');
+            $this->session->setFlashdata('error', 'Username tidak ditemukan. Silahkan coba lagi.');
             return redirect()->to('/');
         }
     }
@@ -54,9 +56,16 @@ class Home extends BaseController
 
             $data = [
                 'title' => 'Dashboard',
+                'user_login' => $this->session->get(),
             ];
 
             return view('pages/dashboard', $data);
-        
+    }
+
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to('/');
     }
 }

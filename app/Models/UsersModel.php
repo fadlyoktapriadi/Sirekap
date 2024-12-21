@@ -1,15 +1,20 @@
-<?php 
+<?php
 
-    namespace App\Models;
+namespace App\Models;
 
-    use CodeIgniter\Model;
+use CodeIgniter\Model;
 
-    class UsersModel extends Model
+class UsersModel extends Model
+{
+    protected $table = 'tbl_pengguna';
+    protected $primaryKey = 'id_pengguna';
+    protected $useTimestamps = true;
+    protected $allowedFields = ['NIP', 'nama_pengguna', 'alamat', 'unit_kerja', 'username', 'password', 'role'];
+
+    public function usersWithoutAdmin()
     {
-        protected $table = 'tbl_pengguna';
-        protected $primaryKey = 'id_pengguna';
-        protected $useTimestamps = true;
-        protected $allowedFields = ['NIP','nama_pengguna', 'alamat', 'unit_kerja', 'username', 'password', 'role'];
+        return $this->where('role !=', 'administrator')->findAll();
     }
+}
 
 ?>

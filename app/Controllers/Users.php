@@ -4,21 +4,28 @@ namespace App\Controllers;
 
 class Users extends BaseController
 {
+    public function __construct()
+    {
+        $this->session = \Config\Services::session();
+    }
+
     public function index(): string
     {
         $data = [
             'title' => 'User Management',
+            'user_login' => $this->session->get(),
             'breadcrumb' => ['User Management'],
             'users' => $this->PenggunaModel->findAll()
         ];
 
-        return view('pages/user_management', $data);
+        return view('pages/users', $data);
     }
 
     public function tambah()
     {
         $data = [
             'title' => 'Tambah User',
+            'user_login' => $this->session->get(),
             'breadcrumb' => ['User Management', 'Tambah User'],
         ];
 
@@ -36,7 +43,7 @@ class Users extends BaseController
             'username' => 'required|is_unique[tbl_pengguna.username]|min_length[5]',
             'password' => 'required|min_length[5]',
             'role' => 'required',
-            'unit_kerja' => 'required'   
+            'unit_kerja' => 'required'
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -58,24 +65,12 @@ class Users extends BaseController
         return redirect()->to('/users')->with('success', 'Data pengguna berhasil disimpan');
     }
 
-    public function cari()
-    {
-        $keyword = $this->request->getVar('keyword');
-
-        $data = [
-            'title' => 'User Management',
-            'breadcrumb' => ['User Management'],
-            'users' => $this->PenggunaModel->like('nama_pengguna', $keyword)->findAll()
-        ];
-
-        return view('pages/user_management', $data);
-    }
-
     public function edit($id)
     {
 
         $data = [
             'title' => 'Edit User',
+            'user_login' => $this->session->get(),
             'breadcrumb' => ['User Management', 'Edit User'],
             'user' => $this->PenggunaModel->find($id)
         ];
@@ -95,7 +90,7 @@ class Users extends BaseController
             'alamat' => 'required',
             'username' => 'required|min_length[5]',
             'role' => 'required',
-            'unit_kerja' => 'required'   
+            'unit_kerja' => 'required'
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -118,7 +113,7 @@ class Users extends BaseController
         $this->PenggunaModel->update($id, $data);
 
         return redirect()->to('/users')->with('success', 'Data pengguna berhasil diubah');
-        
+
     }
 
     public function hapus($id)
@@ -126,5 +121,17 @@ class Users extends BaseController
         $this->PenggunaModel->delete($id);
 
         return redirect()->to('/users')->with('success', 'Data pengguna berhasil dihapus');
+    }
+
+    public function karyawan()
+    {
+        $data = [
+            'title' => 'Data Karyawan',
+            'user_login' => $this->session->get(),
+            'breadcrumb' => ['Data Karyawan'],
+            'users' => $this->PenggunaModel->usersWithoutAdmin()
+        ];
+
+        return view('pages/karyawan', $data);
     }
 }
