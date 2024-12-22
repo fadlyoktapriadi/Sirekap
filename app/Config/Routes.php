@@ -30,4 +30,5 @@ $routes->get('/karyawan', 'Users::karyawan');
 $routes->get('/kak', 'KerangkaKerja::index');
 $routes->get('/kak/tambah', 'KerangkaKerja::tambah');
 $routes->post('/kak/tambah', 'KerangkaKerja::simpan');
+$routes->get('/kak/detail/(:num)', 'KerangkaKerja::detail/$1');
 

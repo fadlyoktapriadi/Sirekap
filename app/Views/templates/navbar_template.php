@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="<?= base_url('assets') ?>/assets/vendor/libs/apex-charts/apex-charts.css" />
 
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+
   <!-- Page CSS -->
 
   <!-- Helpers -->

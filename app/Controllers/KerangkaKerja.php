@@ -58,4 +58,16 @@ class KerangkaKerja extends BaseController
 
         return redirect()->to('/kak');
     }
+
+    public function detail($id)
+    {
+        $data = [
+            'title' => 'Detail Kerangka Acuan Kerja',
+            'user_login' => $this->session->get(),
+            'breadcrumb' => ['Data Kerangka Acuan Kerja', 'Detail Kerangka Acuan Kerja'],
+            'kak' => $this->KerangkaKerjaModel->getKerjangkaKerjaWithUserById($id),
+        ];
+
+        return view('pages/detail_kak', $data);
+    }
 }

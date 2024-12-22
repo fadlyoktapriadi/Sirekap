@@ -17,6 +17,14 @@ class KerangkaKerjaModel extends Model
             ->join('tbl_pengguna', 'tbl_pengguna.nip = tbl_kerangka_kerja.penanggung_jawab')
             ->findAll();
     }
+
+    public function getKerjangkaKerjaWithUserById($id)
+    {
+        return $this->select('tbl_kerangka_kerja.*, tbl_pengguna.nip, tbl_pengguna.nama_pengguna')
+            ->join('tbl_pengguna', 'tbl_pengguna.nip = tbl_kerangka_kerja.penanggung_jawab')
+            ->where('id_kak', $id)
+            ->find();
+    }
 }
 
 ?>
