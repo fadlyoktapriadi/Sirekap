@@ -42,7 +42,7 @@
                     <tr>
                         <td><?= $i ?></td>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                            <strong><?= $user['nama_pengguna'] ?></strong>
+                            <strong><?= $user['nama_karyawan'] ?></strong>
                         </td>
                         <td><?= $user['username'] ?></td>
                         <td><span class="badge bg-label-primary me-1"><?= $user['role'] ?></span></td>
@@ -53,11 +53,11 @@
                                     <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="<?= base_url('users/edit/') . $user['id_pengguna'] ?>"><i
+                                    <a class="dropdown-item" href="<?= base_url('users/edit/') . $user['id_user'] ?>"><i
                                             class="bx bx-edit-alt me-1"></i>
                                         Edit</a>
                                     <a class="dropdown-item hapusbtn"
-                                        href="<?= base_url('users/hapus/') . $user['id_pengguna'] ?>"><i
+                                        href="<?= base_url('users/hapus/') . $user['id_user'] ?>"><i
                                             class="bx bx-trash me-1"></i>
                                         Delete</a>
                                 </div>

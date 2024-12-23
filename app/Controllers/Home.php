@@ -22,7 +22,7 @@ class Home extends BaseController
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
 
-        $user = $this->PenggunaModel->where('username', $username)->first();
+        $user = $this->UsersModel->where('username', $username)->first();
 
         if ($user) {
             $pass = $user['password'];
@@ -30,10 +30,12 @@ class Home extends BaseController
 
             if ($authenticatePassword) {
 
+                $user_login = $this->UsersModel->getUserKaryawan($user['NIP']);
+
                 $ses_data = [
-                    'username' => $user['username'],
-                    'nama_pengguna' => $user['nama_pengguna'],
-                    'role' => $user['role'],
+                    'username' => $user_login['username'],
+                    'nama_karyawan' => $user_login['nama_karyawan'],
+                    'role' => $user_login['role'],
                     'logged_in' => true
                 ];
 

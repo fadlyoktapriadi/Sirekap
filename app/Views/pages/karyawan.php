@@ -14,21 +14,21 @@
                     <th>No</th>
                     <th>NIP</th>
                     <th>Nama Karyawan</th>
-                    <th>Jabatan</th>
                     <th>Unit Kerja</th>
+                    <th>Jabatan</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
                 <?php $i = 1;
-                foreach ($users as $user): ?>
+                foreach ($karyawan as $item): ?>
                     <tr>
                         <td><?= $i ?></td>
-                        <td><?= $user['NIP'] ?></td>
+                        <td><?= $item['NIP'] ?></td>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                            <strong><?= $user['nama_pengguna'] ?></strong>
+                            <strong><?= $item['nama_karyawan'] ?></strong>
                         </td>
-                        <td><?= $user['role'] ?></td>
-                        <td><?= $user['unit_kerja'] ?></td>
+                        <td><?= $item['unit_kerja'] ?></td>
+                        <td><?= $item['jabatan'] ?></td>
                     </tr>
                     <?php
                     $i++;

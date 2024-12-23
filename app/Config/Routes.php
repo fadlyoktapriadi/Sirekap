@@ -25,7 +25,7 @@ $routes->get('/proker/edit/(:num)', 'Proker::edit/$1');
 $routes->post('/proker/update', 'Proker::update');
 $routes->get('/proker/hapus/(:num)', 'Proker::delete/$1');
 
-$routes->get('/karyawan', 'Users::karyawan');
+$routes->get('/karyawan', 'Karyawan::index');
 
 $routes->get('/kak', 'KerangkaKerja::index');
 $routes->get('/kak/tambah', 'KerangkaKerja::tambah');

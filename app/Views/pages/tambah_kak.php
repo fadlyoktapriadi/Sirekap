@@ -34,7 +34,7 @@
                             <label for="floatingInput">Nama Kegiatan</label>
                         </div>
                         <div class="form-floating my-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Kecamatan"
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Lokasi Kerja"
                                 aria-describedby="floatingInputHelp" name="lokasi" required />
                             <label for="floatingInput">Lokasi</label>
                         </div>
@@ -64,11 +64,27 @@
                                 autofocus>
                                 <option selected>--Pilih Penanggung Jawab--</option>
                                 <?php foreach ($penanggung_jawab as $item): ?>
-                                    <option value="<?= $item['NIP'] ?>"><?= $item['nama_pengguna'] ?> (
-                                        <?= $item['role'] ?> | <?= $item['unit_kerja'] ?> )
+                                    <option value="<?= $item['NIP'] ?>"><?= $item['nama_karyawan'] ?> (<?= $item['unit_kerja'] ?> )
                                     </option>
                                 <?php endforeach; ?>
                             </select>
+                        </div>
+
+                        <div class="row my-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInput" placeholder="Sasaran"
+                                        aria-describedby="floatingInputHelp" name="sasaran" required />
+                                    <label for="floatingInput">Sasaran</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="floatingInput" placeholder="Jumlah Pasien"
+                                        aria-describedby="floatingInputHelp" name="target" required />
+                                    <label for="floatingInput">Target</label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-floating my-3">

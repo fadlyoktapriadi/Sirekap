@@ -21,7 +21,7 @@
                         <?= csrf_field() ?>
                         <div class="form-floating my-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="Nama Pengguna"
-                                aria-describedby="floatingInputHelp" name="nama_pengguna" required/>
+                                aria-describedby="floatingInputHelp" name="nama_karyawan" required/>
                             <label for="floatingInput">Nama</label>
                         </div>
                         <div class="form-floating my-3">
@@ -63,7 +63,11 @@
                                 <option value="Kefarmasian & Laboratorium">Kefarmasian & Laboratorium</option>
                             </select>
                         </div>
-
+                        <div class="form-floating my-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Jabatan"
+                                aria-describedby="floatingInputHelp" name="jabatan" required/>
+                            <label for="floatingInput">Jabatan</label>
+                        </div>
                         <div class="d-flex justify-content-end mt-4">
                             <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>

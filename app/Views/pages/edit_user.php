@@ -19,10 +19,11 @@
                         <?php endif; ?>
                     <form action="<?= base_url('/users/update') ?>" method="post">
                         <?= csrf_field() ?>
-                        <input type="hidden" name="id_pengguna" value="<?= $user['id_pengguna'] ?>">
+                        <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                        <input type="hidden" name="nik_lama" value="<?= $user['NIP'] ?>">
                         <div class="form-floating my-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="Nama Pengguna"
-                                aria-describedby="floatingInputHelp" name="nama_pengguna" value="<?= $user['nama_pengguna'] ?>" required/>
+                                aria-describedby="floatingInputHelp" name="nama_karyawan" value="<?= $user['nama_karyawan'] ?>" required/>
                             <label for="floatingInput">Nama</label>
                         </div>
                         <div class="form-floating my-3">
@@ -63,7 +64,11 @@
                             <option value="Kefarmasian & Laboratorium" <?= $user['unit_kerja'] == 'Kefarmasian & Laboratorium' ? 'selected' : '' ?>>Kefarmasian & Laboratorium</option>
                         </select>
                         </div>
-
+                        <div class="form-floating my-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Jabatan"
+                                aria-describedby="floatingInputHelp" name="jabatan" value="<?= $user['jabatan'] ?>" required/>
+                            <label for="floatingInput">Jabatan</label>
+                        </div>
                         <div class="d-flex justify-content-end mt-4">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>

@@ -47,7 +47,7 @@
                         <td><?= $item['nama_kegiatan'] ?></td>
                         <td>Rp<?= number_format($item['anggaran_dibutuhkan'], 0, ',', '.') ?></td>
                         <td>Rp<?= number_format($item['anggaran_disetujui'], 0, ',', '.') ?></td>
-                        <td><?= $item['nama_pengguna'] ?></td>
+                        <td><?= $item['nama_karyawan'] ?></td>
                         <td><?= date('d F Y', strtotime($item['created_at'])) ?></td>
                         <td><span class="badge bg-label-<?php
                         if ($item['status'] == 'Diproses') {

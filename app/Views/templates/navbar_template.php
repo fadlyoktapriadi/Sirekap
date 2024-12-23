@@ -125,10 +125,10 @@
 
           <?php if ($user_login['role'] == 'Administrator'): ?>
             <li
-              class="menu-item <?= ($title == 'User Management' || $title == 'Tambah User' || $title == 'Edit User') ? 'active' : '' ?>">
+              class="menu-item <?= ($title == 'Data Pengguna' || $title == 'Tambah Pengguna' || $title == 'Edit Pengguna') ? 'active' : '' ?>">
               <a href=" <?= base_url('users') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Documentation">User Management</div>
+                <div data-i18n="Documentation">Data Pengguna</div>
               </a>
             </li>
           <?php endif; ?>
@@ -189,7 +189,7 @@
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-semibold d-block"><?= $user_login['nama_pengguna'] ?></span>
+                          <span class="fw-semibold d-block"><?= $user_login['nama_karyawan'] ?></span>
                           <small class="text-muted"><?= $user_login['role'] ?></small>
                         </div>
                       </div>
