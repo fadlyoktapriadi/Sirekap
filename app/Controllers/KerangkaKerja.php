@@ -68,11 +68,12 @@ class KerangkaKerja extends BaseController
 
     public function detail($id)
     {
+        
         $data = [
             'title' => 'Detail Kerangka Acuan Kerja',
             'user_login' => $this->session->get(),
             'breadcrumb' => ['Data Kerangka Acuan Kerja', 'Detail Kerangka Acuan Kerja'],
-            'kak' => $this->KerangkaKerjaModel->getKerjangkaKerjaWithUserById($id),
+            'kak' => $this->KerangkaKerjaModel->getKerjangkaKerjaById($id),
         ];
 
         return view('pages/detail_kak', $data);

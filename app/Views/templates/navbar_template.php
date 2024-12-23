@@ -97,15 +97,15 @@
           <?php endif; ?>
 
           <li
-            class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
+            class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-task"></i>
               <div data-i18n="Layouts">Kegiatan</div>
             </a>
 
             <ul class="menu-sub">
-              <li
-                class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
+              <li 
+                class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja'|| $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
                 <a href="<?= base_url('kak') ?>" class="menu-link">
                   <div data-i18n="Without menu">Kerangka Acuan Kerja (KAK)</div>
                 </a>

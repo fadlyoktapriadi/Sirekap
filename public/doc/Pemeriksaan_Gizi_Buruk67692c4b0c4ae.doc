@@ -1,0 +1,100 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+xmlns="http://www.w3.org/TR/REC-html40">
+<style type="text/css">
+	.satu {
+	   font-size: 12px;
+	   }
+	   .dua {
+	   font-size: 20px;
+	   }
+	   .tiga {
+	   font-size: 8px;
+	   }
+	hr.onepixel {
+	    border-top: 1px solid #afbcc6;
+	    border-bottom: 1px solid #eff2f6;
+	    height: 0px;
+	    margin-bottom: 10px;
+	}
+	@page {
+		size:8.5in 11.0in; 
+		margin:0.5in 0.31in 0.05in 0.25in;} 
+		div.Section1{
+			page:Section1;
+	}
+</style>
+<head>
+<xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml>
+</head>
+<body>
+	<div class="Section1">
+		<center><p class="satu"><b>RENCANA JADWAL SIDANG PERKARA PIDANA </b></p></center></br>
+		<table>
+			<tr>
+				<td width="20%"><b>Nomor Perkara</b></td>
+				<td>: <b>965/Pid.B/2024/PN SRG</b></td>
+			</tr>
+			<tr>
+				<td width="20%"><b>Nama Pihak</b></td>
+				<td><b>ENGELIN KAMEA, SH.<br>RAENDY GUNAWAN ANAK DARI GWAN HO</b></td>
+			</tr>
+		</table>		
+		<hr class="onepixel">
+		<br>
+		<table align="center">
+			<tr>
+				<td align="center" bgcolor="#c7f7bf" width="3%">No</td>
+				<td align="center" bgcolor="#c7f7bf" width="18%">Hari / Tgl Sidang</td>
+				<td align="center" bgcolor="#c7f7bf" width="30%">Acara Sidang</td>
+				<td align="center" bgcolor="#c7f7bf" width="20%">Keterangan</td>
+			</tr>						
+		<tr><td align="center" bgcolor=#f9f8f8>1</td><td bgcolor=#f9f8f8>Selasa, 31 Des. 2024</td><td bgcolor=#f9f8f8>pemeriksaan identitas dan pembacaan dakwaan</td><td bgcolor=#f9f8f8></td></tr><tr><td align="center" bgcolor=#f9f8f8>2</td><td bgcolor=#f9f8f8>Selasa, 07 Jan. 2025</td><td bgcolor=#f9f8f8>pemeriksaan saksi dan terdakwa</td><td bgcolor=#f9f8f8></td></tr><tr><td align="center" bgcolor=#f9f8f8>3</td><td bgcolor=#f9f8f8>Selasa, 14 Jan. 2025</td><td bgcolor=#f9f8f8>tuntutan</td><td bgcolor=#f9f8f8></td></tr><tr><td align="center" bgcolor=#f9f8f8>4</td><td bgcolor=#f9f8f8>Selasa, 21 Jan. 2025</td><td bgcolor=#f9f8f8>pleidoi dan putusan</td><td bgcolor=#f9f8f8></td></tr>		</table>
+		<br>
+		<table>			
+			<tr>
+				<td width="10%">Catatan : </td>
+				<td>1.</td>
+				<td align="justify">Sidang dimulai paling lambat pada pukul ....</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td valign="top">2.</td>
+				<td style="text-align:justify">Apabila para pihak tidak hadir (tanpa ada pemberitahuan) sidang dilanjutkan sesuai jadwal sidang tersebut diatas</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td valign="top">3.</td>
+				<td style="text-align:justify">Jadwal sidang diatas dapat berubah disesuaikan dengan situasi dan kondisi di persidangan</td>
+			</tr>
+		</table>
+		<br><br>
+		<table>
+			<tr>
+				<td>
+					Penuntut				</td>
+				<td>
+					 Terdakwa				</td>
+				<td>Ketua Majelis</td>
+			</tr>
+			<tr>
+				<td><br><br>
+				Engelin Kamea, S.H..	
+				</td>
+				<td><br><br>
+				Raendy Gunawan Anak Dari Gwan Ho				</td>
+				<td>
+				<br><br>DIAH ASTUTI MIFTAFIATUN, S.H., M.H<br>Hakim-Hakim Anggota<br><br>MOCH ICHWANUDIN, S.H., M.H.<br><br>MOCHAMAD ARIEF ADIKUSUMO, S.H., M.H.				</td>
+			</tr>
+			<tr>
+				<td colspan="3" align="center">Panitera Pengganti</td>				
+			</tr>
+			<tr>
+				<td colspan="3" align="center"><br><br>SANTI INDAH PRATIWI, S.H.</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -18,12 +18,13 @@ class KerangkaKerjaModel extends Model
             ->findAll();
     }
 
-    public function getKerjangkaKerjaWithUserById($id)
+    public function getKerjangkaKerjaById($id)
     {
-        return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.NIP, tbl_karyawan.nama_karyawan')
+        return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.nama_karyawan, tbl_proker.*')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
+            ->join('tbl_proker', 'tbl_proker.id_proker = tbl_kerangka_kerja.id_proker')
             ->where('id_kak', $id)
-            ->find();
+            ->first();
     }
 }
 
