@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2024 at 10:28 AM
+-- Generation Time: Dec 24, 2024 at 10:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,7 +66,7 @@ CREATE TABLE `tbl_kerangka_kerja` (
   `sasaran` varchar(128) NOT NULL,
   `target` int(11) NOT NULL,
   `file` varchar(128) NOT NULL,
-  `status` enum('Diproses','Diterima','Perbaikan','Ditolak','Selesai') NOT NULL,
+  `status` enum('Diproses','Diterima','Perlu Perbaikan','Ditolak') NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -76,8 +76,7 @@ CREATE TABLE `tbl_kerangka_kerja` (
 --
 
 INSERT INTO `tbl_kerangka_kerja` (`id_kak`, `id_proker`, `nama_kegiatan`, `lokasi`, `tanggal_mulai`, `tanggal_selesai`, `anggaran_dibutuhkan`, `anggaran_disetujui`, `penanggung_jawab`, `sasaran`, `target`, `file`, `status`, `created_at`, `updated_at`) VALUES
-(5, 1, 'Imunisasi Vitamin B', 'Majalengka Utara', '2024-12-23', '2024-12-30', 5000000, NULL, '196912312000023456', 'Balita dan Ibu Hamil', 100, 'Imunisasi_Vitamin_B_upload_67691e85ef936.pdf', 'Diproses', '2024-12-23', '2024-12-23'),
-(6, 1, 'Pemeriksaan Gizi Buruk', 'Desa Mangunwijaya', '2025-01-06', '2025-02-03', 7500000, NULL, '199207082001801901', 'Balita dan Anak dibawah 12 Tahun', 150, 'Pemeriksaan_Gizi_Buruk67692c4b0c4ae.doc', 'Diproses', '2024-12-23', '2024-12-23');
+(5, 1, 'Imunisasi Vitamin B', 'Majalengka Utara', '2024-12-23', '2024-12-30', 5000000, 4500000, '196912312000023456', 'Balita dan Ibu Hamil', 100, 'Imunisasi_Vitamin_B_676a37c029b00.pdf', 'Diterima', '2024-12-23', '2024-12-24');
 
 -- --------------------------------------------------------
 
@@ -89,8 +88,12 @@ CREATE TABLE `tbl_lpj` (
   `id_lpj` int(11) NOT NULL,
   `id_kak` int(11) NOT NULL,
   `capaian_pelaksanaan` int(11) NOT NULL,
-  `status` varchar(128) NOT NULL,
-  `file_lpj` varchar(128) NOT NULL
+  `anggaran_digunakan` int(11) NOT NULL,
+  `keterangan` text NOT NULL,
+  `status` enum('Diproses','Perlu Perbaikan','Selesai','') NOT NULL,
+  `catatan` text DEFAULT NULL,
+  `file_lpj` varchar(128) NOT NULL,
+  `dokumentasi` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -138,7 +141,7 @@ CREATE TABLE `tbl_users` (
 INSERT INTO `tbl_users` (`id_user`, `NIP`, `username`, `password`, `role`, `created_at`, `updated_at`) VALUES
 (1, '0', 'admin', '$2y$10$YMaizMZysm9CQHeFuL/L3uoAtGsLMepOdqZF6xGzJ4X3Uotp8f8AG', 'Administrator', '2024-12-23', '2024-12-23'),
 (2, '198503122010011234', 'kepala_puskesmas', '$2y$10$hmutOTF5Qd60wY1PUZqADuYW62h1oT6YK64CaoO7MSNHKwdC5GTaO', 'Kepala Puskesmas', '2024-12-23', '2024-12-23'),
-(3, '199207082018019012', 'kepala_unit', '$2y$10$dvquP5BijVCCVRhh/riZo.xI/9JBqo7P9YzJIBKQhhmOT8hv4g0.C', 'Kepala Unit', '2024-12-23', '2024-12-23'),
+(3, '199207082001801901', 'kepala_unit', '$2y$10$dvquP5BijVCCVRhh/riZo.xI/9JBqo7P9YzJIBKQhhmOT8hv4g0.C', 'Kepala Unit', '2024-12-23', '2024-12-23'),
 (4, '196912312000023456', 'staf_unit', '$2y$10$1PCPNZtbMOm.tt446ZK81ukhlnyGuRXIQ1pWT.VSK.6zZfP/rsy9q', 'Staf Unit', '2024-12-23', '2024-12-23');
 
 --
