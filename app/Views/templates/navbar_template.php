@@ -80,14 +80,17 @@
             </a>
           </li>
 
-          <?php if ($user_login['role'] == 'Kepala Puskesmas'): ?>
+          <?php if ($user_login['role'] == 'Kepala Puskesmas' || $user_login['role'] == 'Kepala Unit' ): ?>
             <li
               class="menu-item <?= ($title == 'Data Program Kerja' || $title == 'Tambah Program Kerja' || $title == 'Edit Program Kerja') ? 'active' : '' ?>">
               <a href=" <?= base_url('proker') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-task"></i>
+                <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Documentation">Data Program Kerja</div>
               </a>
             </li>
+          <?php endif; ?>
+
+          <?php if ($user_login['role'] == 'Kepala Puskesmas'): ?>
             <li class="menu-item <?= ($title == 'Data Karyawan') ? 'active' : '' ?>">
               <a href=" <?= base_url('karyawan') ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-user-detail"></i>
@@ -97,7 +100,7 @@
           <?php endif; ?>
 
           <li
-            class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
+            class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja' || $title == 'Data LPJ KAK') ? 'active open' : '' ?>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-task"></i>
               <div data-i18n="Layouts">Kegiatan</div>
@@ -110,8 +113,8 @@
                   <div data-i18n="Without menu">Kerangka Acuan Kerja (KAK)</div>
                 </a>
               </li>
-              <li class="menu-item">
-                <a href="layouts-without-navbar.html" class="menu-link">
+              <li class="menu-item <?= ($title == 'Data LPJ KAK') ? 'active' : '' ?>">
+                <a href="<?= base_url('lpj') ?>" class="menu-link">
                   <div data-i18n="Without navbar">LPJ KAK</div>
                 </a>
               </li>

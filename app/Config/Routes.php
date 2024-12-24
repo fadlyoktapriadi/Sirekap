@@ -34,4 +34,8 @@ $routes->get('/kak/detail/(:num)', 'KerangkaKerja::detail/$1');
 $routes->get('/kak/edit/(:num)', 'KerangkaKerja::edit/$1');
 $routes->post('/kak/update', 'KerangkaKerja::update');
 $routes->get('/kak/hapus/(:num)', 'KerangkaKerja::hapus/$1');
+$routes->post('/kak/validasi', 'KerangkaKerja::validasi');
+
+$routes->get('/lpj', 'Lpj::index');
+$routes->get('/lpj/tambah/(:num)', 'Lpj::tambah/$1');
 

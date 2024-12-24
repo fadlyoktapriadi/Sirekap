@@ -17,12 +17,14 @@
         </div>
     <?php endif; ?>
 
+    <?php if($user_login['role'] == 'staf_unit'): ?>
     <div class="d-flex justify-content-start">
         <a href="<?= base_url("/kak/tambah") ?>">
             <button class="btn btn-outline-success mx-4 mt-2" style="margin-bottom: 0px; height: 38px;">Tambah
                 Kerangka Acuan Kerja</button>
         </a>
     </div>
+    <?php endif; ?>
     <div class="table-responsive text-nowrap mt-4 mx-4">
 
         <table id="dataTable" class="table table-hover">
@@ -70,6 +72,7 @@
                                     <a class="dropdown-item" href="<?= base_url('kak/detail/') . $item['id_kak'] ?>"><i
                                             class="bx bx-detail me-1"></i>
                                         Detail</a>
+                                    <?php if($user_login['role'] == 'Staf Unit' && $item['status'] == 'Diproses'): ?>
                                     <a class="dropdown-item" href="<?= base_url('kak/edit/') . $item['id_kak'] ?>"><i
                                             class="bx bx-edit-alt me-1"></i>
                                         Edit</a>
@@ -77,6 +80,7 @@
                                         href="<?= base_url('kak/hapus/') . $item['id_kak'] ?>"><i
                                             class="bx bx-trash me-1"></i>
                                         Delete</a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </td>

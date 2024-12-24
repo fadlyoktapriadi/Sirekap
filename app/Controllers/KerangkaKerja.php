@@ -145,4 +145,18 @@ class KerangkaKerja extends BaseController
         session()->setFlashdata('success', 'Data Kerangka Acuan Kerja berhasil dihapus!');
         return redirect()->to('/kak');
     }
+
+    public function validasi(){
+        $id = $this->request->getVar('id_kak');
+
+        $data = [
+            'anggaran_disetujui' => $this->request->getVar('anggaran_disetujui'),
+            'status' => $this->request->getVar('status')
+        ];
+
+        $this->KerangkaKerjaModel->update($id, $data);
+
+        session()->setFlashdata('success', 'Data Kerangka Acuan Kerja berhasil ' . strtolower($data['status']) . '!');
+        return redirect()->to('/kak/detail/' . $id);
+    }
 }

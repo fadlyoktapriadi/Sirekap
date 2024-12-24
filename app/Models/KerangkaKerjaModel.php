@@ -20,11 +20,19 @@ class KerangkaKerjaModel extends Model
 
     public function getKerjangkaKerjaById($id)
     {
-        return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.nama_karyawan, tbl_proker.*')
+        return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.nama_karyawan, tbl_karyawan.unit_kerja, tbl_proker.*')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
             ->join('tbl_proker', 'tbl_proker.id_proker = tbl_kerangka_kerja.id_proker')
             ->where('id_kak', $id)
             ->first();
+    }
+
+    public function getKerjangkaKerjaLpj()
+    {
+        return $this->select('tbl_kerangka_kerja.id_kak, tbl_kerangka_kerja.nama_kegiatan, tbl_kerangka_kerja.tanggal_mulai,tbl_kerangka_kerja.tanggal_selesai, tbl_karyawan.nama_karyawan, tbl_karyawan.unit_kerja, tbl_kerangka_kerja.status')
+            ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
+            ->where('status', "Diterima")
+            ->findAll();
     }
 }
 
