@@ -121,7 +121,7 @@ class Users extends BaseController
         ];
 
         if ($this->request->getVar('password')) {
-            $data['password'] = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
+            $data_user['password'] = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
         }
 
         $this->UsersModel->update($id, $data_user);
