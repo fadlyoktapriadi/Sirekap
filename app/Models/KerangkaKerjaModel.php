@@ -32,6 +32,8 @@ class KerangkaKerjaModel extends Model
         return $this->select('tbl_kerangka_kerja.id_kak, tbl_kerangka_kerja.nama_kegiatan, tbl_kerangka_kerja.tanggal_mulai,tbl_kerangka_kerja.tanggal_selesai, tbl_karyawan.nama_karyawan, tbl_karyawan.unit_kerja, tbl_kerangka_kerja.status')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
             ->where('status', "Diterima")
+            ->orWhere("status", "Menunggu Persetujuan LPJ")
+            ->orWhere("status", "Perlu Perbaikan")
             ->findAll();
     }
 }

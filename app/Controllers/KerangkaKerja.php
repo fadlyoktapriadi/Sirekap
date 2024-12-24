@@ -40,7 +40,7 @@ class KerangkaKerja extends BaseController
 
         $allowedExtensions = ['doc', 'docx', 'jpg', 'png', 'pdf'];
         if ($file->isValid() && !$file->hasMoved() && in_array($file->getClientExtension(), $allowedExtensions)) {
-            $newName = preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . uniqid(). '.' . $file->getClientExtension();
+            $newName = preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . uniqid() . '.' . $file->getClientExtension();
             $file->move('doc/', $newName);
             $fileKak = $newName;
         } else {
@@ -68,7 +68,7 @@ class KerangkaKerja extends BaseController
 
     public function detail($id)
     {
-        
+
         $data = [
             'title' => 'Detail Kerangka Acuan Kerja',
             'user_login' => $this->session->get(),
@@ -92,7 +92,7 @@ class KerangkaKerja extends BaseController
 
         return view('pages/edit_kak', $data);
     }
-    
+
     public function update()
     {
         $id = $this->request->getVar('id_kak');
@@ -109,16 +109,16 @@ class KerangkaKerja extends BaseController
             'anggaran_dibutuhkan' => $this->request->getVar('anggaran_dibutuhkan'),
         ];
 
-        if($this->request->getFile('file_kak')){
+        if ($this->request->getFile('file_kak')) {
             $file = $this->request->getFile('file_kak');
             $file_lama = $this->request->getVar('file_lama');
             $allowedExtensions = ['doc', 'docx', 'jpg', 'png', 'pdf'];
-    
+
             if ($file->isValid() && !$file->hasMoved() && in_array($file->getClientExtension(), $allowedExtensions)) {
                 if (file_exists('doc/' . $file_lama)) {
                     unlink('doc/' . $file_lama);
                 }
-                $newName = preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . '_' . uniqid(). '.' . $file->getClientExtension();
+                $newName = preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . '_' . uniqid() . '.' . $file->getClientExtension();
                 $file->move('doc/', $newName);
                 $fileKak = $newName;
                 $data['file'] = $fileKak;
@@ -146,7 +146,8 @@ class KerangkaKerja extends BaseController
         return redirect()->to('/kak');
     }
 
-    public function validasi(){
+    public function validasi()
+    {
         $id = $this->request->getVar('id_kak');
 
         $data = [

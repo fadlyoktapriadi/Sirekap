@@ -80,7 +80,7 @@
             </a>
           </li>
 
-          <?php if ($user_login['role'] == 'Kepala Puskesmas' || $user_login['role'] == 'Kepala Unit' ): ?>
+          <?php if ($user_login['role'] == 'Kepala Puskesmas' || $user_login['role'] == 'Kepala Unit'): ?>
             <li
               class="menu-item <?= ($title == 'Data Program Kerja' || $title == 'Tambah Program Kerja' || $title == 'Edit Program Kerja') ? 'active' : '' ?>">
               <a href=" <?= base_url('proker') ?>" class="menu-link">
@@ -107,8 +107,8 @@
             </a>
 
             <ul class="menu-sub">
-              <li 
-                class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja'|| $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
+              <li
+                class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
                 <a href="<?= base_url('kak') ?>" class="menu-link">
                   <div data-i18n="Without menu">Kerangka Acuan Kerja (KAK)</div>
                 </a>

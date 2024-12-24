@@ -64,7 +64,8 @@
                                 autofocus>
                                 <option selected>--Pilih Penanggung Jawab--</option>
                                 <?php foreach ($penanggung_jawab as $item): ?>
-                                    <option value="<?= $item['NIP'] ?>"><?= $item['nama_karyawan'] ?> (<?= $item['unit_kerja'] ?> )
+                                    <option value="<?= $item['NIP'] ?>"><?= $item['nama_karyawan'] ?>
+                                        (<?= $item['unit_kerja'] ?> )
                                     </option>
                                 <?php endforeach; ?>
                             </select>
@@ -80,8 +81,9 @@
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="number" class="form-control" id="floatingInput" placeholder="Jumlah Pasien"
-                                        aria-describedby="floatingInputHelp" name="target" required />
+                                    <input type="number" class="form-control" id="floatingInput"
+                                        placeholder="Jumlah Pasien" aria-describedby="floatingInputHelp" name="target"
+                                        required />
                                     <label for="floatingInput">Target</label>
                                 </div>
                             </div>

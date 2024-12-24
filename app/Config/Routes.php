@@ -38,4 +38,5 @@ $routes->post('/kak/validasi', 'KerangkaKerja::validasi');
 
 $routes->get('/lpj', 'Lpj::index');
 $routes->get('/lpj/tambah/(:num)', 'Lpj::tambah/$1');
+$routes->post('/lpj/simpan', 'Lpj::simpan');
 

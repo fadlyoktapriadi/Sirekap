@@ -25,7 +25,6 @@
                     <th>No</th>
                     <th>Nama Kegiatan</th>
                     <th>Unit Kerja</th>
-                    <th>Pelaksanaan</th>
                     <th>Penanggung Jawab</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -39,13 +38,38 @@
                         <td><?= $no++; ?></td>
                         <td><?= $item['nama_kegiatan'] ?></td>
                         <td><?= $item['unit_kerja'] ?></td>
-                        <td><?= date('d F Y', strtotime($item['tanggal_mulai'])) ?> s/d <?= date('d F Y', strtotime($item['tanggal_selesai'])) ?></td>
                         <td><?= $item['nama_karyawan'] ?></td>
-                        <td><span class="badge bg-label-danger me-1">Belum LPJ</span></td>
+                        <td><span
+                                class="badge bg-label-<?php
+                                if ($item['status'] == 'Diproses') {
+                                    echo 'primary';
+                                } else if ($item['status'] == 'Diterima') {
+                                    echo 'danger';
+                                } else if ($item['status'] == 'Menunggu Persetujuan LPJ') {
+                                    echo 'warning';
+                                } else if ($item['status'] == 'Selesai') {
+                                    echo 'success';
+                                } else {
+                                    echo 'danger';
+                                } ?> me-1"><?= ($item['status'] == 'Diterima') ? 'Belum Mengisi LPJ' : $item['status'] ?></span>
+                        </td>
                         <td>
-                            <a href="<?= base_url('lpj/tambah/') . $item['id_kak'] ?>">
-                                <button class="btn btn-sm btn-info">Input LPJ</button>
-                            </a>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <?php if ($item['status'] == 'Diproses'): ?>
+                                        <a class="dropdown-item" href="<?= base_url('lpj/tambah') ?>"><i
+                                                class="bx bx-pencil me-1"></i>
+                                            Input LPJ</a>
+                                    <?php else: ?>
+                                        <a class="dropdown-item" href="<?= base_url('lpj/detail/') . $item['id_kak'] ?>"><i
+                                                class="bx bx-detail me-1"></i>
+                                            Detail</a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>

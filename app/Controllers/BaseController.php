@@ -59,5 +59,6 @@ abstract class BaseController extends Controller
         $this->KaryawanModel = new \App\Models\KaryawanModel();
         $this->ProkerModel = new \App\Models\ProkerModel();
         $this->KerangkaKerjaModel = new \App\Models\KerangkaKerjaModel();
+        $this->LpjModel = new \App\Models\LpjModel();
     }
 }
