@@ -4,19 +4,7 @@
 
 <!-- Basic Bootstrap Table -->
 <div class="card">
-    <h5 class="card-header">Data Lembar Pertanggung Jawaban</h5>
-    <?php if (session()->getFlashdata('success')): ?>
-        <div class="alert alert-success alert-dismissible text-center mx-4">
-            <?= session()->getFlashdata('success') ?>
-        </div>
-    <?php endif; ?>
-
-    <?php if (session()->getFlashdata('error')): ?>
-        <div class="alert alert-danger alert-dismissible text-center mx-4">
-            <?= session()->getFlashdata('error') ?>
-        </div>
-    <?php endif; ?>
-
+    <h5 class="card-header">Data Riwayat Lembar Pertanggung Jawaban</h5>
     <div class="table-responsive text-nowrap mt-4 mx-4">
 
         <table id="dataTable" class="table table-hover">
@@ -61,15 +49,9 @@
                                     <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <?php if ($item['status'] == 'Diterima'): ?>
-                                        <a class="dropdown-item" href="<?= base_url('lpj/tambah/') . $item['id_kak'] ?>"><i
-                                                class="bx bx-pencil me-1"></i>
-                                            Input LPJ</a>
-                                    <?php else: ?>
-                                        <a class="dropdown-item" href="<?= base_url('lpj/detail/') . $item['id_kak'] ?>"><i
-                                                class="bx bx-detail me-1"></i>
-                                            Detail</a>
-                                    <?php endif; ?>
+                                    <a class="dropdown-item" href="<?= base_url('lpj/detail/') . $item['id_kak'] ?>"><i
+                                            class="bx bx-detail me-1"></i>
+                                        Detail</a>
                                 </div>
                             </div>
                         </td>

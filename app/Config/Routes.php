@@ -39,4 +39,10 @@ $routes->post('/kak/validasi', 'KerangkaKerja::validasi');
 $routes->get('/lpj', 'Lpj::index');
 $routes->get('/lpj/tambah/(:num)', 'Lpj::tambah/$1');
 $routes->post('/lpj/simpan', 'Lpj::simpan');
+$routes->get('/lpj/detail/(:num)', 'Lpj::detail/$1');
+$routes->get('/lpj/edit/(:num)', 'Lpj::edit/$1');
+$routes->post('/lpj/update/', 'Lpj::update');
+$routes->get('/lpj/hapus/(:num)', 'Lpj::hapus/$1');
+$routes->post('/lpj/validasi', 'Lpj::validasi');
+$routes->get('/lpj/riwayat', 'Lpj::riwayatLpj');
 

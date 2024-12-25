@@ -13,7 +13,7 @@
     <?php endif; ?>
 
     <div class="row mx-4 mb-5">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h4>Program Kerja</h4>
             <table class="table">
                 <tr>
@@ -74,19 +74,22 @@
                 </tr>
                 <tr>
                     <td>Status</td>
-                    <td><span class="badge bg-label-<?php
-                    if ($kak['status'] == 'Diproses') {
-                        echo 'primary';
-                    } else if ($kak['status'] == 'Diterima') {
-                        echo 'info';
-                    } else if ($kak['status'] == 'Perbaikan') {
-                        echo 'warning';
-                    } else if ($kak['status'] == 'Selesai') {
-                        echo 'success';
-                    } else {
-                        echo 'danger';
-                    } ?> me-1"><?= $kak['status'] ?></span></td>
-                    <td>
+                    <td><span
+                            class="badge bg-label-<?php
+                            if ($kak['status'] == 'Diproses') {
+                                echo 'primary';
+                            } else if ($kak['status'] == 'Diterima') {
+                                echo 'danger';
+                            } else if ($kak['status'] == 'Menunggu Persetujuan LPJ') {
+                                echo 'warning';
+                            } else if ($kak['status'] == 'Perlu Diperbaiki') {
+                                echo 'warning';
+                            } else if ($kak['status'] == 'Selesai') {
+                                echo 'success';
+                            } else {
+                                echo 'danger';
+                            } ?> me-1"><?= ($kak['status'] == 'Diterima') ? 'Belum Mengisi LPJ' : $kak['status'] ?></span>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -96,6 +99,7 @@
                     <?php if ($kak['status'] == 'Diterima'): ?>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenter">Batal Validasi
                             Kerangka Acuan Kerja</button>
+                    <?php elseif ($kak['status'] == 'Selesai'): ?>
                     <?php else: ?>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCenter">Validasi Kerangka
                             Acuan Kerja</button>

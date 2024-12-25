@@ -75,4 +75,132 @@ class Lpj extends BaseController
         return redirect()->to('/lpj');
 
     }
+
+    public function detail($id)
+    {
+
+        $data = [
+            'title' => 'Detail LPJ',
+            'user_login' => $this->session->get(),
+            'breadcrumb' => ['Data LPJ KAK', 'Detail LPJ'],
+            'lpj' => $this->LpjModel->getLpjById($id),
+        ];
+
+        return view('pages/detail_lpj', $data);
+    }
+
+    public function edit($id)
+    {
+        $data = [
+            'title' => 'Detail LPJ',
+            'user_login' => $this->session->get(),
+            'breadcrumb' => ['Data LPJ KAK', 'Ubah LPJ'],
+            'lpj' => $this->LpjModel->getLpjById($id),
+        ];
+
+        return view('pages/edit_lpj', $data);
+    }
+
+    public function update()
+    {
+        $id_lpj = $this->request->getVar('id_lpj');
+        $id_kak = $this->request->getVar('id_kak');
+
+
+        $data = [
+            'capaian_pelaksanaan' => $this->request->getVar('capaian_pelaksanaan'),
+            'anggaran_digunakan' => $this->request->getVar('anggaran_digunakan'),
+            'keterangan' => $this->request->getVar('keterangan'),
+        ];
+
+
+        $file_lpj = $this->request->getFile('file_lpj');
+        $file_dokumentasi = $this->request->getFile('dokumentasi');
+        $allowedExtensions = ['doc', 'docx', 'jpg', 'png', 'pdf', 'xls', 'xlsx'];
+
+        if ($file_lpj) {
+            $file_lama = $this->request->getVar('lpj_lama');
+            if (file_exists('doc/lpj/' . $file_lama)) {
+                unlink('doc/lpj/' . $file_lama);
+            }
+            if ($file_lpj->isValid() && !$file_lpj->hasMoved() && in_array($file_lpj->getClientExtension(), $allowedExtensions)) {
+                $newName = 'LPJ_' . preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . uniqid() . '.' . $file_lpj->getClientExtension();
+                $file_lpj->move('doc/lpj', $newName);
+                $file_lpj = $newName;
+                $data['file_lpj'] = $file_lpj;
+            } else {
+                session()->setFlashdata('error', 'File LPJ yang diupload harus bertipe: doc, docx, jpg, png, pdf, xls, xlsx.');
+                return redirect()->back()->withInput();
+            }
+        }
+
+        if ($file_dokumentasi) {
+            $file_lama = $this->request->getVar('dokumentasi_lama');
+            if (file_exists('doc/dokumentasi/' . $file_lama)) {
+                unlink('doc/dokumentasi/' . $file_lama);
+            }
+            if ($file_dokumentasi->isValid() && !$file_dokumentasi->hasMoved() && in_array($file_dokumentasi->getClientExtension(), $allowedExtensions)) {
+                $newName = 'Dokumentasi_' . preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . uniqid() . '.' . $file_dokumentasi->getClientExtension();
+                $file_dokumentasi->move('doc/dokumentasi', $newName);
+                $file_dokumentasi = $newName;
+                $data['dokumentasi'] = $file_dokumentasi;
+            } else {
+                session()->setFlashdata('error', 'File Dokumentasi yang diupload harus bertipe: doc, docx, jpg, png, pdf, xls, xlsx.');
+                return redirect()->back()->withInput();
+            }
+        }
+
+        $this->LpjModel->update($id_lpj, $data);
+
+        session()->setFlashdata('success', 'Lembar Pertanggung Jawaban berhasil diubah!');
+
+        return redirect()->to('/lpj/detail/' . $id_kak);
+
+    }
+
+    public function hapus($id_lpj)
+    {
+
+        $lpj = $this->LpjModel->find($id_lpj);
+
+        if (file_exists('doc/lpj/' . $lpj['file_lpj'])) {
+            unlink('doc/lpj/' . $lpj['file_lpj']);
+        }
+
+        if (file_exists('doc/dokumentasi/' . $lpj['dokumentasi'])) {
+            unlink('doc/dokumentasi/' . $lpj['dokumentasi']);
+        }
+        $this->KerangkaKerjaModel->update($lpj['id_kak'], ['status' => 'Diterima']);
+
+        $this->LpjModel->where('id_lpj', $id_lpj)->delete();
+
+        session()->setFlashdata('success', 'Data Lembar Pertanggung Jawaban berhasil dihapus!');
+        return redirect()->to('/lpj');
+    }
+
+    public function validasi()
+    {
+        $id_lpj = $this->request->getVar('id_lpj');
+        $lpj = $this->LpjModel->find($id_lpj);
+
+        $this->LpjModel->update($id_lpj, ['catatan' => $this->request->getVar('catatan')]);
+
+        $this->KerangkaKerjaModel->update($lpj['id_kak'], ['status' => $this->request->getVar('status')]);
+
+        session()->setFlashdata('success', 'Data Lembar Pertanggung Jawaban berhasil dihapus!');
+        return redirect()->to('/lpj/detail/' . $lpj['id_kak']);
+
+    }
+
+    public function riwayatLpj()
+    {
+        $data = [
+            'title' => 'Data Riwayat KAK',
+            'user_login' => $this->session->get(),
+            'breadcrumb' => ['Data Riwayat KAK'],
+            'kak' => $this->KerangkaKerjaModel->getRiwayatLpj(),
+        ];
+
+        return view('pages/riwayat_lpj', $data);
+    }
 }
