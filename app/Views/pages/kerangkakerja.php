@@ -17,7 +17,7 @@
         </div>
     <?php endif; ?>
 
-    <?php if ($user_login['role'] == 'staf_unit'): ?>
+    <?php if ($user_login['role'] == 'Staf Unit'): ?>
         <div class="d-flex justify-content-start">
             <a href="<?= base_url("/kak/tambah") ?>">
                 <button class="btn btn-outline-success mx-4 mt-2" style="margin-bottom: 0px; height: 38px;">Tambah
