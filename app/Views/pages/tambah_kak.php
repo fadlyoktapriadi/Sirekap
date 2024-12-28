@@ -19,26 +19,16 @@
                     <?php endif; ?>
                     <form action="<?= base_url('/kak/tambah') ?>" method="post" enctype="multipart/form-data">
                         <?= csrf_field() ?>
-                        <div class="my-3">
-                            <select class="form-select" id="exampleFormControlSelect1"
-                                aria-label="Default select example" style="height: 55px" name="id_proker" autofocus>
-                                <option selected>--Pilih Proker--</option>
-                                <?php foreach ($proker as $item): ?>
-                                    <option value="<?= $item['id_proker'] ?>"><?= $item['nama_proker'] ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                        <div class="form-floating my-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Program Kerja"
+                                aria-describedby="floatingInputHelp" name="program_kerja" required />
+                            <label for="floatingInput">Program Kerja</label>
                         </div>
                         <div class="form-floating my-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="Nama Kegiatan"
                                 aria-describedby="floatingInputHelp" name="nama_kegiatan" required />
                             <label for="floatingInput">Nama Kegiatan</label>
                         </div>
-                        <div class="form-floating my-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Lokasi Kerja"
-                                aria-describedby="floatingInputHelp" name="lokasi" required />
-                            <label for="floatingInput">Lokasi</label>
-                        </div>
-
                         <div class="row my-3">
                             <div class="col">
                                 <div class="form-floating">
@@ -57,7 +47,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="my-3">
                             <select class="form-select" id="exampleFormControlSelect1"
                                 aria-label="Default select example" style="height: 55px" name="penanggung_jawab"
@@ -82,17 +71,17 @@
                             <div class="col">
                                 <div class="form-floating">
                                     <input type="number" class="form-control" id="floatingInput"
-                                        placeholder="Jumlah Pasien" aria-describedby="floatingInputHelp" name="target"
-                                        required />
+                                        placeholder="Jumlah Kunjungan" aria-describedby="floatingInputHelp"
+                                        name="target" required />
                                     <label for="floatingInput">Target</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-floating my-3">
-                            <input type="number" class="form-control" id="floatingInput" placeholder="Rp."
+                            <input type="text" class="form-control" id="anggaran_dibutuhkan" placeholder="Rp "
                                 aria-describedby="floatingInputHelp" name="anggaran_dibutuhkan" required />
-                            <label for="floatingInput">Anggaran Yang Dibutuhkan</label>
+                            <label for="anggaran_dibutuhkan">Anggaran Dibutuhkan</label>
                         </div>
 
                         <div class="my-3">
@@ -109,4 +98,18 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('anggaran_dibutuhkan').addEventListener('input', function (e) {
+        var value = e.target.value;
+        value = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+        if (value) {
+            value = parseInt(value, 10);
+            e.target.value = new Intl.NumberFormat('id-ID', {
+                minimumFractionDigits: 0
+            }).format(value);
+        } else {
+            e.target.value = '';
+        }
+    });
+</script>
 <?= $this->endSection() ?>

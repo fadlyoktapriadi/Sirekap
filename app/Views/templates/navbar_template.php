@@ -80,16 +80,6 @@
             </a>
           </li>
 
-          <?php if ($user_login['role'] == 'Kepala Puskesmas' || $user_login['role'] == 'Kepala Unit'): ?>
-            <li
-              class="menu-item <?= ($title == 'Data Program Kerja' || $title == 'Tambah Program Kerja' || $title == 'Edit Program Kerja') ? 'active' : '' ?>">
-              <a href=" <?= base_url('proker') ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-category"></i>
-                <div data-i18n="Documentation">Data Program Kerja</div>
-              </a>
-            </li>
-          <?php endif; ?>
-
           <?php if ($user_login['role'] == 'Kepala Puskesmas'): ?>
             <li class="menu-item <?= ($title == 'Data Karyawan') ? 'active' : '' ?>">
               <a href=" <?= base_url('karyawan') ?>" class="menu-link">

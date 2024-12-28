@@ -9,7 +9,7 @@ class KerangkaKerjaModel extends Model
     protected $table = 'tbl_kerangka_kerja';
     protected $primaryKey = 'id_kak';
     protected $useTimestamps = true;
-    protected $allowedFields = ['id_proker', 'nama_kegiatan', 'lokasi', 'tanggal_mulai', 'tanggal_selesai', 'anggaran_dibutuhkan', 'anggaran_disetujui', 'penanggung_jawab', 'sasaran', 'target', 'file', 'status',];
+    protected $allowedFields = ['program_kerja', 'nama_kegiatan', 'tanggal_mulai', 'tanggal_selesai', 'anggaran_dibutuhkan', 'anggaran_disetujui', 'penanggung_jawab', 'sasaran', 'target', 'file', 'status',];
 
     public function getKerjangkaKerjaWithUsers()
     {
@@ -20,9 +20,8 @@ class KerangkaKerjaModel extends Model
 
     public function getKerjangkaKerjaById($id)
     {
-        return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.nama_karyawan, tbl_karyawan.unit_kerja, tbl_proker.*')
+        return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.nama_karyawan, tbl_karyawan.unit_kerja')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
-            ->join('tbl_proker', 'tbl_proker.id_proker = tbl_kerangka_kerja.id_proker')
             ->where('id_kak', $id)
             ->first();
     }

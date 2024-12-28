@@ -27,7 +27,6 @@ class KerangkaKerja extends BaseController
             'title' => 'Tambah Kerangka Acuan Kerja',
             'user_login' => $this->session->get(),
             'breadcrumb' => ['Data Kerangka Acuan Kerja', 'Tambah Kerangka Acuan Kerja'],
-            'proker' => $this->ProkerModel->findAll(),
             'penanggung_jawab' => $this->KaryawanModel->getKaryawan(),
         ];
 
@@ -48,16 +47,17 @@ class KerangkaKerja extends BaseController
             return redirect()->back()->withInput();
         }
 
+        $anggaran_dibutuhkan = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_dibutuhkan'))));
+
         $this->KerangkaKerjaModel->insert([
-            'id_proker' => $this->request->getVar('id_proker'),
+            'program_kerja' => $this->request->getVar('program_kerja'),
             'nama_kegiatan' => $this->request->getVar('nama_kegiatan'),
-            'lokasi' => $this->request->getVar('lokasi'),
             'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
             'tanggal_selesai' => $this->request->getVar('tanggal_selesai'),
             'penanggung_jawab' => $this->request->getVar('penanggung_jawab'),
             'sasaran' => $this->request->getVar('sasaran'),
             'target' => $this->request->getVar('target'),
-            'anggaran_dibutuhkan' => $this->request->getVar('anggaran_dibutuhkan'),
+            'anggaran_dibutuhkan' => $anggaran_dibutuhkan,
             'file' => $fileKak,
             'status' => "Diproses",
         ]);
@@ -86,7 +86,6 @@ class KerangkaKerja extends BaseController
             'user_login' => $this->session->get(),
             'breadcrumb' => ['Data Kerangka Acuan Kerja', 'Edit Kerangka Acuan Kerja'],
             'kak' => $this->KerangkaKerjaModel->getKerjangkaKerjaById($id),
-            'proker' => $this->ProkerModel->findAll(),
             'penanggung_jawab' => $this->KaryawanModel->getKaryawan(),
         ];
 
@@ -97,16 +96,17 @@ class KerangkaKerja extends BaseController
     {
         $id = $this->request->getVar('id_kak');
 
+        $anggaran_dibutuhkan = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_dibutuhkan'))));
+
         $data = [
-            'id_proker' => $this->request->getVar('id_proker'),
+            'program_kerja' => $this->request->getVar('program_kerja'),
             'nama_kegiatan' => $this->request->getVar('nama_kegiatan'),
-            'lokasi' => $this->request->getVar('lokasi'),
             'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
             'tanggal_selesai' => $this->request->getVar('tanggal_selesai'),
             'penanggung_jawab' => $this->request->getVar('penanggung_jawab'),
             'sasaran' => $this->request->getVar('sasaran'),
             'target' => $this->request->getVar('target'),
-            'anggaran_dibutuhkan' => $this->request->getVar('anggaran_dibutuhkan'),
+            'anggaran_dibutuhkan' => $anggaran_dibutuhkan,
         ];
 
         if ($this->request->getFile('file_kak')) {
@@ -150,8 +150,10 @@ class KerangkaKerja extends BaseController
     {
         $id = $this->request->getVar('id_kak');
 
+        $anggaran_dibutuhkan = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_disetujui'))));
+
         $data = [
-            'anggaran_disetujui' => $this->request->getVar('anggaran_disetujui'),
+            'anggaran_disetujui' => $anggaran_dibutuhkan,
             'status' => $this->request->getVar('status')
         ];
 
