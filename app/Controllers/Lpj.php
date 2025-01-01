@@ -59,16 +59,65 @@ class Lpj extends BaseController
             return redirect()->back()->withInput();
         }
 
+        $id_kak = $this->request->getVar('id_kak');
+
+        $data_kunjungan = [
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Burujul Kulon',
+                'jumlah_kunjungan' => $this->request->getVar('burujul_kulon'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Burujul Wetan',
+                'jumlah_kunjungan' => $this->request->getVar('burujul_wetan'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Cicadas',
+                'jumlah_kunjungan' => $this->request->getVar('cicadas'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Jatisura',
+                'jumlah_kunjungan' => $this->request->getVar('jatisura'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Jatiwangi',
+                'jumlah_kunjungan' => $this->request->getVar('jatiwangi'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Mekarsari',
+                'jumlah_kunjungan' => $this->request->getVar('mekarsari'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Surawangi',
+                'jumlah_kunjungan' => $this->request->getVar('surawangi'),
+            ],
+
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Sutawangi',
+                'jumlah_kunjungan' => $this->request->getVar('sutawangi'),
+            ],
+        ];
+
+        $this->KunjunganModel->insertBatch($data_kunjungan);
+
+        $anggaran_digunakan = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_digunakan'))));
+
         $this->LpjModel->insert([
-            'id_kak' => $this->request->getVar('id_kak'),
-            'capaian_pelaksanaan' => $this->request->getVar('capaian_pelaksanaan'),
-            'anggaran_digunakan' => $this->request->getVar('anggaran_digunakan'),
+            'id_kak' => $id_kak,
+            'anggaran_digunakan' => $anggaran_digunakan,
             'keterangan' => $this->request->getVar('keterangan'),
             'file_lpj' => $file_lpj,
             'dokumentasi' => $file_dokumentasi,
         ]);
 
-        $this->KerangkaKerjaModel->update($this->request->getVar('id_kak'), ['status' => 'Menunggu Persetujuan LPJ']);
+        $this->KerangkaKerjaModel->update($id_kak, ['status' => 'Menunggu Persetujuan LPJ']);
 
         session()->setFlashdata('success', 'Lembar Pertanggung Jawaban berhasil disimpan!');
 
@@ -84,6 +133,7 @@ class Lpj extends BaseController
             'user_login' => $this->session->get(),
             'breadcrumb' => ['Data LPJ KAK', 'Detail LPJ'],
             'lpj' => $this->LpjModel->getLpjById($id),
+            'kunjungan' => $this->KunjunganModel->getKunjunganById($id),
         ];
 
         return view('pages/detail_lpj', $data);

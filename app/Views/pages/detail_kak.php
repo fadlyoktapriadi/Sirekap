@@ -50,7 +50,7 @@
                 </tr>
                 <tr>
                     <td>Target</td>
-                    <td><?= $kak['target'] ?> Pasien</td>
+                    <td><?= $kak['target'] ?> Kunjungan</td>
                 </tr>
                 <tr>
                     <td>File Kerangka Acuan Kerja (KAK)</td>
@@ -111,7 +111,7 @@
                             <div class="col mb-0">
                                 <div class="form-floating my-3">
                                     <input type="text" class="form-control" id="anggaran_disetujui" placeholder="Rp "
-                                        aria-describedby="floatingInputHelp" name="anggaran_disetujui" required />
+                                        aria-describedby="floatingInputHelp" name="anggaran_disetujui" />
                                     <label for="anggaran_disetujui">Anggaran Disetujui</label>
                                 </div>
                             </div>
@@ -124,8 +124,8 @@
                                         Diproses</option>
                                     <option value="Diterima" <?= ($kak['status'] == 'Diterima') ? 'selected' : '' ?>>
                                         Diterima</option>
-                                    <option value="Perbaikan" <?= ($kak['status'] == 'Perbaikan') ? 'selected' : '' ?>>
-                                        Perbaikan</option>
+                                    <option value="Perlu Perbaikan" <?= ($kak['status'] == 'Perlu Perbaikan') ? 'selected' : '' ?>>
+                                        Perlu Perbaikan</option>
                                     <option value="Ditolak" <?= ($kak['status'] == 'Ditolak') ? 'selected' : '' ?>>
                                         Ditolak</option>
                                 </select>

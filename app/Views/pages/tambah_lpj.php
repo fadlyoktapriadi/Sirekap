@@ -47,7 +47,7 @@
                             </tr>
                             <tr>
                                 <td>Target</td>
-                                <td><?= $kak['target'] ?> Pasien</td>
+                                <td><?= $kak['target'] ?> Kunjungan</td>
                             </tr>
 
                         </table>
@@ -59,17 +59,61 @@
                                 <form action="<?= base_url('lpj/simpan') ?>" method="post"
                                     enctype="multipart/form-data">
                                     <input type="hidden" name="id_kak" value="<?= $kak['id_kak'] ?>" />
-                                    <div class="form-floating my-3">
-                                        <input type="number" class="form-control" id="floatingInput"
-                                            placeholder="Jumlah pasien yang ditangani"
-                                            aria-describedby="floatingInputHelp" name="capaian_pelaksanaan" autofocus
-                                            required />
-                                        <label for="floatingInput">Capaian Pelaksanaan</label>
+
+                                    <div class="my-3">
+                                        <label for="formFile" class="form-label">Jumlah Kunjungan di Desa</label>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Burujul Kulon</span>
+                                            <input type="number" class="form-control" placeholder="Jumlah kunjungan"
+                                                aria-describedby="basic-addon1" name="burujul_kulon" autofocus
+                                                required />
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Burujul Wetan</span>
+                                            <input type="number" class="form-control" placeholder="Jumlah kunjungan"
+                                                aria-describedby="basic-addon1" name="burujul_wetan" autofocus
+                                                required />
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Cicadas</span>
+                                            <input type="number" class="form-control" placeholder="Jumlah kunjungan"
+                                                aria-describedby="basic-addon1" name="cicadas" autofocus required />
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Jatisura</span>
+                                            <input type="number" class="form-control" placeholder="Jumlah kunjungan"
+                                                aria-describedby="basic-addon1" name="jatisura" autofocus required />
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Jatiwangi</span>
+                                            <input type="number" class="form-control" placeholder="Jumlah kunjungan"
+                                                aria-describedby="basic-addon1" name="jatiwangi" autofocus required />
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Mekarsari</span>
+                                            <input type="number" class="form-control" placeholder="Jumlah kunjungan"
+                                                aria-describedby="basic-addon1" name="mekarsari" autofocus required />
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Surawangi</span>
+                                            <input type="number" class="form-control" placeholder="Jumlah kunjungan"
+                                                aria-describedby="basic-addon1" name="surawangi" autofocus required />
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Sutawangi</span>
+                                            <input type="number" class="form-control" placeholder="Jumlah kunjungan"
+                                                aria-describedby="basic-addon1" name="sutawangi" autofocus required />
+                                        </div>
                                     </div>
+
+                                    <label for="formFile" class="form-label">Rincian Pelaksanaan</label>
                                     <div class="form-floating my-3">
-                                        <input type="number" class="form-control" id="floatingInput" placeholder="Rp."
-                                            aria-describedby="floatingInputHelp" name="anggaran_digunakan" required />
-                                        <label for="floatingInput">Anggaran yang digunakan</label>
+                                        <input type="text" class="form-control" id="anggaran_digunakan"
+                                            placeholder="Rp " aria-describedby="floatingInputHelp"
+                                            name="anggaran_digunakan" />
+                                        <label for="anggaran_digunakan">Anggaran Digunakan</label>
                                     </div>
                                     <div class="form-floating my-3">
                                         <textarea name="keterangan" id="keterangan" class="form-control"
@@ -99,5 +143,18 @@
                 </div>
             </div>
         </div>
-
+        <script>
+            document.getElementById('anggaran_digunakan').addEventListener('input', function (e) {
+                var value = e.target.value;
+                value = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+                if (value) {
+                    value = parseInt(value, 10);
+                    e.target.value = new Intl.NumberFormat('id-ID', {
+                        minimumFractionDigits: 0
+                    }).format(value);
+                } else {
+                    e.target.value = '';
+                }
+            });
+        </script>
         <?= $this->endSection() ?>

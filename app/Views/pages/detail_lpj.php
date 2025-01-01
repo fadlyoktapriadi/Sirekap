@@ -47,7 +47,7 @@
                             </tr>
                             <tr>
                                 <td>Target</td>
-                                <td><?= $lpj['target'] ?> Pasien</td>
+                                <td><?= $lpj['target'] ?> Kunjungan</td>
                             </tr>
 
                         </table>
@@ -56,13 +56,55 @@
                             <div class="col">
                                 <h4 class="mt-4">Lembar Pertanggung Jawaban</h4>
 
+                                <h6>Kunjungan di Desa</h6>
+                                <div class="table-responsive mb-3">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Desa</th>
+                                                <th>Burujul Kulon</th>
+                                                <th>Burujul Wetan</th>
+                                                <th>Cicadas</th>
+                                                <th>Jatisura</th>
+                                                <th>Jatiwangi</th>
+                                                <th>Mekarsari</th>
+                                                <th>Surawangi</th>
+                                                <th>Sutawangi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Jumlah Kunjungan</td>
+                                                <?php
+                                                foreach ($kunjungan as $index): ?>
+                                                    <td><?= $index['jumlah_kunjungan'] ?></td>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Kunjungan</td>
+                                                <td colspan="8">
+                                                    <?= array_sum(array_column($kunjungan, 'jumlah_kunjungan')) . " / " . $lpj['target'] ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Hasil Capaian</td>
+                                                <td colspan="8">
+                                                    <b>
+                                                        <?php
+                                                        $total_kunjungan = array_sum(array_column($kunjungan, 'jumlah_kunjungan'));
+                                                        $target = $lpj['target'];
+                                                        $hasil = ($total_kunjungan / $target) * 100;
+                                                        echo $hasil . '%';
+                                                        ?>
+                                                    </b>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
                                 <table class="table">
-                                    <tr>
-                                        <td>Capaian Pelaksanaan</td>
-                                        <td><?= $lpj['capaian_pelaksanaan'] ?> Pasien (
-                                            <?= $lpj['capaian_pelaksanaan'] / $lpj['target'] * 100 ?>% )
-                                        </td>
-                                    </tr>
                                     <tr>
                                         <td>Anggaran Yang Digunakan</td>
                                         <td>Rp<?= number_format($lpj['anggaran_digunakan'], 0, ',', '.') ?></td>
@@ -122,7 +164,7 @@
                                 <div class="row">
                                     <div class="col mt-4">
                                         <div class="d-flex justify-content-end mt-4">
-                                            <?php if ($user_login['role'] == 'Staf Unit'): ?>
+                                            <?php if ($user_login['role'] == 'Staf Unit' && $lpj['status'] != 'Selesai'): ?>
                                                 <a href="<?= base_url('lpj/edit/') . $lpj['id_kak'] ?>"
                                                     class="btn btn-sm btn-primary mx-2">
                                                     <i class="bx bx-pencil me-1"></i>
@@ -134,14 +176,16 @@
                                                     Hapus LPJ
                                                 </a>
                                             <?php else: ?>
-                                                <?php if ($lpj['status'] == 'Selesai'): ?>
-                                                    <button class="btn btn-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#modalCenter">Batal Validasi Lembar Pertanggung
-                                                        Jawaban</button>
-                                                <?php else: ?>
-                                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#modalCenter">Validasi Lembar Pertanggung
-                                                        Jawaban</button>
+                                                <?php if ($user_login['role'] != 'Staf Unit'): ?>
+                                                    <?php if ($lpj['status'] == 'Selesai'): ?>
+                                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                                            data-bs-target="#modalCenter">Batal Validasi Lembar Pertanggung
+                                                            Jawaban</button>
+                                                    <?php else: ?>
+                                                        <button class="btn btn-primary" data-bs-toggle="modal"
+                                                            data-bs-target="#modalCenter">Validasi Lembar Pertanggung
+                                                            Jawaban</button>
+                                                    <?php endif; ?>
                                                 <?php endif; ?>
                                             <?php endif; ?>
                                         </div>

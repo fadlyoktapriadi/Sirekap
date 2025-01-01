@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 30 Des 2024 pada 17.04
+-- Waktu pembuatan: 01 Jan 2025 pada 15.36
 -- Versi server: 8.0.30
 -- Versi PHP: 8.1.10
 
@@ -75,7 +75,7 @@ CREATE TABLE `tbl_kerangka_kerja` (
 --
 
 INSERT INTO `tbl_kerangka_kerja` (`id_kak`, `program_kerja`, `nama_kegiatan`, `tanggal_mulai`, `tanggal_selesai`, `anggaran_dibutuhkan`, `anggaran_disetujui`, `penanggung_jawab`, `sasaran`, `target`, `file`, `status`, `created_at`, `updated_at`) VALUES
-(5, 'Pencegahan Gizi Buruk', 'Imunisasi Vitamin B', '2024-12-23', '2024-12-30', 5000000, 4500000, '196912312000023456', 'Balita dan Ibu Hamil', 100, 'Imunisasi_Vitamin_B_676a37c029b00.pdf', 'Selesai', '2024-12-23', '2024-12-25');
+(7, 'Pencegahan Stunting', 'Imunisasi Vitamin B', '2025-01-01', '2025-01-31', 4000000, 3500000, '199207082001801901', 'Balita dan Dibawah Anak Usia 12 Tahun', 150, 'Imunisasi_Vitamin_B6775478eeb5c1.docx', 'Menunggu Persetujuan LPJ', '2025-01-01', '2025-01-01');
 
 -- --------------------------------------------------------
 
@@ -86,10 +86,25 @@ INSERT INTO `tbl_kerangka_kerja` (`id_kak`, `program_kerja`, `nama_kegiatan`, `t
 CREATE TABLE `tbl_kunjungan` (
   `id_kunjungan` int NOT NULL,
   `id_kak` int NOT NULL,
+  `nama_desa` varchar(128) NOT NULL,
   `jumlah_kunjungan` int NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data untuk tabel `tbl_kunjungan`
+--
+
+INSERT INTO `tbl_kunjungan` (`id_kunjungan`, `id_kak`, `nama_desa`, `jumlah_kunjungan`, `created_at`, `updated_at`) VALUES
+(9, 7, 'Cicadas', 10, '2025-01-01', '2025-01-01'),
+(10, 7, 'Burujul Wetan', 10, '2025-01-01', '2025-01-01'),
+(11, 7, 'Burujul Kulon', 20, '2025-01-01', '2025-01-01'),
+(12, 7, 'Mekarsari', 20, '2025-01-01', '2025-01-01'),
+(13, 7, 'Jatiwangi', 20, '2025-01-01', '2025-01-01'),
+(14, 7, 'Surawangi', 10, '2025-01-01', '2025-01-01'),
+(15, 7, 'Jatisura', 20, '2025-01-01', '2025-01-01'),
+(16, 7, 'Sutawangi', 10, '2025-01-01', '2025-01-01');
 
 -- --------------------------------------------------------
 
@@ -114,7 +129,7 @@ CREATE TABLE `tbl_lpj` (
 --
 
 INSERT INTO `tbl_lpj` (`id_lpj`, `id_kak`, `anggaran_digunakan`, `keterangan`, `catatan`, `file_lpj`, `dokumentasi`, `created_at`, `updated_at`) VALUES
-(0, 5, 4500000, 'hahahahahohohohihihi', 'Sudah aman hehehe', 'LPJ_676c4e3033043.pdf', 'Dokumentasi_676c4e3033705.jpg', '2024-12-25', '2024-12-25');
+(3, 7, 3000000, 'gak ada hehehehe', NULL, 'LPJ_677558ae2b40e.pdf', 'Dokumentasi_677558ae2bab7.jpg', '2025-01-01', '2025-01-01');
 
 -- --------------------------------------------------------
 
@@ -188,13 +203,19 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT untuk tabel `tbl_kerangka_kerja`
 --
 ALTER TABLE `tbl_kerangka_kerja`
-  MODIFY `id_kak` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kak` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_kunjungan`
 --
 ALTER TABLE `tbl_kunjungan`
-  MODIFY `id_kunjungan` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kunjungan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_lpj`
+--
+ALTER TABLE `tbl_lpj`
+  MODIFY `id_lpj` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_users`
