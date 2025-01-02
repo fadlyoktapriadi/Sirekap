@@ -283,7 +283,8 @@
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- DataTables JS -->
-  <script src="https:////cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+  
   <script>
     $(document).ready(function () {
       $('#dataTable').DataTable({
