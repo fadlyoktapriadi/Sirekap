@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Waktu pembuatan: 01 Jan 2025 pada 15.36
--- Versi server: 8.0.30
--- Versi PHP: 8.1.10
+-- Host: 127.0.0.1
+-- Generation Time: Jan 02, 2025 at 10:29 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `sirekap`
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_karyawan`
+-- Table structure for table `tbl_karyawan`
 --
 
 CREATE TABLE `tbl_karyawan` (
@@ -38,7 +38,7 @@ CREATE TABLE `tbl_karyawan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data untuk tabel `tbl_karyawan`
+-- Dumping data for table `tbl_karyawan`
 --
 
 INSERT INTO `tbl_karyawan` (`NIP`, `nama_karyawan`, `alamat`, `unit_kerja`, `jabatan`, `created_at`, `updated_at`) VALUES
@@ -50,20 +50,20 @@ INSERT INTO `tbl_karyawan` (`NIP`, `nama_karyawan`, `alamat`, `unit_kerja`, `jab
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kerangka_kerja`
+-- Table structure for table `tbl_kerangka_kerja`
 --
 
 CREATE TABLE `tbl_kerangka_kerja` (
-  `id_kak` int NOT NULL,
-  `program_kerja` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `id_kak` int(11) NOT NULL,
+  `program_kerja` varchar(128) NOT NULL,
   `nama_kegiatan` varchar(128) NOT NULL,
   `tanggal_mulai` date NOT NULL,
   `tanggal_selesai` date NOT NULL,
-  `anggaran_dibutuhkan` int NOT NULL,
-  `anggaran_disetujui` int DEFAULT NULL,
+  `anggaran_dibutuhkan` int(11) NOT NULL,
+  `anggaran_disetujui` int(11) DEFAULT NULL,
   `penanggung_jawab` varchar(128) NOT NULL,
   `sasaran` varchar(128) NOT NULL,
-  `target` int NOT NULL,
+  `target` int(11) NOT NULL,
   `file` varchar(128) NOT NULL,
   `status` enum('Diproses','Diterima','Menunggu Persetujuan LPJ','Perlu Perbaikan','Ditolak','Selesai') NOT NULL,
   `created_at` date NOT NULL,
@@ -71,53 +71,53 @@ CREATE TABLE `tbl_kerangka_kerja` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data untuk tabel `tbl_kerangka_kerja`
+-- Dumping data for table `tbl_kerangka_kerja`
 --
 
 INSERT INTO `tbl_kerangka_kerja` (`id_kak`, `program_kerja`, `nama_kegiatan`, `tanggal_mulai`, `tanggal_selesai`, `anggaran_dibutuhkan`, `anggaran_disetujui`, `penanggung_jawab`, `sasaran`, `target`, `file`, `status`, `created_at`, `updated_at`) VALUES
-(7, 'Pencegahan Stunting', 'Imunisasi Vitamin B', '2025-01-01', '2025-01-31', 4000000, 3500000, '199207082001801901', 'Balita dan Dibawah Anak Usia 12 Tahun', 150, 'Imunisasi_Vitamin_B6775478eeb5c1.docx', 'Menunggu Persetujuan LPJ', '2025-01-01', '2025-01-01');
+(9, 'Penyuluhan Stunting', 'Imunisasi Vitamin B', '2025-01-01', '2025-01-31', 4500000, 4000000, '199207082001801901', 'Balita dan Anak dibawah 12 Tahun', 150, 'Imunisasi_Vitamin_B6775fd558b102.docx', 'Selesai', '2025-01-02', '2025-01-02');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kunjungan`
+-- Table structure for table `tbl_kunjungan`
 --
 
 CREATE TABLE `tbl_kunjungan` (
-  `id_kunjungan` int NOT NULL,
-  `id_kak` int NOT NULL,
+  `id_kunjungan` int(11) NOT NULL,
+  `id_kak` int(11) NOT NULL,
   `nama_desa` varchar(128) NOT NULL,
-  `jumlah_kunjungan` int NOT NULL,
+  `jumlah_kunjungan` int(11) NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data untuk tabel `tbl_kunjungan`
+-- Dumping data for table `tbl_kunjungan`
 --
 
 INSERT INTO `tbl_kunjungan` (`id_kunjungan`, `id_kak`, `nama_desa`, `jumlah_kunjungan`, `created_at`, `updated_at`) VALUES
-(9, 7, 'Cicadas', 10, '2025-01-01', '2025-01-01'),
-(10, 7, 'Burujul Wetan', 10, '2025-01-01', '2025-01-01'),
-(11, 7, 'Burujul Kulon', 20, '2025-01-01', '2025-01-01'),
-(12, 7, 'Mekarsari', 20, '2025-01-01', '2025-01-01'),
-(13, 7, 'Jatiwangi', 20, '2025-01-01', '2025-01-01'),
-(14, 7, 'Surawangi', 10, '2025-01-01', '2025-01-01'),
-(15, 7, 'Jatisura', 20, '2025-01-01', '2025-01-01'),
-(16, 7, 'Sutawangi', 10, '2025-01-01', '2025-01-01');
+(25, 9, 'Burujul Kulon', 15, '2025-01-02', '2025-01-02'),
+(26, 9, 'Burujul Wetan', 20, '2025-01-02', '2025-01-02'),
+(27, 9, 'Cicadas', 25, '2025-01-02', '2025-01-02'),
+(28, 9, 'Jatisura', 15, '2025-01-02', '2025-01-02'),
+(29, 9, 'Jatiwangi', 15, '2025-01-02', '2025-01-02'),
+(30, 9, 'Mekarsari', 10, '2025-01-02', '2025-01-02'),
+(31, 9, 'Surawangi', 15, '2025-01-02', '2025-01-02'),
+(32, 9, 'Sutawangi', 15, '2025-01-02', '2025-01-02');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_lpj`
+-- Table structure for table `tbl_lpj`
 --
 
 CREATE TABLE `tbl_lpj` (
-  `id_lpj` int NOT NULL,
-  `id_kak` int NOT NULL,
-  `anggaran_digunakan` int NOT NULL,
+  `id_lpj` int(11) NOT NULL,
+  `id_kak` int(11) NOT NULL,
+  `anggaran_digunakan` int(11) NOT NULL,
   `keterangan` text NOT NULL,
-  `catatan` text,
+  `catatan` text DEFAULT NULL,
   `file_lpj` varchar(128) NOT NULL,
   `dokumentasi` varchar(128) NOT NULL,
   `created_at` date NOT NULL,
@@ -125,20 +125,20 @@ CREATE TABLE `tbl_lpj` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data untuk tabel `tbl_lpj`
+-- Dumping data for table `tbl_lpj`
 --
 
 INSERT INTO `tbl_lpj` (`id_lpj`, `id_kak`, `anggaran_digunakan`, `keterangan`, `catatan`, `file_lpj`, `dokumentasi`, `created_at`, `updated_at`) VALUES
-(3, 7, 3000000, 'gak ada hehehehe', NULL, 'LPJ_677558ae2b40e.pdf', 'Dokumentasi_677558ae2bab7.jpg', '2025-01-01', '2025-01-01');
+(4, 9, 3500000, 'gak ada hehehe', 'aman hehe', 'LPJ_6775fe252b8d9.pdf', 'Dokumentasi_6775fe3a91543.jpg', '2025-01-02', '2025-01-02');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_users`
+-- Table structure for table `tbl_users`
 --
 
 CREATE TABLE `tbl_users` (
-  `id_user` int NOT NULL,
+  `id_user` int(11) NOT NULL,
   `NIP` char(18) NOT NULL,
   `username` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE `tbl_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data untuk tabel `tbl_users`
+-- Dumping data for table `tbl_users`
 --
 
 INSERT INTO `tbl_users` (`id_user`, `NIP`, `username`, `password`, `role`, `created_at`, `updated_at`) VALUES
@@ -162,73 +162,73 @@ INSERT INTO `tbl_users` (`id_user`, `NIP`, `username`, `password`, `role`, `crea
 --
 
 --
--- Indeks untuk tabel `tbl_karyawan`
+-- Indexes for table `tbl_karyawan`
 --
 ALTER TABLE `tbl_karyawan`
   ADD PRIMARY KEY (`NIP`);
 
 --
--- Indeks untuk tabel `tbl_kerangka_kerja`
+-- Indexes for table `tbl_kerangka_kerja`
 --
 ALTER TABLE `tbl_kerangka_kerja`
   ADD PRIMARY KEY (`id_kak`),
   ADD KEY `id_proker` (`program_kerja`);
 
 --
--- Indeks untuk tabel `tbl_kunjungan`
+-- Indexes for table `tbl_kunjungan`
 --
 ALTER TABLE `tbl_kunjungan`
   ADD PRIMARY KEY (`id_kunjungan`),
   ADD KEY `id_kak` (`id_kak`);
 
 --
--- Indeks untuk tabel `tbl_lpj`
+-- Indexes for table `tbl_lpj`
 --
 ALTER TABLE `tbl_lpj`
   ADD PRIMARY KEY (`id_lpj`),
   ADD KEY `id_kak` (`id_kak`);
 
 --
--- Indeks untuk tabel `tbl_users`
+-- Indexes for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
   ADD PRIMARY KEY (`id_user`),
   ADD KEY `NIP` (`NIP`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_kerangka_kerja`
+-- AUTO_INCREMENT for table `tbl_kerangka_kerja`
 --
 ALTER TABLE `tbl_kerangka_kerja`
-  MODIFY `id_kak` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_kunjungan`
+-- AUTO_INCREMENT for table `tbl_kunjungan`
 --
 ALTER TABLE `tbl_kunjungan`
-  MODIFY `id_kunjungan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_kunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_lpj`
+-- AUTO_INCREMENT for table `tbl_lpj`
 --
 ALTER TABLE `tbl_lpj`
-  MODIFY `id_lpj` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_lpj` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_users`
+-- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tbl_lpj`
+-- Constraints for table `tbl_lpj`
 --
 ALTER TABLE `tbl_lpj`
   ADD CONSTRAINT `tbl_lpj_ibfk_1` FOREIGN KEY (`id_kak`) REFERENCES `tbl_kerangka_kerja` (`id_kak`) ON DELETE CASCADE ON UPDATE CASCADE;

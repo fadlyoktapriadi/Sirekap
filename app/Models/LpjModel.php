@@ -19,6 +19,11 @@ class LpjModel extends Model
             ->where('tbl_lpj.id_kak', $id)
             ->first();
     }
+
+    public function jumlahAnggaranDigunakan(){
+        return $this->selectSum('anggaran_digunakan')
+                    ->first();
+    }
 }
 
 ?>

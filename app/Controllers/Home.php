@@ -55,10 +55,19 @@ class Home extends BaseController
 
     public function dashboard()
     {
-
             $data = [
                 'title' => 'Dashboard',
                 'user_login' => $this->session->get(),
+                'total_karyawan' => $this->KaryawanModel->countAll(),
+                'total_kak' => $this->KerangkaKerjaModel->countAll(),
+                'total_kak_disetujui' => $this->KerangkaKerjaModel->countKakSetuju(),
+                'total_kak_berjalan' => $this->KerangkaKerjaModel->countKakBerjalan(),
+                'statusKegiatan' => $this->KerangkaKerjaModel->statusKegiatan(),
+                'jumlahAnggaranKegiatan' => $this->KerangkaKerjaModel->jumlahAnggaranKegiatan()['anggaran_disetujui'],
+                'jumlahAnggaranDigunakan' => $this->LpjModel->jumlahAnggaranDigunakan()['anggaran_digunakan'],
+                'jumlahKegiatanUnitEKKM' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat'),
+                'jumlahKegiatanUnitPengembangan' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan'),
+                'jumlahKegiatanUnitKL' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Labolatorium'),
             ];
 
             return view('pages/dashboard', $data);

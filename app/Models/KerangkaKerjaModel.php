@@ -43,6 +43,36 @@ class KerangkaKerjaModel extends Model
             ->where('status', "Selesai")
             ->findAll();
     }
+
+    public function countKakSetuju(){
+        return $this->where('status', "Diterima")
+                    ->orWhere('status', "Menunggu Persetujuan LPJ")
+                    ->orWhere('status', "Selesai")
+                    ->countAllResults();
+    }
+
+    public function countKakBerjalan(){
+        return $this->Where('status !=', "Selesai")
+                    ->Where('status !=', "Ditolak")
+                    ->countAllResults();
+    }
+
+    public function statusKegiatan(){
+        return $this->select('nama_kegiatan, status, created_at')
+                    ->findAll();
+    }
+
+    public function jumlahAnggaranKegiatan(){
+        return $this->selectSum('anggaran_disetujui')
+                ->first();
+    }
+
+    public function getKerjangkaKerjaUnit($unit){
+        return $this->select('tbl_karyawan.unit_kerja, COUNT(tbl_kerangka_kerja.id_kak) as jumlah_kegiatan')
+                    ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
+                    ->where('tbl_karyawan.unit_kerja', $unit)
+                    ->countAllResults();
+    }
 }
 
 ?>
