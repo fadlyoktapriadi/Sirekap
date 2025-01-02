@@ -43,7 +43,7 @@ class Lpj extends BaseController
 
         if ($file_lpj->isValid() && !$file_lpj->hasMoved() && in_array($file_lpj->getClientExtension(), $allowedExtensions)) {
             $newName = 'LPJ_' . preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . uniqid() . '.' . $file_lpj->getClientExtension();
-            $file_lpj->move('doc/lpj', $newName);
+            $file_lpj->move('doc/lpj/', $newName);
             $file_lpj = $newName;
         } else {
             session()->setFlashdata('error', 'File LPJ yang diupload harus bertipe: doc, docx, jpg, png, pdf, xls, xlsx.');
@@ -52,7 +52,7 @@ class Lpj extends BaseController
 
         if ($file_dokumentasi->isValid() && !$file_dokumentasi->hasMoved() && in_array($file_dokumentasi->getClientExtension(), $allowedExtensions)) {
             $newName = 'Dokumentasi_' . preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . uniqid() . '.' . $file_dokumentasi->getClientExtension();
-            $file_dokumentasi->move('doc/dokumentasi', $newName);
+            $file_dokumentasi->move('doc/dokumentasi/', $newName);
             $file_dokumentasi = $newName;
         } else {
             session()->setFlashdata('error', 'File Dokumentasi yang diupload harus bertipe: doc, docx, jpg, png, pdf, xls, xlsx.');
@@ -146,6 +146,7 @@ class Lpj extends BaseController
             'user_login' => $this->session->get(),
             'breadcrumb' => ['Data LPJ KAK', 'Ubah LPJ'],
             'lpj' => $this->LpjModel->getLpjById($id),
+            'kunjungan' => $this->KunjunganModel->getKunjunganById($id),
         ];
 
         return view('pages/edit_lpj', $data);
@@ -156,19 +157,62 @@ class Lpj extends BaseController
         $id_lpj = $this->request->getVar('id_lpj');
         $id_kak = $this->request->getVar('id_kak');
 
+        $data_kunjungan = [
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Burujul Kulon',
+                'jumlah_kunjungan' => $this->request->getVar('burujul_kulon'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Burujul Wetan',
+                'jumlah_kunjungan' => $this->request->getVar('burujul_wetan'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Cicadas',
+                'jumlah_kunjungan' => $this->request->getVar('cicadas'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Jatisura',
+                'jumlah_kunjungan' => $this->request->getVar('jatisura'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Jatiwangi',
+                'jumlah_kunjungan' => $this->request->getVar('jatiwangi'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Mekarsari',
+                'jumlah_kunjungan' => $this->request->getVar('mekarsari'),
+            ],
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Surawangi',
+                'jumlah_kunjungan' => $this->request->getVar('surawangi'),
+            ],
 
-        $data = [
-            'capaian_pelaksanaan' => $this->request->getVar('capaian_pelaksanaan'),
-            'anggaran_digunakan' => $this->request->getVar('anggaran_digunakan'),
-            'keterangan' => $this->request->getVar('keterangan'),
+            [
+                'id_kak' => $id_kak,
+                'nama_desa' => 'Sutawangi',
+                'jumlah_kunjungan' => $this->request->getVar('sutawangi'),
+            ],
         ];
 
+        $anggaran_digunakan = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_digunakan'))));
+        
+        $data = [
+            'anggaran_digunakan' => $anggaran_digunakan,
+            'keterangan' => $this->request->getVar('keterangan'),
+        ];
 
         $file_lpj = $this->request->getFile('file_lpj');
         $file_dokumentasi = $this->request->getFile('dokumentasi');
         $allowedExtensions = ['doc', 'docx', 'jpg', 'png', 'pdf', 'xls', 'xlsx'];
 
-        if ($file_lpj) {
+        if ($file_lpj->isValid()) {
             $file_lama = $this->request->getVar('lpj_lama');
             if (file_exists('doc/lpj/' . $file_lama)) {
                 unlink('doc/lpj/' . $file_lama);
@@ -184,7 +228,7 @@ class Lpj extends BaseController
             }
         }
 
-        if ($file_dokumentasi) {
+        if ($file_dokumentasi->isValid()) {
             $file_lama = $this->request->getVar('dokumentasi_lama');
             if (file_exists('doc/dokumentasi/' . $file_lama)) {
                 unlink('doc/dokumentasi/' . $file_lama);
@@ -199,6 +243,8 @@ class Lpj extends BaseController
                 return redirect()->back()->withInput();
             }
         }
+        
+        $this->KunjunganModel->updateBatch($data_kunjungan, 'nama_desa');
 
         $this->LpjModel->update($id_lpj, $data);
 

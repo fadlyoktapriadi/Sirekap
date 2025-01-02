@@ -9,9 +9,9 @@
             <div class="card">
                 <h3 class="card-header text-center mt-3">Pengisian Lembar Pertanggung Jawaban</h3>
 
-                <?php if (session()->getFlashdata('success')): ?>
-                    <div class="alert alert-success alert-dismissible text-center mx-4">
-                        <?= session()->getFlashdata('success') ?>
+                <?php if (session()->getFlashdata('error')): ?>
+                    <div class="alert alert-danger alert-dismissible text-center mx-4">
+                        <?= session()->getFlashdata('error') ?>
                     </div>
                 <?php endif; ?>
 
@@ -47,7 +47,7 @@
                             </tr>
                             <tr>
                                 <td>Target</td>
-                                <td><?= $lpj['target'] ?> Pasien</td>
+                                <td><?= $lpj['target'] ?> Kunjungan</td>
                             </tr>
 
                         </table>
@@ -63,18 +63,25 @@
                                     <input type="hidden" name="lpj_lama" value="<?= $lpj['file_lpj'] ?>">
                                     <input type="hidden" name="dokumentasi_lama" value="<?= $lpj['dokumentasi'] ?>">
 
-                                    <div class="form-floating my-3">
-                                        <input type="number" class="form-control" id="floatingInput"
-                                            placeholder="Jumlah pasien yang ditangani"
-                                            aria-describedby="floatingInputHelp" name="capaian_pelaksanaan"
-                                            value="<?= $lpj['capaian_pelaksanaan'] ?>" autofocus required />
-                                        <label for="floatingInput">Capaian Pelaksanaan</label>
+                                    <div class="my-3">
+                                        <label for="formFile" class="form-label">Jumlah Kunjungan di Desa</label>
+                                        <?php foreach ($kunjungan as $k): ?>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1"><?= $k['nama_desa'] ?></span>
+                                                <input type="number" class="form-control" placeholder="Jumlah kunjungan"
+                                                    aria-describedby="basic-addon1" name="<?= strtolower(str_replace(' ', '_', $k['nama_desa'])) ?>" value="<?= $k['jumlah_kunjungan'] ?>"
+                                                    required />
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
+
+                                    <label for="formFile" class="form-label">Rincian Pelaksanaan</label>
+
                                     <div class="form-floating my-3">
-                                        <input type="number" class="form-control" id="floatingInput" placeholder="Rp."
-                                            aria-describedby="floatingInputHelp" name="anggaran_digunakan"
-                                            value="<?= $lpj['anggaran_digunakan'] ?>" required />
-                                        <label for="floatingInput">Anggaran yang digunakan</label>
+                                        <input type="text" class="form-control" id="anggaran_digunakan"
+                                            placeholder="Rp " aria-describedby="floatingInputHelp"
+                                            name="anggaran_digunakan" value="<?= $lpj['anggaran_digunakan'] ?>"/>
+                                        <label for="anggaran_digunakan">Anggaran Digunakan</label>
                                     </div>
                                     <div class="form-floating my-3">
                                         <textarea name="keterangan" id="keterangan" class="form-control"
@@ -105,5 +112,18 @@
                 </div>
             </div>
         </div>
-
+        <script>
+            document.getElementById('anggaran_digunakan').addEventListener('input', function (e) {
+                var value = e.target.value;
+                value = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+                if (value) {
+                    value = parseInt(value, 10);
+                    e.target.value = new Intl.NumberFormat('id-ID', {
+                        minimumFractionDigits: 0
+                    }).format(value);
+                } else {
+                    e.target.value = '';
+                }
+            });
+        </script>
         <?= $this->endSection() ?>

@@ -40,7 +40,7 @@ class KerangkaKerja extends BaseController
         $allowedExtensions = ['doc', 'docx', 'jpg', 'png', 'pdf'];
         if ($file->isValid() && !$file->hasMoved() && in_array($file->getClientExtension(), $allowedExtensions)) {
             $newName = preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . uniqid() . '.' . $file->getClientExtension();
-            $file->move('doc/', $newName);
+            $file->move('doc/kak/', $newName);
             $fileKak = $newName;
         } else {
             session()->setFlashdata('error', 'File yang diupload harus bertipe: doc, docx, jpg, png, pdf.');
@@ -109,17 +109,17 @@ class KerangkaKerja extends BaseController
             'anggaran_dibutuhkan' => $anggaran_dibutuhkan,
         ];
 
-        if ($this->request->getFile('file_kak')) {
+        if ($this->request->getFile('file_kak')->isValid()) {
             $file = $this->request->getFile('file_kak');
             $file_lama = $this->request->getVar('file_lama');
             $allowedExtensions = ['doc', 'docx', 'jpg', 'png', 'pdf'];
 
             if ($file->isValid() && !$file->hasMoved() && in_array($file->getClientExtension(), $allowedExtensions)) {
-                if (file_exists('doc/' . $file_lama)) {
-                    unlink('doc/' . $file_lama);
+                if (file_exists('doc/kak/' . $file_lama)) {
+                    unlink('doc/kak/' . $file_lama);
                 }
                 $newName = preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . '_' . uniqid() . '.' . $file->getClientExtension();
-                $file->move('doc/', $newName);
+                $file->move('doc/kak/', $newName);
                 $fileKak = $newName;
                 $data['file'] = $fileKak;
             } elseif ($file->getError() != 4) {
@@ -137,8 +137,8 @@ class KerangkaKerja extends BaseController
     public function hapus($id)
     {
         $kak = $this->KerangkaKerjaModel->find($id);
-        if (file_exists('doc/' . $kak['file'])) {
-            unlink('doc/' . $kak['file']);
+        if (file_exists('doc/kak/' . $kak['file'])) {
+            unlink('doc/kak/' . $kak['file']);
         }
         $this->KerangkaKerjaModel->delete($id);
 

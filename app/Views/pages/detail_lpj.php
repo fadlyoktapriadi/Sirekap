@@ -94,7 +94,7 @@
                                                         $total_kunjungan = array_sum(array_column($kunjungan, 'jumlah_kunjungan'));
                                                         $target = $lpj['target'];
                                                         $hasil = ($total_kunjungan / $target) * 100;
-                                                        echo $hasil . '%';
+                                                        echo number_format($hasil, 2) . '%';
                                                         ?>
                                                     </b>
                                                 </td>

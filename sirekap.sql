@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `sirekap`
@@ -35,7 +35,7 @@ CREATE TABLE `tbl_karyawan` (
   `jabatan` varchar(128) NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data untuk tabel `tbl_karyawan`
@@ -55,7 +55,7 @@ INSERT INTO `tbl_karyawan` (`NIP`, `nama_karyawan`, `alamat`, `unit_kerja`, `jab
 
 CREATE TABLE `tbl_kerangka_kerja` (
   `id_kak` int NOT NULL,
-  `program_kerja` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `program_kerja` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `nama_kegiatan` varchar(128) NOT NULL,
   `tanggal_mulai` date NOT NULL,
   `tanggal_selesai` date NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `tbl_kerangka_kerja` (
   `status` enum('Diproses','Diterima','Menunggu Persetujuan LPJ','Perlu Perbaikan','Ditolak','Selesai') NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data untuk tabel `tbl_kerangka_kerja`
@@ -90,7 +90,7 @@ CREATE TABLE `tbl_kunjungan` (
   `jumlah_kunjungan` int NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data untuk tabel `tbl_kunjungan`
@@ -122,7 +122,7 @@ CREATE TABLE `tbl_lpj` (
   `dokumentasi` varchar(128) NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data untuk tabel `tbl_lpj`
@@ -145,7 +145,7 @@ CREATE TABLE `tbl_users` (
   `role` enum('Administrator','Kepala Puskesmas','Kepala Unit','Staf Unit') NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data untuk tabel `tbl_users`

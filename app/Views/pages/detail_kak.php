@@ -54,7 +54,7 @@
                 </tr>
                 <tr>
                     <td>File Kerangka Acuan Kerja (KAK)</td>
-                    <td><a href="<?= base_url('doc/') . $kak['file'] ?>" target="_blank"><?= $kak['file'] ?></a></td>
+                    <td><a href="<?= base_url('doc/kak/') . $kak['file'] ?>" target="_blank"><?= $kak['file'] ?></a></td>
                 </tr>
                 <tr>
                     <td>Status</td>
