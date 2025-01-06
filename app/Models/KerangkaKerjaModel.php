@@ -73,6 +73,40 @@ class KerangkaKerjaModel extends Model
                     ->where('tbl_karyawan.unit_kerja', $unit)
                     ->countAllResults();
     }
+
+    public function getKakCountByMonth($year)
+    {
+        return $this->select("MONTH(created_at) AS bulan, COUNT(*) AS total_kak")
+                ->where("YEAR(created_at)", $year)
+                ->where("status", "Diproses")
+                ->groupBy("MONTH(created_at)")
+                ->findAll();
+    }
+
+    public function getLpjCountByMonth($year)
+    {
+        return $this->select("MONTH(created_at) AS bulan, COUNT(*) AS total_kak")
+                ->where("YEAR(created_at)", $year)
+                ->where("status", "Diterima")
+                ->orWhere("status", "Menunggu Persetujuan LPJ")
+                ->orWhere("status", "Perlu Perbaikan")
+                ->groupBy("MONTH(created_at)")
+                ->findAll();
+    }
+
+    public function getKakSelesaiByMonth($year)
+    {
+        return $this->select("MONTH(created_at) AS bulan, COUNT(*) AS total_kak_selesai")
+                ->where("YEAR(created_at)", $year)
+                ->where("status", "Selesai")
+                ->groupBy("MONTH(created_at)")
+                ->findAll();
+    }
+
+    public function countKakSelesai(){
+        return $this->Where('status', "Selesai")
+                    ->countAllResults();
+    }
 }
 
 ?>

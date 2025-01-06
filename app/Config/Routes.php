@@ -10,6 +10,11 @@ $routes->post('/login', 'Home::login');
 $routes->get('/logout', 'Home::logout');
 
 $routes->get('/dashboard', 'Home::dashboard');
+$routes->get('/dashboard/getKakDataJson', 'Home::getKakDataJson');
+$routes->get('/dashboard/getLpjDataJson', 'Home::getLpjDataJson');
+$routes->get('/dashboard/getKakSelesaiDataJson', 'Home::getKakSelesaiDataJson');
+$routes->get('/dashboard/getPieUnit', 'Home::getPieUnit');
+$routes->get('/dashboard/kinerjaUnit', 'Home::kinerjaUnit');
 
 $routes->get('/users', 'Users::index');
 $routes->get('/users/tambah', 'Users::tambah');

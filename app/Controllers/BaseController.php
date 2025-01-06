@@ -60,5 +60,6 @@ abstract class BaseController extends Controller
         $this->KerangkaKerjaModel = new \App\Models\KerangkaKerjaModel();
         $this->LpjModel = new \App\Models\LpjModel();
         $this->KunjunganModel = new \App\Models\KunjunganModel();
+        $this->PaguAnggaranModel = new \App\Models\PaguAnggaranModel();
     }
 }

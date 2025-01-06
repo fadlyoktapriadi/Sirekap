@@ -63,14 +63,66 @@ class Home extends BaseController
                 'total_kak_disetujui' => $this->KerangkaKerjaModel->countKakSetuju(),
                 'total_kak_berjalan' => $this->KerangkaKerjaModel->countKakBerjalan(),
                 'statusKegiatan' => $this->KerangkaKerjaModel->statusKegiatan(),
-                'jumlahAnggaranKegiatan' => $this->KerangkaKerjaModel->jumlahAnggaranKegiatan()['anggaran_disetujui'],
+                'jumlahPaguAnggaran' => $this->PaguAnggaranModel->getPaguAnggaran('2025')['jumlah_anggaran'],
                 'jumlahAnggaranDigunakan' => $this->LpjModel->jumlahAnggaranDigunakan()['anggaran_digunakan'],
                 'jumlahKegiatanUnitEKKM' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat'),
                 'jumlahKegiatanUnitPengembangan' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan'),
                 'jumlahKegiatanUnitKL' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Labolatorium'),
+                
             ];
 
             return view('pages/dashboard', $data);
+    }
+
+    public function getKakDataJson()
+    {
+        $year = 2025; // Example year
+        $kakData = $this->KerangkaKerjaModel->getKakCountByMonth('2025');
+        
+        return $this->response->setJSON($kakData);
+    }
+
+    public function getLpjDataJson()
+    {
+        $year = 2025; // Example year
+        $lpjData = $this->KerangkaKerjaModel->getLpjCountByMonth('2025');
+        
+        return $this->response->setJSON($lpjData);
+    }
+
+    public function getKakSelesaiDataJson()
+    {
+        $year = 2025; // Example year
+        $kakSelesaiData = $this->KerangkaKerjaModel->getKakSelesaiByMonth('2025');
+        
+        return $this->response->setJSON($kakSelesaiData);
+    }
+
+    public function getPieUnit(){
+
+        $ekm = $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat');
+        $pengembangan = $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan');
+        $kl = $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Labolatorium');
+
+        $total = $ekm + $pengembangan + $kl;
+
+        $rekm = $ekm / $total * 100;
+        $rpengembangan = $pengembangan / $total * 100;
+        $rkl = $kl / $total * 100; 
+
+        return $this->response->setJSON([
+            $rekm, $rpengembangan, $rkl
+        ]);
+    }
+
+    public function kinerjaUnit(){
+
+       $total_kak = $this->KerangkaKerjaModel->countAll();
+
+       $total_kak_selesai = $this->KerangkaKerjaModel->countKakSelesai();
+
+        return $this->response->setJSON(number_format($total_kak_selesai / $total_kak * 100));
+
     }
 
     public function logout()
