@@ -78,10 +78,10 @@
             </table>
         </div>
     </div>
+    <?php if ($user_login['role'] != 'Staf Unit'): ?>
     <div class="row">
         <div class="col">
-            <div class="d-flex justify-content-end my-3 mx-3 p-4">
-                <?php if ($user_login['role'] != 'Staf Unit'): ?>
+            <div class="d-flex justify-content-end mt-3 mx-4"> 
                     <?php if ($kak['status'] == 'Diterima'): ?>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenter">Batal Validasi
                             Kerangka Acuan Kerja</button>
@@ -90,8 +90,36 @@
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">Validasi Kerangka
                             Acuan Kerja</button>
                     <?php endif; ?>
-                <?php endif; ?>
             </div>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <div class="row mx-4 my-4">
+        <div class="col-md-6">
+            <h4 class="mt-2">Riwayat Kerangka Acuan Kerja</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Tanggal Input</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pengajuan KAK</td>
+                        <td><?= date('d F Y', strtotime($kak['created_at'])) ?></td>
+                    </tr>
+                    <?php if ($kak['status'] == 'Diterima'): ?>
+                        <tr>
+                            <td>KAK Diterima</td>
+                            <td><?= date('d F Y', strtotime($kak['tanggal_diterima'])) ?></td>
+                        </tr>
+                    <?php endif; ?>
+                    
+                </tbody>
+               
+            </table>
         </div>
     </div>
 

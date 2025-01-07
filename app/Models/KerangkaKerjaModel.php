@@ -9,7 +9,7 @@ class KerangkaKerjaModel extends Model
     protected $table = 'tbl_kerangka_kerja';
     protected $primaryKey = 'id_kak';
     protected $useTimestamps = true;
-    protected $allowedFields = ['program_kerja', 'nama_kegiatan', 'tanggal_mulai', 'tanggal_selesai', 'anggaran_dibutuhkan', 'anggaran_disetujui', 'penanggung_jawab', 'sasaran', 'target', 'file', 'status',];
+    protected $allowedFields = ['program_kerja', 'nama_kegiatan', 'tanggal_mulai', 'tanggal_selesai', 'anggaran_dibutuhkan', 'anggaran_disetujui', 'penanggung_jawab', 'sasaran', 'target', 'file', 'status', 'tanggal_diterima'];
 
     public function getKerjangkaKerjaWithUsers()
     {

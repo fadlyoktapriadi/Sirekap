@@ -153,9 +153,16 @@ class KerangkaKerja extends BaseController
         $anggaran_dibutuhkan = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_disetujui'))));
 
         $data = [
-            'anggaran_disetujui' => $anggaran_dibutuhkan,
-            'status' => $this->request->getVar('status')
+            'status' => $this->request->getVar('status'),
+            'tanggal_diterima' => null
         ];
+
+        $data['status'] = $this->request->getVar('status');
+
+        if($data['status'] == "Diterima"){
+            $data['anggaran_disetujui'] = $anggaran_dibutuhkan;
+            $data['tanggal_diterima'] = date('Y-m-d');
+        }
 
         $this->KerangkaKerjaModel->update($id, $data);
 

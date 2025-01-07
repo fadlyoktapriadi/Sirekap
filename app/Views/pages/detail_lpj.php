@@ -15,7 +15,7 @@
                     </div>
                 <?php endif; ?>
 
-                <div class="row mx-4 mb-5">
+                <div class="row mx-1">
                     <div class="col-md-12">
                         <h4 class="mt-4">Detail Kegiatan</h4>
                         <table class="table">
@@ -197,6 +197,37 @@
                         </div>
                     </div>
                 </div>
+
+        <div class="row mx-4 my-2 pb-4">
+        <div class="col-md-6">
+            <h4 class="mt-2">Riwayat Kerangka Acuan Kerja</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Tanggal Input</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pengajuan KAK</td>
+                        <td><?= date('d F Y', strtotime($lpj['created_at'])) ?></td>
+                    </tr>
+                        <tr>
+                            <td>KAK Diterima</td>
+                            <td><?= date('d F Y', strtotime($lpj['tanggal_diterima'])) ?></td>
+                        </tr>
+                        <tr>
+                            <td>LPJ Diterima</td>
+                            <td><?= date('d F Y', strtotime($lpj['updated_at'])) ?></td>
+                        </tr>   
+                    
+                </tbody>
+               
+            </table>
+        </div>
+    </div>
+    
             </div>
         </div>
 
