@@ -217,10 +217,18 @@
                             <td>KAK Diterima</td>
                             <td><?= date('d F Y', strtotime($lpj['tanggal_diterima'])) ?></td>
                         </tr>
+                        <?php if ($lpj['status'] != "Diterima"): ?>
                         <tr>
                             <td>LPJ Diterima</td>
                             <td><?= date('d F Y', strtotime($lpj['updated_at'])) ?></td>
-                        </tr>   
+                        </tr>
+                            <?php if ($lpj['lpj_selesai'] != null): ?>   
+                            <tr>
+                                <td>LPJ Selesai</td>
+                                <td><?= date('d F Y', strtotime($lpj['lpj_selesai'])) ?></td>
+                            </tr>  
+                            <?php endif; ?>
+                        <?php endif; ?>
                     
                 </tbody>
                

@@ -279,7 +279,7 @@ class Lpj extends BaseController
         $id_lpj = $this->request->getVar('id_lpj');
         $lpj = $this->LpjModel->find($id_lpj);
 
-        $this->LpjModel->update($id_lpj, ['catatan' => $this->request->getVar('catatan')]);
+        $this->LpjModel->update($id_lpj, ['catatan' => $this->request->getVar('catatan'), 'lpj_selesai' => date('Y-m-d')]);
 
         $this->KerangkaKerjaModel->update($lpj['id_kak'], ['status' => $this->request->getVar('status')]);
 

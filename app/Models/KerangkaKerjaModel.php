@@ -15,6 +15,7 @@ class KerangkaKerjaModel extends Model
     {
         return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.NIP, tbl_karyawan.nama_karyawan')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
+            ->where('status', "Diproses")
             ->findAll();
     }
 
