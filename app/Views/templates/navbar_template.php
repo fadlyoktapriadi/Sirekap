@@ -87,6 +87,12 @@
                 <div data-i18n="Documentation">Data Karyawan</div>
               </a>
             </li>
+            <li class="menu-item <?= ($title == 'Pagu Anggaran') ? 'active' : '' ?>">
+              <a href=" <?= base_url('pagu-anggaran') ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-money"></i>
+                <div data-i18n="Documentation">Pagu Anggaran</div>
+              </a>
+            </li>
           <?php endif; ?>
 
           <li
@@ -279,12 +285,12 @@
 
   <!-- Page JS -->
   <?= $this->renderSection('jscart') ?>
-  
+
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- DataTables JS -->
   <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
-  
+
   <script>
     $(document).ready(function () {
       $('#dataTable').DataTable({

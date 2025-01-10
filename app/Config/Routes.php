@@ -23,12 +23,12 @@ $routes->get('/users/edit/(:num)', 'Users::edit/$1');
 $routes->post('/users/update', 'Users::update');
 $routes->get('/users/hapus/(:num)', 'Users::hapus/$1');
 
-$routes->get('/proker', 'Proker::index');
-$routes->get('/proker/tambah', 'Proker::tambah');
-$routes->post('/proker/tambah', 'Proker::simpan');
-$routes->get('/proker/edit/(:num)', 'Proker::edit/$1');
-$routes->post('/proker/update', 'Proker::update');
-$routes->get('/proker/hapus/(:num)', 'Proker::delete/$1');
+$routes->get('/pagu-anggaran', 'PaguAnggaran::index');
+$routes->get('/pagu-anggaran/tambah', 'PaguAnggaran::tambah');
+$routes->post('/pagu-anggaran/simpan', 'PaguAnggaran::simpan');
+$routes->get('/pagu-anggaran/edit/(:num)', 'PaguAnggaran::edit/$1');
+$routes->post('/pagu-anggaran/update', 'PaguAnggaran::update');
+$routes->get('/pagu-anggaran/hapus/(:num)', 'PaguAnggaran::hapus/$1');
 
 $routes->get('/karyawan', 'Karyawan::index');
 
