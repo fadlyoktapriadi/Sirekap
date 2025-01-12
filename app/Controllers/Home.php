@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-    public function __construct() {
-        $this->session = \Config\Services::session();   
+    public function __construct()
+    {
+        $this->session = \Config\Services::session();
     }
 
     public function index(): string
@@ -17,7 +18,8 @@ class Home extends BaseController
         return view('pages/login', $data);
     }
 
-    public function login(){
+    public function login()
+    {
 
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
@@ -40,9 +42,9 @@ class Home extends BaseController
                 ];
 
                 $this->session->set($ses_data);
-                
+
                 return redirect()->to('/dashboard');
-                
+
             } else {
                 $this->session->setFlashdata('error', 'Password salah. Silahkan coba lagi.');
                 return redirect()->to('/');
@@ -55,50 +57,48 @@ class Home extends BaseController
 
     public function dashboard()
     {
-            $data = [
-                'title' => 'Dashboard',
-                'user_login' => $this->session->get(),
-                'total_karyawan' => $this->KaryawanModel->countAll(),
-                'total_kak' => $this->KerangkaKerjaModel->countAll(),
-                'total_kak_disetujui' => $this->KerangkaKerjaModel->countKakSetuju(),
-                'total_kak_berjalan' => $this->KerangkaKerjaModel->countKakBerjalan(),
-                'statusKegiatan' => $this->KerangkaKerjaModel->statusKegiatan(),
-                'jumlahPaguAnggaran' => $this->PaguAnggaranModel->getPaguAnggaran('2025')['jumlah_anggaran'],
-                'jumlahAnggaranDigunakan' => $this->LpjModel->jumlahAnggaranDigunakan()['anggaran_digunakan'],
-                'jumlahKegiatanUnitEKKM' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat'),
-                'jumlahKegiatanUnitPengembangan' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan'),
-                'jumlahKegiatanUnitKL' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Labolatorium'),
-                
-            ];
+        $data = [
+            'title' => 'Dashboard',
+            'user_login' => $this->session->get(),
+            'total_karyawan' => $this->KaryawanModel->countAll(),
+            'total_kak' => $this->KerangkaKerjaModel->countAll(),
+            'total_kak_disetujui' => $this->KerangkaKerjaModel->countKakSetuju(),
+            'total_kak_berjalan' => $this->KerangkaKerjaModel->countKakBerjalan(),
+            'statusKegiatan' => $this->KerangkaKerjaModel->statusKegiatan(),
+            'jumlahPaguAnggaran' => $this->PaguAnggaranModel->getPaguAnggaran(date('Y'))['jumlah_anggaran'],
+            'jumlahAnggaranDigunakan' => $this->LpjModel->jumlahAnggaranDigunakan()['anggaran_digunakan'],
+            'jumlahKegiatanUnitEKKM' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat'),
+            'jumlahKegiatanUnitPengembangan' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan'),
+            'jumlahKegiatanUnitKL' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Labolatorium'),
 
-            return view('pages/dashboard', $data);
+        ];
+
+        return view('pages/dashboard', $data);
     }
 
-    public function getKakDataJson()
+    public function getKakDataJson($year)
     {
-        $year = 2025; // Example year
-        $kakData = $this->KerangkaKerjaModel->getKakCountByMonth('2025');
-        
+        $kakData = $this->KerangkaKerjaModel->getKakCountByMonth($year);
+
         return $this->response->setJSON($kakData);
     }
 
-    public function getLpjDataJson()
+    public function getLpjDataJson($year)
     {
-        $year = 2025; // Example year
-        $lpjData = $this->KerangkaKerjaModel->getLpjCountByMonth('2025');
-        
+        $lpjData = $this->LpjModel->getLpjCountByMonth($year);
+
         return $this->response->setJSON($lpjData);
     }
 
-    public function getKakSelesaiDataJson()
+    public function getKakSelesaiDataJson($year)
     {
-        $year = 2025; // Example year
-        $kakSelesaiData = $this->KerangkaKerjaModel->getKakSelesaiByMonth('2025');
-        
+        $kakSelesaiData = $this->KerangkaKerjaModel->getKakSelesaiByMonth($year);
+
         return $this->response->setJSON($kakSelesaiData);
     }
 
-    public function getPieUnit(){
+    public function getPieUnit()
+    {
 
         $ekm = $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat');
         $pengembangan = $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan');
@@ -108,18 +108,21 @@ class Home extends BaseController
 
         $rekm = $ekm / $total * 100;
         $rpengembangan = $pengembangan / $total * 100;
-        $rkl = $kl / $total * 100; 
+        $rkl = $kl / $total * 100;
 
         return $this->response->setJSON([
-            $rekm, $rpengembangan, $rkl
+            $rekm,
+            $rpengembangan,
+            $rkl
         ]);
     }
 
-    public function kinerjaUnit(){
+    public function kinerjaUnit()
+    {
 
-       $total_kak = $this->KerangkaKerjaModel->countAll();
+        $total_kak = $this->KerangkaKerjaModel->countAll();
 
-       $total_kak_selesai = $this->KerangkaKerjaModel->countKakSelesai();
+        $total_kak_selesai = $this->KerangkaKerjaModel->countKakSelesai();
 
         return $this->response->setJSON(number_format($total_kak_selesai / $total_kak * 100));
 

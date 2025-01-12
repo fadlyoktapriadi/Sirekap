@@ -21,6 +21,18 @@ class KerangkaKerja extends BaseController
         return view('pages/kerangkakerja', $data);
     }
 
+    public function filter()
+    {
+        $data = [
+            'title' => 'Data Kerangka Acuan Kerja',
+            'user_login' => $this->session->get(),
+            'breadcrumb' => ['Data Kerangka Acuan Kerja'],
+            'kak' => $this->KerangkaKerjaModel->getKerjangkaKerjaByFilter($this->request->getVar('unit_kerja')),
+        ];
+
+        return view('pages/kerangkakerja', $data);
+    }
+
     public function tambah()
     {
         $data = [
@@ -159,7 +171,7 @@ class KerangkaKerja extends BaseController
 
         $data['status'] = $this->request->getVar('status');
 
-        if($data['status'] == "Diterima"){
+        if ($data['status'] == "Diterima") {
             $data['anggaran_disetujui'] = $anggaran_dibutuhkan;
             $data['tanggal_diterima'] = date('Y-m-d');
         }

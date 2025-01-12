@@ -17,7 +17,12 @@
         </div>
     <?php endif; ?>
 
-    <div class="table-responsive text-nowrap mt-4 mx-4">
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-outline-primary mx-4 mt-2" data-bs-toggle="modal" data-bs-target="#modalCenter"
+            style="margin-bottom: 0px; height: 38px;">Filter
+            Data</button>
+    </div>
+    <div class="table-responsive text-nowrap mx-4">
 
         <table id="dataTable" class="table table-hover">
             <thead>
@@ -77,6 +82,42 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+</div>
+<div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCenterTitle">Filter Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="<?= base_url('lpj/filter') ?>" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating">
+                                <select class="form-select" id="exampleFormControlSelect1"
+                                    aria-label="Default select example" style="height: 55px; padding: 10px"
+                                    name="unit_kerja" required>
+                                    <option selected> --Pilih Unit Kerja--</option>
+                                    <option value="Esensial dan Keperawatan Kesehatan Masyarakat">Esensial dan
+                                        Keperawatan
+                                        Kesehatan Masyarakat</option>
+                                    <option value="Pengembangan">Pengembangan</option>
+                                    <option value="Kefarmasian & Laboratorium">Kefarmasian & Laboratorium</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mt-3">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Kembali
+                    </button>
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <?= $this->endSection() ?>

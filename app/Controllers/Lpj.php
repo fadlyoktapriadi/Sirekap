@@ -21,6 +21,18 @@ class Lpj extends BaseController
         return view('pages/lpj', $data);
     }
 
+    public function filter(): string
+    {
+        $data = [
+            'title' => 'Data LPJ KAK',
+            'user_login' => $this->session->get(),
+            'breadcrumb' => ['Data LPJ KAK'],
+            'kak' => $this->KerangkaKerjaModel->getKerjangkaKerjaLpjWithFilter($this->request->getVar('unit_kerja')),
+        ];
+
+        return view('pages/lpj', $data);
+    }
+
     public function tambah($id_kak)
     {
         $data = [
@@ -202,7 +214,7 @@ class Lpj extends BaseController
         ];
 
         $anggaran_digunakan = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_digunakan'))));
-        
+
         $data = [
             'anggaran_digunakan' => $anggaran_digunakan,
             'keterangan' => $this->request->getVar('keterangan'),
@@ -243,7 +255,7 @@ class Lpj extends BaseController
                 return redirect()->back()->withInput();
             }
         }
-        
+
         $this->KunjunganModel->updateBatch($data_kunjungan, 'nama_desa');
 
         $this->LpjModel->update($id_lpj, $data);
@@ -295,6 +307,18 @@ class Lpj extends BaseController
             'user_login' => $this->session->get(),
             'breadcrumb' => ['Data Riwayat KAK'],
             'kak' => $this->KerangkaKerjaModel->getRiwayatLpj(),
+        ];
+
+        return view('pages/riwayat_lpj', $data);
+    }
+
+    public function riwayatLpjFilter()
+    {
+        $data = [
+            'title' => 'Data Riwayat KAK',
+            'user_login' => $this->session->get(),
+            'breadcrumb' => ['Data Riwayat KAK'],
+            'kak' => $this->KerangkaKerjaModel->getRiwayatLpjWithFilter($this->request->getVar('unit_kerja')),
         ];
 
         return view('pages/riwayat_lpj', $data);
