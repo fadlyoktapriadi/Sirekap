@@ -49,6 +49,15 @@ class KerangkaKerja extends BaseController
     {
         $file = $this->request->getFile('file_kak');
 
+        $anggaran_dibutuhkan = (int) trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_dibutuhkan')));
+
+        $pagu_anggaran = (int) $this->PaguAnggaranModel->getPaguAnggaran(date('Y'))['jumlah_anggaran'];
+
+        if ($anggaran_dibutuhkan > $pagu_anggaran) {
+            session()->setFlashdata('error', 'Anggaran dibutuhkan melebihi pagu anggaran.');
+            return redirect()->back()->withInput();
+        }
+
         $allowedExtensions = ['doc', 'docx', 'jpg', 'png', 'pdf'];
         if ($file->isValid() && !$file->hasMoved() && in_array($file->getClientExtension(), $allowedExtensions)) {
             $newName = preg_replace('/[^A-Za-z0-9\-]/', '_', $this->request->getVar('nama_kegiatan')) . uniqid() . '.' . $file->getClientExtension();
@@ -58,8 +67,6 @@ class KerangkaKerja extends BaseController
             session()->setFlashdata('error', 'File yang diupload harus bertipe: doc, docx, jpg, png, pdf.');
             return redirect()->back()->withInput();
         }
-
-        $anggaran_dibutuhkan = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_dibutuhkan'))));
 
         $this->KerangkaKerjaModel->insert([
             'program_kerja' => $this->request->getVar('program_kerja'),
@@ -162,7 +169,14 @@ class KerangkaKerja extends BaseController
     {
         $id = $this->request->getVar('id_kak');
 
-        $anggaran_dibutuhkan = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_disetujui'))));
+        $anggaran_disetujui = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_disetujui'))));
+
+        $pagu_anggaran = (int) $this->PaguAnggaranModel->getPaguAnggaran(date('Y'))['jumlah_anggaran'];
+
+        if ($anggaran_disetujui > $pagu_anggaran) {
+            session()->setFlashdata('error', 'Anggaran disetujui melebihi pagu anggaran.');
+            return redirect()->back()->withInput();
+        }
 
         $data = [
             'status' => $this->request->getVar('status'),
@@ -172,11 +186,21 @@ class KerangkaKerja extends BaseController
         $data['status'] = $this->request->getVar('status');
 
         if ($data['status'] == "Diterima") {
-            $data['anggaran_disetujui'] = $anggaran_dibutuhkan;
+            $data['anggaran_disetujui'] = $anggaran_disetujui;
             $data['tanggal_diterima'] = date('Y-m-d');
         }
 
+        $riwayat_anggaran = [
+            'id_kak' => $id,
+            'jumlah_anggaran' => $anggaran_disetujui,
+            'label_anggaran' => 'Keluar',
+        ];
+
         $this->KerangkaKerjaModel->update($id, $data);
+
+        $this->PaguAnggaranModel->updatePaguAnggaran(date('Y'), $pagu_anggaran - $anggaran_disetujui);
+
+        $this->RiwayatAnggaranModel->insert($riwayat_anggaran);
 
         session()->setFlashdata('success', 'Data Kerangka Acuan Kerja berhasil ' . strtolower($data['status']) . '!');
         return redirect()->to('/kak/detail/' . $id);

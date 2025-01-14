@@ -11,9 +11,17 @@ class PaguAnggaranModel extends Model
     protected $useTimestamps = true;
     protected $allowedFields = ['jumlah_anggaran', 'tahun_anggaran'];
 
-    public function getPaguAnggaran($tahun){
+    public function getPaguAnggaran($tahun)
+    {
         return $this->where('tahun_anggaran', $tahun)
-                    ->first();
+            ->first();
+    }
+
+    public function updatePaguAnggaran($year, $biaya)
+    {
+        return $this->where('tahun_anggaran', $year)
+            ->set('jumlah_anggaran', $biaya)
+            ->update();
     }
 }
 

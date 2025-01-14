@@ -96,6 +96,8 @@ class KerangkaKerjaModel extends Model
     public function statusKegiatan()
     {
         return $this->select('nama_kegiatan, status, created_at')
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
             ->findAll();
     }
 

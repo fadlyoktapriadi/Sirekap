@@ -17,6 +17,11 @@
                             </ul>
                         </div>
                     <?php endif; ?>
+                    <?php if (session()->getFlashdata('error')): ?>
+                        <div class="alert alert-danger alert-dismissible text-center">
+                            <?= session()->getFlashdata('error') ?>
+                        </div>
+                    <?php endif; ?>
                     <form action="<?= base_url('/kak/tambah') ?>" method="post" enctype="multipart/form-data">
                         <?= csrf_field() ?>
                         <div class="form-floating my-3">

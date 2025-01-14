@@ -61,5 +61,6 @@ abstract class BaseController extends Controller
         $this->LpjModel = new \App\Models\LpjModel();
         $this->KunjunganModel = new \App\Models\KunjunganModel();
         $this->PaguAnggaranModel = new \App\Models\PaguAnggaranModel();
+        $this->RiwayatAnggaranModel = new \App\Models\RiwayatAnggaranModel();
     }
 }

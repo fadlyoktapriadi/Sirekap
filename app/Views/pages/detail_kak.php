@@ -11,6 +11,11 @@
             <?= session()->getFlashdata('success') ?>
         </div>
     <?php endif; ?>
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger alert-dismissible text-center mx-4">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
 
     <div class="row mx-4">
         <div class="col-md-12">
@@ -54,7 +59,8 @@
                 </tr>
                 <tr>
                     <td>File Kerangka Acuan Kerja (KAK)</td>
-                    <td><a href="<?= base_url('doc/kak/') . $kak['file'] ?>" target="_blank"><?= $kak['file'] ?></a></td>
+                    <td><a href="<?= base_url('doc/kak/') . $kak['file'] ?>" target="_blank"><?= $kak['file'] ?></a>
+                    </td>
                 </tr>
                 <tr>
                     <td>Status</td>
@@ -79,9 +85,9 @@
         </div>
     </div>
     <?php if ($user_login['role'] != 'Staf Unit'): ?>
-    <div class="row">
-        <div class="col">
-            <div class="d-flex justify-content-end mt-3 mx-4"> 
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-end mt-3 mx-4">
                     <?php if ($kak['status'] == 'Diterima'): ?>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenter">Batal Validasi
                             Kerangka Acuan Kerja</button>
@@ -90,9 +96,9 @@
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">Validasi Kerangka
                             Acuan Kerja</button>
                     <?php endif; ?>
+                </div>
             </div>
         </div>
-    </div>
     <?php endif; ?>
 
     <div class="row mx-4 my-4">
@@ -116,9 +122,9 @@
                             <td><?= date('d F Y', strtotime($kak['tanggal_diterima'])) ?></td>
                         </tr>
                     <?php endif; ?>
-                    
+
                 </tbody>
-               
+
             </table>
         </div>
     </div>

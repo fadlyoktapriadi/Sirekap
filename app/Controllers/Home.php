@@ -65,7 +65,7 @@ class Home extends BaseController
             'total_kak_disetujui' => $this->KerangkaKerjaModel->countKakSetuju(),
             'total_kak_berjalan' => $this->KerangkaKerjaModel->countKakBerjalan(),
             'statusKegiatan' => $this->KerangkaKerjaModel->statusKegiatan(),
-            'jumlahPaguAnggaran' => $this->PaguAnggaranModel->getPaguAnggaran(date('Y'))['jumlah_anggaran'],
+            'jumlahPaguAnggaran' => $this->PaguAnggaranModel->getPaguAnggaran(date('Y'))['jumlah_anggaran'] ?? 0,
             'jumlahAnggaranDigunakan' => $this->LpjModel->jumlahAnggaranDigunakan()['anggaran_digunakan'],
             'jumlahKegiatanUnitEKKM' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat'),
             'jumlahKegiatanUnitPengembangan' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan'),
