@@ -62,14 +62,14 @@ class Home extends BaseController
             'user_login' => $this->session->get(),
             'total_karyawan' => $this->KaryawanModel->countAll(),
             'total_kak' => $this->KerangkaKerjaModel->countAll(),
-            'total_kak_disetujui' => $this->KerangkaKerjaModel->countKakSetuju(),
             'total_kak_berjalan' => $this->KerangkaKerjaModel->countKakBerjalan(),
+            'total_kak_selesai' => $this->KerangkaKerjaModel->countKakSelesai(),
             'statusKegiatan' => $this->KerangkaKerjaModel->statusKegiatan(),
             'jumlahPaguAnggaran' => $this->PaguAnggaranModel->getPaguAnggaran(date('Y'))['jumlah_anggaran'] ?? 0,
             'jumlahAnggaranDigunakan' => $this->LpjModel->jumlahAnggaranDigunakan()['anggaran_digunakan'],
             'jumlahKegiatanUnitEKKM' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat'),
             'jumlahKegiatanUnitPengembangan' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan'),
-            'jumlahKegiatanUnitKL' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Labolatorium'),
+            'jumlahKegiatanUnitKL' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Laboratorium'),
 
         ];
 
@@ -85,7 +85,7 @@ class Home extends BaseController
 
     public function getLpjDataJson($year)
     {
-        $lpjData = $this->LpjModel->getLpjCountByMonth($year);
+        $lpjData = $this->KerangkaKerjaModel->getLpjCountByMonth($year);
 
         return $this->response->setJSON($lpjData);
     }
@@ -102,13 +102,14 @@ class Home extends BaseController
 
         $ekm = $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat');
         $pengembangan = $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan');
-        $kl = $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Labolatorium');
+        $kl = $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Laboratorium');
 
         $total = $ekm + $pengembangan + $kl;
 
-        $rekm = $ekm / $total * 100;
-        $rpengembangan = $pengembangan / $total * 100;
-        $rkl = $kl / $total * 100;
+        // dd($kl);
+        $rekm = ($ekm / $total) * 100;
+        $rpengembangan = ($pengembangan / $total) * 100;
+        $rkl = ($kl / $total) * 100;
 
         return $this->response->setJSON([
             $rekm,

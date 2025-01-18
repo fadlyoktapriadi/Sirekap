@@ -70,9 +70,7 @@
                                 echo 'primary';
                             } else if ($kak['status'] == 'Diterima') {
                                 echo 'danger';
-                            } else if ($kak['status'] == 'Menunggu Persetujuan LPJ') {
-                                echo 'warning';
-                            } else if ($kak['status'] == 'Perlu Diperbaiki') {
+                            } else if ($kak['status'] == 'Perlu Perbaikan KAK') {
                                 echo 'warning';
                             } else if ($kak['status'] == 'Selesai') {
                                 echo 'success';
@@ -81,6 +79,12 @@
                             } ?> me-1"><?= ($kak['status'] == 'Diterima') ? 'Belum Mengisi LPJ' : $kak['status'] ?></span>
                     </td>
                 </tr>
+                <?php if ($kak['status'] == 'Perlu Perbaikan KAK' || $kak['status'] == 'Ditolak'): ?>
+                    <tr>
+                        <td>Catatan Status</td>
+                        <td><?= $kak['catatan_status'] ?></td>
+                    </tr>
+                <?php endif; ?>
             </table>
         </div>
     </div>
@@ -140,29 +144,41 @@
                 </div>
                 <form action="<?= base_url('kak/validasi') ?>" method="post">
                     <input type="text" name="id_kak" value="<?= $kak['id_kak'] ?>" hidden>
+                    <input type="text" name="anggaran_lama" value="<?= $kak['anggaran_disetujui'] ?>" hidden>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col mb-0">
-                                <div class="form-floating my-3">
-                                    <input type="text" class="form-control" id="anggaran_disetujui" placeholder="Rp "
-                                        aria-describedby="floatingInputHelp" name="anggaran_disetujui" />
-                                    <label for="anggaran_disetujui">Anggaran Disetujui</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mb-0">
-                                <select class="form-select" id="exampleFormControlSelect1"
-                                    aria-label="Default select example" style="height: 55px" name="status">
+                                <select class="form-select" id="status" aria-label="Default select example"
+                                    style="height: 55px" name="status">
                                     <option value="Diproses" <?= ($kak['status'] == 'Diproses') ? 'selected' : '' ?>>
                                         Diproses</option>
                                     <option value="Diterima" <?= ($kak['status'] == 'Diterima') ? 'selected' : '' ?>>
                                         Diterima</option>
-                                    <option value="Perlu Perbaikan" <?= ($kak['status'] == 'Perlu Perbaikan') ? 'selected' : '' ?>>
-                                        Perlu Perbaikan</option>
-                                    <option value="Ditolak" <?= ($kak['status'] == 'Ditolak') ? 'selected' : '' ?>>
-                                        Ditolak</option>
+                                    <option value="Perlu Perbaikan KAK" <?= ($kak['status'] == 'Perlu Perbaikan KAK') ? 'selected' : '' ?>>
+                                        Perlu Perbaikan KAK</option>
+                                    <option value="Ditolak" <?= ($kak['status'] == 'KAK Ditolak') ? 'selected' : '' ?>>
+                                        KAK Ditolak</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row" id="anggaran_form">
+                            <div class="col mb-0">
+                                <div class="form-floating my-3">
+                                    <input type="text" class="form-control" id="anggaran_disetujui" placeholder="Rp "
+                                        aria-describedby="floatingInputHelp" name="anggaran_disetujui"
+                                        value="<?= $kak['anggaran_disetujui'] ?>" />
+                                    <label for="anggaran_disetujui">Anggaran Disetujui</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="catatan_form">
+                            <div class="col mb-0">
+                                <div class="form-floating my-3">
+                                    <textarea class="form-control" id="floatingInput" placeholder="Catatan"
+                                        aria-describedby="floatingInputHelp"
+                                        name="catatan_status"><?= $kak['catatan_status'] ?></textarea>
+                                    <label for="floatingInput">Catatan Status</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -190,6 +206,25 @@
             e.target.value = '';
         }
     });
+
+    document.getElementById('status').addEventListener('change', function (e) {
+        var catatan = document.getElementById('catatan_form');
+        var anggaran = document.getElementById('anggaran_form');
+        if (e.target.value === 'Perlu Perbaikan KAK' || e.target.value === 'Ditolak') {
+            catatan.style.display = 'block';
+            anggaran.style.display = 'none';
+        } else if (e.target.value === 'Diterima') {
+            anggaran.style.display = 'block';
+            catatan.style.display = 'none';
+        }
+        else {
+            catatan.style.display = 'none';
+            anggaran.style.display = 'none';
+        }
+    });
+
+    // Trigger change event on page load to handle pre-selected status
+    document.getElementById('status').dispatchEvent(new Event('change'));
 </script>
 
 <?= $this->endSection() ?>

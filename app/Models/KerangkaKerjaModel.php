@@ -9,13 +9,15 @@ class KerangkaKerjaModel extends Model
     protected $table = 'tbl_kerangka_kerja';
     protected $primaryKey = 'id_kak';
     protected $useTimestamps = true;
-    protected $allowedFields = ['program_kerja', 'nama_kegiatan', 'tanggal_mulai', 'tanggal_selesai', 'anggaran_dibutuhkan', 'anggaran_disetujui', 'penanggung_jawab', 'sasaran', 'target', 'file', 'status', 'tanggal_diterima'];
+    protected $allowedFields = ['program_kerja', 'nama_kegiatan', 'tanggal_mulai', 'tanggal_selesai', 'anggaran_dibutuhkan', 'anggaran_disetujui', 'penanggung_jawab', 'sasaran', 'target', 'file', 'status', 'catatan_status', 'tanggal_diterima'];
 
     public function getKerjangkaKerjaWithUsers()
     {
         return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.NIP, tbl_karyawan.nama_karyawan')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
             ->where('status', "Diproses")
+            ->orWhere("status", "Perlu Perbaikan KAK")
+            ->orWhere("status", "Ditolak")
             ->orderBy("created_at", "asc")
             ->findAll();
     }
@@ -25,7 +27,8 @@ class KerangkaKerjaModel extends Model
         return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.NIP, tbl_karyawan.nama_karyawan')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
             ->where('tbl_karyawan.unit_kerja', $filter)
-            ->where('status', "Diproses")
+            ->orWhere("status", "Perlu Perbaikan KAK")
+            ->orWhere("status", "Ditolak")
             ->orderBy("created_at", "asc")
             ->findAll();
     }
@@ -44,7 +47,7 @@ class KerangkaKerjaModel extends Model
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
             ->where('status', "Diterima")
             ->orWhere("status", "Menunggu Persetujuan LPJ")
-            ->orWhere("status", "Perlu Perbaikan")
+            ->orWhere("status", "Perlu Perbaikan LPJ")
             ->orderBy("tbl_kerangka_kerja.created_at", "asc")
             ->findAll();
     }
@@ -78,11 +81,9 @@ class KerangkaKerjaModel extends Model
             ->findAll();
     }
 
-    public function countKakSetuju()
+    public function countKakSelesai()
     {
-        return $this->where('status', "Diterima")
-            ->orWhere('status', "Menunggu Persetujuan LPJ")
-            ->orWhere('status', "Selesai")
+        return $this->where('status', "Selesai")
             ->countAllResults();
     }
 
@@ -96,7 +97,7 @@ class KerangkaKerjaModel extends Model
     public function statusKegiatan()
     {
         return $this->select('nama_kegiatan, status, created_at')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'asc')
             ->limit(5)
             ->findAll();
     }
@@ -107,7 +108,7 @@ class KerangkaKerjaModel extends Model
             ->first();
     }
 
-    public function getKerjangkaKerjaUnit($unit)
+    public function getKerjangkaKerjaUnit($unit): int|string
     {
         return $this->select('tbl_karyawan.unit_kerja, COUNT(tbl_kerangka_kerja.id_kak) as jumlah_kegiatan')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
@@ -120,24 +121,30 @@ class KerangkaKerjaModel extends Model
         return $this->select("MONTH(created_at) AS bulan, COUNT(*) AS total_kak")
             ->where("YEAR(created_at)", $year)
             ->where("status", "Diproses")
+            ->orWhere("status", "Perlu Perbaikan KAK")
+            ->groupBy("MONTH(created_at)")
+            ->findAll();
+    }
+
+    public function getLpjCountByMonth($year)
+    {
+        return $this->select("MONTH(created_at) AS bulan, COUNT(*) AS total_lpj")
+            ->where("YEAR(created_at)", $year)
+            ->where("status", "Diterima")
+            ->orWhere("status", "Perlu Perbaikan LPJ")
+            ->orWhere("status", "LPJ Ditolak")
             ->groupBy("MONTH(created_at)")
             ->findAll();
     }
 
     public function getKakSelesaiByMonth($year)
     {
-        return $this->select("MONTH(tbl_lpj.lpj_selesai) AS bulan, COUNT(*) AS total_kak_selesai")
+        return $this->select("MONTH(tbl_lpj.lpj_selesai) AS bulan, COUNT(*) AS total_lpj_selesai")
             ->join('tbl_lpj', 'tbl_kerangka_kerja.id_kak = tbl_lpj.id_kak')
             ->where("YEAR(tbl_lpj.lpj_selesai)", $year)
             ->where("tbl_kerangka_kerja.status", "Selesai")
             ->groupBy("MONTH(tbl_lpj.lpj_selesai)")
             ->findAll();
-    }
-
-    public function countKakSelesai()
-    {
-        return $this->Where('status', "Selesai")
-            ->countAllResults();
     }
 }
 

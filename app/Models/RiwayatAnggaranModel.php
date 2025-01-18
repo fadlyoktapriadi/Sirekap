@@ -11,6 +11,20 @@ class RiwayatAnggaranModel extends Model
     protected $useTimestamps = true;
     protected $allowedFields = ['id_kak', 'jumlah_anggaran', 'label_anggaran'];
 
+    public function getRiwayatAnggaran($id)
+    {
+        return $this->where('id_kak', $id)
+            ->where('label_anggaran', 'Keluar')
+            ->first();
+    }
+
+    public function updateRiwayatAnggaran($id, $anggaran)
+    {
+        return $this->where('id_kak', $id)
+            ->where('label_anggaran', 'Keluar')
+            ->set('jumlah_anggaran', $anggaran)
+            ->update();
+    }
 }
 
 ?>

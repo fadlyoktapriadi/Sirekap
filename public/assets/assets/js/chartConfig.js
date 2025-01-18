@@ -36,7 +36,7 @@
       // Process the data to fit the chart format
       let chartSelesai = Array(12).fill(0);
       data.forEach(item => {
-        chartSelesai[item.bulan - 1] = item.total_kak_selesai;
+        chartSelesai[item.bulan - 1] = item.total_lpj_selesai;
       });
 
       // Total Revenue Report Chart - Bar Chart
@@ -53,7 +53,7 @@
             },
             {
               name: 'Kegiatan Selesai',
-              data: chartSelesai
+              data: [chartSelesai]
             }
           ],
           chart: {
@@ -314,8 +314,6 @@
       $.getJSON(base_url + "kinerjaUnit", function(data) {
       // Process the data to fit the chart format
       let resultKinerja = data;
-
-      console.log(resultKinerja);
   
     
   const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
@@ -335,7 +333,7 @@
       dataLabels: {
         enabled: false,
         formatter: function (val, opt) {
-          return parseInt(val) + '%';
+          return parseInt(val);
         }
       },
       legend: {

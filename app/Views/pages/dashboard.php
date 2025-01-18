@@ -69,11 +69,11 @@
             <div class="card-body">
               <div class="card-title d-flex align-items-start justify-content-between">
                 <div class="avatar flex-shrink-0">
-                  <span class="avatar-initial rounded bg-label-info"><i class="bx bx-check"></i></span>
+                  <span class="avatar-initial rounded bg-label-info"><i class="bx bx-select-multiple"></i></span>
                 </div>
               </div>
-              <span class="fw-semibold d-block mb-1">Jumlah KAK Yang Disetujui</span>
-              <h4 class="card-title mb-2"><?= $total_kak_disetujui ?></h4>
+              <span class="fw-semibold d-block mb-1">Jumlah Kerangka Acuan Kerja Berjalan</span>
+              <h4 class="card-title mb-2"><?= $total_kak_berjalan ?></h4>
             </div>
           </div>
         </div>
@@ -87,12 +87,11 @@
             <div class="card-body">
               <div class="card-title d-flex align-items-start justify-content-between">
                 <div class="avatar flex-shrink-0">
-                  <img src="<?= base_url('assets') ?>/assets/img/icons/unicons/chart-success.png" alt="chart success"
-                    class="rounded" />
+                  <span class="avatar-initial rounded bg-label-success"><i class="bx bx-check"></i></span>
                 </div>
               </div>
-              <span class="fw-semibold d-block mb-1">Jumlah Kerangka Acuan Kerja Berjalan</span>
-              <h4 class="card-title mb-2"><?= $total_kak_berjalan ?></h4>
+              <span class="fw-semibold d-block mb-1">Jumlah Kegiatan Selesai</span>
+              <h4 class="card-title mb-2"><?= $total_kak_selesai ?></h4>
             </div>
           </div>
         </div>
@@ -145,7 +144,9 @@
                       echo 'danger';
                     } else if ($kegiatan['status'] == 'Menunggu Persetujuan LPJ') {
                       echo 'warning';
-                    } else if ($kegiatan['status'] == 'Perlu Diperbaiki') {
+                    } else if ($kegiatan['status'] == 'Perlu Perbaikan KAK') {
+                      echo 'warning';
+                    } else if ($kegiatan['status'] == 'Perlu Perbaikan LPJ') {
                       echo 'warning';
                     } else if ($kegiatan['status'] == 'Selesai') {
                       echo 'success';

@@ -62,11 +62,7 @@
                             echo 'primary';
                         } else if ($item['status'] == 'Diterima') {
                             echo 'info';
-                        } else if ($item['status'] == 'Perbaikan') {
-                            echo 'warning';
-                        } else if ($item['status'] == 'Menunggu Persetujuan LPJ') {
-                            echo 'warning';
-                        } else if ($item['status'] == 'Perlu Diperbaiki') {
+                        } else if ($item['status'] == 'Perlu Perbaikan KAK') {
                             echo 'warning';
                         } else if ($item['status'] == 'Selesai') {
                             echo 'success';

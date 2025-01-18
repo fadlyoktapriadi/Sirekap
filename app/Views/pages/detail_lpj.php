@@ -143,7 +143,7 @@
                                                     echo 'danger';
                                                 } else if ($lpj['status'] == 'Menunggu Persetujuan LPJ') {
                                                     echo 'warning';
-                                                } else if ($lpj['status'] == 'Perlu Perbaikan') {
+                                                } else if ($lpj['status'] == 'Perlu Perbaikan LPJ') {
                                                     echo 'warning';
                                                 } else if ($lpj['status'] == 'Selesai') {
                                                     echo 'success';
@@ -153,12 +153,10 @@
                                         </td>
                                         <td>
                                     </tr>
-                                    <?php if ($lpj['status'] == 'Selesai'): ?>
-                                        <tr>
-                                            <td>Catatan</td>
-                                            <td><?= $lpj['catatan'] ?></td>
-                                        </tr>
-                                    <?php endif; ?>
+                                    <tr>
+                                        <td>Catatan</td>
+                                        <td><?= $lpj['catatan'] ?></td>
+                                    </tr>
                                 </table>
 
                                 <div class="row">
@@ -198,44 +196,44 @@
                     </div>
                 </div>
 
-        <div class="row mx-4 my-2 pb-4">
-        <div class="col-md-6">
-            <h4 class="mt-2">Riwayat Kerangka Acuan Kerja</h4>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Tanggal Input</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Pengajuan KAK</td>
-                        <td><?= date('d F Y', strtotime($lpj['created_at'])) ?></td>
-                    </tr>
-                        <tr>
-                            <td>KAK Diterima</td>
-                            <td><?= date('d F Y', strtotime($lpj['tanggal_diterima'])) ?></td>
-                        </tr>
-                        <?php if ($lpj['status'] != "Diterima"): ?>
-                        <tr>
-                            <td>LPJ Diterima</td>
-                            <td><?= date('d F Y', strtotime($lpj['updated_at'])) ?></td>
-                        </tr>
-                            <?php if ($lpj['lpj_selesai'] != null): ?>   
-                            <tr>
-                                <td>LPJ Selesai</td>
-                                <td><?= date('d F Y', strtotime($lpj['lpj_selesai'])) ?></td>
-                            </tr>  
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    
-                </tbody>
-               
-            </table>
-        </div>
-    </div>
-    
+                <div class="row mx-4 my-2 pb-4">
+                    <div class="col-md-6">
+                        <h4 class="mt-2">Riwayat Kerangka Acuan Kerja</h4>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Tanggal Input</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Pengajuan KAK</td>
+                                    <td><?= date('d F Y', strtotime($lpj['created_at'])) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>KAK Diterima</td>
+                                    <td><?= date('d F Y', strtotime($lpj['tanggal_diterima'])) ?></td>
+                                </tr>
+                                <?php if ($lpj['status'] != "Diterima"): ?>
+                                    <tr>
+                                        <td>LPJ Diterima</td>
+                                        <td><?= date('d F Y', strtotime($lpj['updated_at'])) ?></td>
+                                    </tr>
+                                    <?php if ($lpj['lpj_selesai'] != null): ?>
+                                        <tr>
+                                            <td>LPJ Selesai</td>
+                                            <td><?= date('d F Y', strtotime($lpj['lpj_selesai'])) ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -257,10 +255,10 @@
                                         <option value="Selesai" <?= ($lpj['status'] == 'Selesai') ? 'selected' : '' ?>>
                                             Selesai
                                         </option>
-                                        <option value="Perlu Perbaikan" <?= ($lpj['status'] == 'Perlu Perbaikan') ? 'selected' : '' ?>>
-                                            Perlu Perbaikan</option>
-                                        <option value="Ditolak" <?= ($lpj['status'] == 'Ditolak') ? 'selected' : '' ?>>
-                                            Ditolak</option>
+                                        <option value="Perlu Perbaikan LPJ" <?= ($lpj['status'] == 'Perlu Perbaikan LPJ') ? 'selected' : '' ?>>
+                                            Perlu Perbaikan LPJ</option>
+                                        <option value="Ditolak" <?= ($lpj['status'] == 'LPJ Ditolak') ? 'selected' : '' ?>>
+                                            LPJ Ditolak</option>
                                     </select>
                                 </div>
                             </div>

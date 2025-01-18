@@ -289,13 +289,22 @@ class Lpj extends BaseController
     public function validasi()
     {
         $id_lpj = $this->request->getVar('id_lpj');
+
         $lpj = $this->LpjModel->find($id_lpj);
 
-        $this->LpjModel->update($id_lpj, ['catatan' => $this->request->getVar('catatan'), 'lpj_selesai' => date('Y-m-d')]);
+        $status = $this->request->getVar('status');
 
-        $this->KerangkaKerjaModel->update($lpj['id_kak'], ['status' => $this->request->getVar('status')]);
+        if ($status == "Selesai") {
+            $data['lpj_selesai'] = date('Y-m-d');
+        }
 
-        session()->setFlashdata('success', 'Data Lembar Pertanggung Jawaban berhasil dihapus!');
+        $data['catatan'] = $this->request->getVar('catatan');
+
+        $this->LpjModel->update($id_lpj, $data);
+
+        $this->KerangkaKerjaModel->update($lpj['id_kak'], ['status' => $status]);
+
+        session()->setFlashdata('success', 'Data Lembar Pertanggung Jawaban berhasil disimpan!');
         return redirect()->to('/lpj/detail/' . $lpj['id_kak']);
 
     }

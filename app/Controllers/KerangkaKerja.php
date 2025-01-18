@@ -168,39 +168,67 @@ class KerangkaKerja extends BaseController
     public function validasi()
     {
         $id = $this->request->getVar('id_kak');
-
-        $anggaran_disetujui = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_disetujui'))));
+        $status = $this->request->getVar('status');
+        $data = [];
 
         $pagu_anggaran = (int) $this->PaguAnggaranModel->getPaguAnggaran(date('Y'))['jumlah_anggaran'];
 
-        if ($anggaran_disetujui > $pagu_anggaran) {
-            session()->setFlashdata('error', 'Anggaran disetujui melebihi pagu anggaran.');
-            return redirect()->back()->withInput();
+        if ($status == "Diterima") {
+
+            $anggaran_disetujui = intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('anggaran_disetujui'))));
+
+            if ($anggaran_disetujui > $pagu_anggaran) {
+                session()->setFlashdata('error', 'Anggaran disetujui melebihi pagu anggaran.');
+                return redirect()->back()->withInput();
+            }
+
+            $riwayat_anggaran = [
+                'id_kak' => $id,
+                'jumlah_anggaran' => $anggaran_disetujui,
+                'label_anggaran' => 'Keluar',
+            ];
+
+            $data = [
+                'anggaran_disetujui' => $anggaran_disetujui,
+                'tanggal_diterima' => date('Y-m-d'),
+                'catatan_status' => null,
+            ];
+
+            $anggaran_lama = $this->request->getVar('anggaran_lama');
+            if ($anggaran_lama == 0 || $anggaran_lama == null) {
+                $anggaran = $pagu_anggaran - $anggaran_disetujui;
+                $this->RiwayatAnggaranModel->insert($riwayat_anggaran);
+            } else if ($anggaran_lama > $anggaran_disetujui) {
+                $anggaran = $pagu_anggaran + ($anggaran_lama - $anggaran_disetujui);
+                $this->RiwayatAnggaranModel->updateRiwayatAnggaran($id, $anggaran);
+            } else {
+                $anggaran = $pagu_anggaran - ($anggaran_disetujui - $anggaran_lama);
+                $this->RiwayatAnggaranModel->updateRiwayatAnggaran($id, $anggaran);
+            }
+
+            $this->PaguAnggaranModel->updatePaguAnggaran(date('Y'), $anggaran);
+
+
+        } else if ($status == 'Perlu Perbaikan' || $status == 'Ditolak') {
+
+            $data = [
+                'anggaran_disetujui' => null,
+                'tanggal_diterima' => null,
+                'catatan_status' => $this->request->getVar('catatan_status'),
+            ];
+
+            $riwayat = $this->RiwayatAnggaranModel->getRiwayatAnggaran($id);
+
+            if ($riwayat) {
+                $anggaran = $pagu_anggaran + $riwayat['jumlah_anggaran'];
+                $this->PaguAnggaranModel->updatePaguAnggaran(date('Y'), $anggaran);
+                $this->RiwayatAnggaranModel->delete($riwayat['id_riwayat_anggaran']);
+            }
         }
 
-        $data = [
-            'status' => $this->request->getVar('status'),
-            'tanggal_diterima' => null
-        ];
-
-        $data['status'] = $this->request->getVar('status');
-
-        if ($data['status'] == "Diterima") {
-            $data['anggaran_disetujui'] = $anggaran_disetujui;
-            $data['tanggal_diterima'] = date('Y-m-d');
-        }
-
-        $riwayat_anggaran = [
-            'id_kak' => $id,
-            'jumlah_anggaran' => $anggaran_disetujui,
-            'label_anggaran' => 'Keluar',
-        ];
+        $data['status'] = $status;
 
         $this->KerangkaKerjaModel->update($id, $data);
-
-        $this->PaguAnggaranModel->updatePaguAnggaran(date('Y'), $pagu_anggaran - $anggaran_disetujui);
-
-        $this->RiwayatAnggaranModel->insert($riwayat_anggaran);
 
         session()->setFlashdata('success', 'Data Kerangka Acuan Kerja berhasil ' . strtolower($data['status']) . '!');
         return redirect()->to('/kak/detail/' . $id);

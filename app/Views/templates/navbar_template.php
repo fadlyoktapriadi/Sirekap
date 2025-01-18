@@ -95,34 +95,35 @@
             </li>
           <?php endif; ?>
 
-          <li
-            class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja' || $title == 'Data LPJ KAK') || $title == 'Tambah LPJ' || $title == 'Detail LPJ' || $title == 'Data Riwayat KAK' ? 'active open' : '' ?>">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-task"></i>
-              <div data-i18n="Layouts">Kegiatan</div>
-            </a>
+          <?php if ($user_login['role'] != 'Administrator'): ?>
+            <li
+              class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja' || $title == 'Data LPJ KAK') || $title == 'Tambah LPJ' || $title == 'Detail LPJ' || $title == 'Data Riwayat KAK' ? 'active open' : '' ?>">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-task"></i>
+                <div data-i18n="Layouts">Kegiatan</div>
+              </a>
 
-            <ul class="menu-sub">
-              <li
-                class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
-                <a href="<?= base_url('kak') ?>" class="menu-link">
-                  <div data-i18n="Without menu">Kerangka Acuan Kerja (KAK)</div>
-                </a>
-              </li>
-              <li
-                class="menu-item <?= ($title == 'Data LPJ KAK') || $title == 'Tambah LPJ' || $title == 'Detail LPJ' ? 'active' : '' ?>">
-                <a href="<?= base_url('lpj') ?>" class="menu-link">
-                  <div data-i18n="Without navbar">LPJ KAK</div>
-                </a>
-              </li>
-              <li class="menu-item <?= ($title == 'Data Riwayat KAK') ? 'active' : '' ?>">
-                <a href=" <?= base_url('lpj/riwayat') ?>" class="menu-link">
-                  <div data-i18n="Container">Riwayat KAK</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
+              <ul class="menu-sub">
+                <li
+                  class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja') ? 'active open' : '' ?>">
+                  <a href="<?= base_url('kak') ?>" class="menu-link">
+                    <div data-i18n="Without menu">Kerangka Acuan Kerja (KAK)</div>
+                  </a>
+                </li>
+                <li
+                  class="menu-item <?= ($title == 'Data LPJ KAK') || $title == 'Tambah LPJ' || $title == 'Detail LPJ' ? 'active' : '' ?>">
+                  <a href="<?= base_url('lpj') ?>" class="menu-link">
+                    <div data-i18n="Without navbar">LPJ KAK</div>
+                  </a>
+                </li>
+                <li class="menu-item <?= ($title == 'Data Riwayat KAK') ? 'active' : '' ?>">
+                  <a href=" <?= base_url('lpj/riwayat') ?>" class="menu-link">
+                    <div data-i18n="Container">Riwayat KAK</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <?php endif; ?>
           <?php if ($user_login['role'] == 'Administrator'): ?>
             <li
               class="menu-item <?= ($title == 'Data Pengguna' || $title == 'Tambah Pengguna' || $title == 'Edit Pengguna') ? 'active' : '' ?>">

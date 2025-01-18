@@ -9,7 +9,7 @@ class LpjModel extends Model
     protected $table = 'tbl_lpj';
     protected $primaryKey = 'id_lpj';
     protected $useTimestamps = true;
-    protected $allowedFields = ['id_kak', 'anggaran_digunakan', 'keterangan', 'catatan', 'file_lpj', 'dokumentasi', 'tanggal_selesai'];
+    protected $allowedFields = ['id_kak', 'anggaran_digunakan', 'keterangan', 'catatan', 'file_lpj', 'dokumentasi', 'lpj_selesai', 'tanggal_selesai'];
 
     public function getLpjById($id)
     {
@@ -24,18 +24,6 @@ class LpjModel extends Model
     {
         return $this->selectSum('anggaran_digunakan')
             ->first();
-    }
-
-    public function getLpjCountByMonth($year)
-    {
-        return $this->select("MONTH(tbl_lpj.created_at) AS bulan, COUNT(*) AS total_lpj")
-            ->join("tbl_kerangka_kerja", "tbl_lpj.id_kak = tbl_kerangka_kerja.id_kak")
-            ->where("YEAR(tbl_lpj.created_at)", $year)
-            // ->where("tbl_kerangka_kerja.status", "Diterima")
-            // ->orWhere("tbl_kerangka_kerja.status", "Menunggu Persetujuan LPJ")
-            // ->orWhere("tbl_kerangka_kerja.status", value: "Perlu Perbaikan")
-            ->groupBy("MONTH(tbl_lpj.created_at)")
-            ->findAll();
     }
 }
 

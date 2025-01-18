@@ -52,7 +52,7 @@
                                     echo 'danger';
                                 } else if ($item['status'] == 'Menunggu Persetujuan LPJ') {
                                     echo 'warning';
-                                } else if ($item['status'] == 'Perlu Diperbaiki') {
+                                } else if ($item['status'] == 'Perlu Perbaikan LPJ') {
                                     echo 'warning';
                                 } else if ($item['status'] == 'Selesai') {
                                     echo 'success';
