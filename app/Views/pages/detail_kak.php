@@ -156,7 +156,7 @@
                                         Diterima</option>
                                     <option value="Perlu Perbaikan KAK" <?= ($kak['status'] == 'Perlu Perbaikan KAK') ? 'selected' : '' ?>>
                                         Perlu Perbaikan KAK</option>
-                                    <option value="Ditolak" <?= ($kak['status'] == 'KAK Ditolak') ? 'selected' : '' ?>>
+                                    <option value="KAK Ditolak" <?= ($kak['status'] == 'KAK Ditolak') ? 'selected' : '' ?>>
                                         KAK Ditolak</option>
                                 </select>
                             </div>

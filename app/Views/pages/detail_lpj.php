@@ -257,7 +257,7 @@
                                         </option>
                                         <option value="Perlu Perbaikan LPJ" <?= ($lpj['status'] == 'Perlu Perbaikan LPJ') ? 'selected' : '' ?>>
                                             Perlu Perbaikan LPJ</option>
-                                        <option value="Ditolak" <?= ($lpj['status'] == 'LPJ Ditolak') ? 'selected' : '' ?>>
+                                        <option value="LPJ Ditolak" <?= ($lpj['status'] == 'LPJ Ditolak') ? 'selected' : '' ?>>
                                             LPJ Ditolak</option>
                                     </select>
                                 </div>
