@@ -54,4 +54,8 @@ $routes->post('/lpj/validasi', 'Lpj::validasi');
 $routes->get('/lpj/riwayat', 'Lpj::riwayatLpj');
 $routes->post('/lpj/riwayat/filter', 'Lpj::riwayatLpjFilter');
 
+$routes->get('/laporan/realisasi-kegiatan', 'Laporan::realisasiKegiatan');
+$routes->get('/laporan/detail-realisasi-kegiatan', 'Laporan::kegiatan');
+$routes->get('/laporan/realisasi-anggaran', 'Laporan::anggaran');
+
 

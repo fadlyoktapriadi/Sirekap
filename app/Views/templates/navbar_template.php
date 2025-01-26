@@ -134,6 +134,28 @@
             </li>
           <?php endif; ?>
 
+          <li
+            class="menu-item <?= ($title == 'Realisasi Kegiatan' || $title == 'Detail Realisasi Kegiatan' || $title == 'Realisasi Anggaran') ? 'active open' : '' ?>">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-archive"></i>
+              <div data-i18n="Layouts">Laporan</div>
+            </a>
+
+            <ul class="menu-sub">
+              <li
+                class="menu-item <?= ($title == 'Realisasi Kegiatan' || $title == 'Detail Realisasi Kegiatan') ? 'active open' : '' ?>">
+                <a href="<?= base_url('laporan/realisasi-kegiatan') ?>" class="menu-link">
+                  <div data-i18n="Without menu">Realisasi Kegiatan</div>
+                </a>
+              </li>
+              <li class="menu-item <?= ($title == 'Realisasi Anggaran') ? 'active open' : '' ?>">
+                <a href="<?= base_url('laporan/realisasi-anggaran') ?>" class="menu-link">
+                  <div data-i18n="Without navbar">Realisasi Anggaran</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Account</span></li>
 
           <li class="menu-item">

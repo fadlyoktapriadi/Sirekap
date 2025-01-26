@@ -146,6 +146,28 @@ class KerangkaKerjaModel extends Model
             ->groupBy("MONTH(tbl_lpj.lpj_selesai)")
             ->findAll();
     }
+
+    public function realisasiKegiatan($unit, $bulan)
+    {
+        return $this->select('tbl_kerangka_kerja.nama_kegiatan, tbl_kerangka_kerja.target, GROUP_CONCAT(tbl_kunjungan.jumlah_kunjungan) as jumlah_kunjungan')
+            ->join('tbl_lpj', 'tbl_lpj.id_kak = tbl_kerangka_kerja.id_kak')
+            ->join('tbl_kunjungan', 'tbl_kerangka_kerja.id_kak = tbl_kunjungan.id_kak')
+            ->join('tbl_karyawan', 'tbl_kerangka_kerja.penanggung_jawab = tbl_karyawan.NIP')
+            ->where('tbl_karyawan.unit_kerja', $unit)
+            ->orWhere('MONTH(tbl_lpj.lpj_selesai)', $bulan)
+            ->groupBy('tbl_kerangka_kerja.nama_kegiatan, tbl_kerangka_kerja.target')
+            ->findAll();
+    }
+
+    public function realisasiAnggaran($bulan)
+    {
+        return $this->select('tbl_kerangka_kerja.nama_kegiatan, tbl_karyawan.unit_kerja, tbl_kerangka_kerja.anggaran_disetujui, SUM(tbl_lpj.anggaran_digunakan) as anggaran_digunakan, tbl_kerangka_kerja.status')
+            ->join('tbl_lpj', 'tbl_lpj.id_kak = tbl_kerangka_kerja.id_kak')
+            ->join('tbl_karyawan', 'tbl_kerangka_kerja.penanggung_jawab = tbl_karyawan.NIP')
+            ->Where('MONTH(tbl_kerangka_kerja.tanggal_diterima)', $bulan)
+            ->groupBy('tbl_kerangka_kerja.nama_kegiatan, tbl_kerangka_kerja.anggaran_disetujui, tbl_kerangka_kerja.status, tbl_karyawan.unit_kerja')
+            ->findAll();
+    }
 }
 
 ?>
