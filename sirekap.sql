@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 18 Jan 2025 pada 19.26
+-- Waktu pembuatan: 27 Jan 2025 pada 12.25
 -- Versi server: 8.0.30
 -- Versi PHP: 8.1.10
 
@@ -43,7 +43,7 @@ CREATE TABLE `tbl_karyawan` (
 
 INSERT INTO `tbl_karyawan` (`NIP`, `nama_karyawan`, `alamat`, `unit_kerja`, `jabatan`, `created_at`, `updated_at`) VALUES
 ('0', 'Administrator', '-', '', 'Admin', '2024-12-23', '2024-12-23'),
-('196912312000023456', 'Wawan Supriatno', 'Perum Griya Asri, Jl. Mawar, Kota Bandung', 'Esensial dan Keperawatan Kesehatan Masyarakat', 'Staf', '2024-12-23', '2025-01-18'),
+('196912312000023456', 'Wawan Supriatno', 'Perum Griya Asri, Jl. Mawar, Kota Bandung', 'Kefarmasian & Laboratorium', 'Staf', '2024-12-23', '2025-01-18'),
 ('197011011995011002', 'Rere Jayabaya Sitepu, S.Kes.', 'Komp. Citra Damai Indah Blok.A4, Ciamis, Bekasi Barat', 'Kefarmasian & Laboratorium', 'Staf', '2025-01-17', '2025-01-18'),
 ('197501221991041001', 'Herman Gultom, S.Kes', 'Jl. Merdeka Barat Daya No.33, Buah Batu, Bandung', 'Kefarmasian & Laboratorium', 'Kepala Unit', '2025-01-17', '2025-01-17'),
 ('198501012008121001', 'Dr. Siti Nurhaliza, Sp.M', 'Jl. Kesehatan No. 12, Kota Medan', 'Pengembangan', 'Kepala Unit', '2025-01-18', '2025-01-18'),
@@ -171,7 +171,7 @@ CREATE TABLE `tbl_riwayat_anggaran` (
   `id_riwayat_anggaran` int NOT NULL,
   `id_kak` int NOT NULL,
   `jumlah_anggaran` int NOT NULL,
-  `label_anggaran` enum('Masuk','Keluar') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `label_anggaran` enum('Masuk','Keluar') NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
