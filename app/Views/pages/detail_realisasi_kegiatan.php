@@ -43,8 +43,8 @@
                 Data tidak ditemukan
             </div>
         <?php endif; ?>
-        <div class="table-responsive text-nowrap">
-            <?php foreach ($kegiatan as $key => $value): ?>
+        <?php foreach ($kegiatan as $key => $value): ?>
+            <div class="table-responsive text-nowrap">
                 <table class="table table-hover mb-4">
                     <thead>
                         <tr>
