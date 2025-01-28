@@ -97,7 +97,7 @@
 
           <?php if ($user_login['role'] != 'Administrator'): ?>
             <li
-              class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja' || $title == 'Data LPJ KAK') || $title == 'Tambah LPJ' || $title == 'Detail LPJ' || $title == 'Data Riwayat KAK' ? 'active open' : '' ?>">
+              class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja' || $title == 'Data LPJ KAK') || $title == 'Pengisian LPJ' || $title == 'Detail LPJ' || $title == 'Data Riwayat KAK' ? 'active open' : '' ?>">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-task"></i>
                 <div data-i18n="Layouts">Kegiatan</div>
@@ -111,7 +111,7 @@
                   </a>
                 </li>
                 <li
-                  class="menu-item <?= ($title == 'Data LPJ KAK') || $title == 'Tambah LPJ' || $title == 'Detail LPJ' ? 'active' : '' ?>">
+                  class="menu-item <?= ($title == 'Data LPJ KAK') || $title == 'Pengisian LPJ' || $title == 'Detail LPJ' ? 'active' : '' ?>">
                   <a href="<?= base_url('lpj') ?>" class="menu-link">
                     <div data-i18n="Without navbar">LPJ KAK</div>
                   </a>
@@ -327,8 +327,10 @@
         bSort: true,
         bPaginate: true
       });
-    });    
+    });
   </script>
+
+
 </body>
 
 </html>

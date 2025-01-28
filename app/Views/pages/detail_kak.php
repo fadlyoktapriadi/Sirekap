@@ -161,6 +161,17 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="row" id="dibutuhkan_form">
+                            <div class="col mb-0">
+                                <div class="form-floating my-3">
+                                    <input type="text" class="form-control" id="anggaran_dibutuhkan" placeholder="Rp "
+                                        aria-describedby="floatingInputHelp" name="anggaran_dibutuhkan"
+                                        value="Rp<?= number_format($kak['anggaran_dibutuhkan'], 0, ',', '.') ?>"
+                                        disabled />
+                                    <label for="anggaran_dibutuhkan">Anggaran Dibutuhkan</label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row" id="anggaran_form">
                             <div class="col mb-0">
                                 <div class="form-floating my-3">
@@ -210,16 +221,20 @@
     document.getElementById('status').addEventListener('change', function (e) {
         var catatan = document.getElementById('catatan_form');
         var anggaran = document.getElementById('anggaran_form');
+        var dibutuhkan = document.getElementById('dibutuhkan_form');
         if (e.target.value === 'Perlu Perbaikan KAK' || e.target.value === 'Ditolak') {
             catatan.style.display = 'block';
             anggaran.style.display = 'none';
+            dibutuhkan.style.display = 'none';
         } else if (e.target.value === 'Diterima') {
             anggaran.style.display = 'block';
+            dibutuhkan.style.display = 'block';
             catatan.style.display = 'none';
         }
         else {
             catatan.style.display = 'none';
             anggaran.style.display = 'none';
+            dibutuhkan.style.display = 'none';
         }
     });
 

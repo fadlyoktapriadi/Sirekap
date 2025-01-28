@@ -33,7 +33,15 @@ class PaguAnggaran extends BaseController
 
     public function simpan()
     {
-        $check = $this->PaguAnggaranModel->getPaguAnggaran($this->request->getVar('tahun_anggaran'));
+
+        $tahun = $this->request->getVar('tahun_anggaran');
+
+        if ($tahun < date('Y')) {
+            session()->setFlashdata('error', 'Tahun anggaran tidak boleh kurang dari tahun sekarang.');
+            return redirect()->back()->withInput();
+        }
+
+        $check = $this->PaguAnggaranModel->getPaguAnggaran($tahun);
 
         if (!empty($check)) {
             session()->setFlashdata('error', 'Pagu Tahun anggaran sudah ada.');
@@ -41,8 +49,9 @@ class PaguAnggaran extends BaseController
         }
 
         $data = [
-            'tahun_anggaran' => $this->request->getVar('tahun_anggaran'),
-            'jumlah_anggaran' => intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('jumlah_anggaran'))))
+            'tahun_anggaran' => $tahun,
+            'jumlah_anggaran' => intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('jumlah_anggaran')))),
+            'balance' => intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('jumlah_anggaran'))))
         ];
 
         $this->PaguAnggaranModel->insert($data);
@@ -67,6 +76,11 @@ class PaguAnggaran extends BaseController
     {
         $id = $this->request->getVar('id_pagu_anggaran');
 
+        if ($this->request->getVar('tahun_anggaran') < date('Y')) {
+            session()->setFlashdata('error', 'Tahun anggaran tidak boleh kurang dari tahun sekarang.');
+            return redirect()->back()->withInput();
+        }
+
         $check = $this->PaguAnggaranModel->where('tahun_anggaran', $this->request->getVar('tahun_anggaran'))
             ->where('id_pagu_anggaran !=', $id)
             ->first();
@@ -78,7 +92,8 @@ class PaguAnggaran extends BaseController
 
         $data = [
             'tahun_anggaran' => $this->request->getVar('tahun_anggaran'),
-            'jumlah_anggaran' => intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('jumlah_anggaran'))))
+            'jumlah_anggaran' => intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('jumlah_anggaran')))),
+            'balance' => intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('jumlah_anggaran')))),
         ];
 
         $this->PaguAnggaranModel->update($id, $data);

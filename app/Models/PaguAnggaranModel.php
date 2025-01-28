@@ -9,7 +9,7 @@ class PaguAnggaranModel extends Model
     protected $table = 'tbl_pagu_anggaran';
     protected $primaryKey = 'id_pagu_anggaran';
     protected $useTimestamps = true;
-    protected $allowedFields = ['jumlah_anggaran', 'tahun_anggaran'];
+    protected $allowedFields = ['jumlah_anggaran', 'balance', 'tahun_anggaran'];
 
     public function getPaguAnggaran($tahun)
     {
@@ -20,7 +20,7 @@ class PaguAnggaranModel extends Model
     public function updatePaguAnggaran($year, $biaya)
     {
         return $this->where('tahun_anggaran', $year)
-            ->set('jumlah_anggaran', $biaya)
+            ->set('balance', $biaya)
             ->update();
     }
 }

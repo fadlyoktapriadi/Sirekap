@@ -43,6 +43,7 @@ $routes->get('/kak/hapus/(:num)', 'KerangkaKerja::hapus/$1');
 $routes->post('/kak/validasi', 'KerangkaKerja::validasi');
 
 $routes->get('/lpj', 'Lpj::index');
+$routes->get('/lpj/batal/(:num)', 'Lpj::batal/$1');
 $routes->post('/lpj/filter', 'Lpj::filter');
 $routes->get('/lpj/tambah/(:num)', 'Lpj::tambah/$1');
 $routes->post('/lpj/simpan', 'Lpj::simpan');

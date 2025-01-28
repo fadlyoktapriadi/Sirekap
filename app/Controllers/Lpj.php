@@ -35,10 +35,11 @@ class Lpj extends BaseController
 
     public function tambah($id_kak)
     {
+
         $data = [
-            'title' => 'Tambah LPJ',
+            'title' => 'Pengisian LPJ',
             'user_login' => $this->session->get(),
-            'breadcrumb' => ['Data LPJ KAK', 'Tambah LPJ'],
+            'breadcrumb' => ['Data LPJ KAK', 'Pengisian LPJ'],
             'kak' => $this->KerangkaKerjaModel->getKerjangkaKerjaById($id_kak),
         ];
 
@@ -134,6 +135,13 @@ class Lpj extends BaseController
         session()->setFlashdata('success', 'Lembar Pertanggung Jawaban berhasil disimpan!');
 
         return redirect()->to('/lpj');
+    }
+
+    public function batal($id_kak)
+    {
+        $this->KerangkaKerjaModel->update($id_kak, ['status' => 'Diproses', 'tanggal_diterima' => null]);
+        session()->setFlashdata('success', 'Pengajuan Validasi KAK berhasil dibatalkan!');
+        return redirect()->to('/kak');
 
     }
 

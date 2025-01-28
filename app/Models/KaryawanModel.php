@@ -11,11 +11,13 @@ class KaryawanModel extends Model
     protected $useTimestamps = true;
     protected $allowedFields = ['NIP', 'nama_karyawan', 'alamat', 'unit_kerja', 'jabatan'];
 
-    public function getKaryawan(){
+    public function getKaryawan($unit)
+    {
         return $this->where('jabatan !=', 'admin')
-                    ->where('jabatan !=', 'kepala puskesmas')
-                    ->orderBy('jabatan', 'ASC')
-                    ->findAll();
+            ->where('jabatan !=', 'kepala puskesmas')
+            ->where('unit_kerja', $unit)
+            ->orderBy('jabatan', 'ASC')
+            ->findAll();
     }
 }
 

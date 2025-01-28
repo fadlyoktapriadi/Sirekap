@@ -37,6 +37,7 @@ class Home extends BaseController
                 $ses_data = [
                     'username' => $user_login['username'],
                     'nama_karyawan' => $user_login['nama_karyawan'],
+                    'unit_kerja' => $user_login['unit_kerja'],
                     'role' => $user_login['role'],
                     'logged_in' => true
                 ];

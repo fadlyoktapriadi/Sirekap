@@ -21,7 +21,8 @@
                         </div>
                         <div class="form-floating my-3">
                             <input type="text" class="form-control" id="jumlah_anggaran" placeholder="Rp "
-                                aria-describedby="floatingInputHelp" name="jumlah_anggaran" />
+                                aria-describedby="floatingInputHelp" name="jumlah_anggaran"
+                                value="<?= old('jumlah_anggaran') ?>" />
                             <label for="jumlah_anggaran">Jumlah Anggaran</label>
                         </div>
                         <div class="d-flex justify-content-end mt-4">

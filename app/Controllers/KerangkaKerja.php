@@ -35,11 +35,13 @@ class KerangkaKerja extends BaseController
 
     public function tambah()
     {
+        $session = $this->session->get();
+
         $data = [
             'title' => 'Tambah Kerangka Acuan Kerja',
-            'user_login' => $this->session->get(),
+            'user_login' => $session,
             'breadcrumb' => ['Data Kerangka Acuan Kerja', 'Tambah Kerangka Acuan Kerja'],
-            'penanggung_jawab' => $this->KaryawanModel->getKaryawan(),
+            'penanggung_jawab' => $this->KaryawanModel->getKaryawan($session['unit_kerja']),
         ];
 
         return view('pages/tambah_kak', $data);
