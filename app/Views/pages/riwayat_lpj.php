@@ -4,7 +4,7 @@
 
 <!-- Basic Bootstrap Table -->
 <div class="card">
-    <h5 class="card-header">Data Riwayat Lembar Pertanggung Jawaban</h5>
+    <h5 class="card-header">Data Riwayat Kegiatan</h5>
     <div class="table-responsive text-nowrap mx-4">
 
         <div class="d-flex justify-content-end">

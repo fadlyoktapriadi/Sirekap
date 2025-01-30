@@ -17,10 +17,10 @@ class PaguAnggaranModel extends Model
             ->first();
     }
 
-    public function updatePaguAnggaran($year, $biaya)
+    public function updatePaguAnggaran($year, $anggaran)
     {
         return $this->where('tahun_anggaran', $year)
-            ->set('balance', $biaya)
+            ->set('balance', $anggaran)
             ->update();
     }
 }

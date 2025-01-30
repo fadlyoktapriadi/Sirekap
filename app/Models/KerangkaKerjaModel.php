@@ -13,7 +13,7 @@ class KerangkaKerjaModel extends Model
 
     public function getKerjangkaKerjaWithUsers()
     {
-        return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.NIP, tbl_karyawan.nama_karyawan')
+        return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.NIP, tbl_karyawan.nama_karyawan, tbl_karyawan.unit_kerja')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
             ->where('status', "Diproses")
             ->orWhere("status", "Perlu Perbaikan KAK")
@@ -89,8 +89,10 @@ class KerangkaKerjaModel extends Model
 
     public function countKakBerjalan()
     {
-        return $this->Where('status !=', "Selesai")
-            ->Where('status !=', "Ditolak")
+        return $this
+            ->Where('status', "Diterima")
+            ->orWhere('status', "Menunggu Persetujuan LPJ")
+            ->orWhere('status', "Perlu Perbaikan LPJ")
             ->countAllResults();
     }
 
@@ -131,6 +133,7 @@ class KerangkaKerjaModel extends Model
         return $this->select("MONTH(created_at) AS bulan, COUNT(*) AS total_lpj")
             ->where("YEAR(created_at)", $year)
             ->where("status", "Diterima")
+            ->orWhere("status", "Menunggu Persetujuan LPJ")
             ->orWhere("status", "Perlu Perbaikan LPJ")
             ->orWhere("status", "LPJ Ditolak")
             ->groupBy("MONTH(created_at)")
@@ -154,7 +157,7 @@ class KerangkaKerjaModel extends Model
             ->join('tbl_kunjungan', 'tbl_kerangka_kerja.id_kak = tbl_kunjungan.id_kak')
             ->join('tbl_karyawan', 'tbl_kerangka_kerja.penanggung_jawab = tbl_karyawan.NIP')
             ->where('tbl_karyawan.unit_kerja', $unit)
-            ->orWhere('MONTH(tbl_lpj.lpj_selesai)', $bulan)
+            ->Where('MONTH(tbl_lpj.lpj_selesai)', $bulan)
             ->groupBy('tbl_kerangka_kerja.nama_kegiatan, tbl_kerangka_kerja.target')
             ->findAll();
     }
@@ -167,6 +170,12 @@ class KerangkaKerjaModel extends Model
             ->Where('MONTH(tbl_kerangka_kerja.tanggal_diterima)', $bulan)
             ->groupBy('tbl_kerangka_kerja.nama_kegiatan, tbl_kerangka_kerja.anggaran_disetujui, tbl_kerangka_kerja.status, tbl_karyawan.unit_kerja')
             ->findAll();
+    }
+
+    public function anggaranSetuju()
+    {
+        return $this->selectSum('anggaran_disetujui')
+            ->first();
     }
 }
 

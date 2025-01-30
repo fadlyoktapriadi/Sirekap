@@ -93,7 +93,7 @@ class PaguAnggaran extends BaseController
         $data = [
             'tahun_anggaran' => $this->request->getVar('tahun_anggaran'),
             'jumlah_anggaran' => intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('jumlah_anggaran')))),
-            'balance' => intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('jumlah_anggaran')))),
+            'balance' => intval(trim(str_replace(['Rp', ' ', '.', ','], '', $this->request->getVar('balance')))),
         ];
 
         $this->PaguAnggaranModel->update($id, $data);

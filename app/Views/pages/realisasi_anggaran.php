@@ -99,10 +99,11 @@
                         <tbody class="table-border-bottom-0">
                             <tr>
                                 <td><?= date('Y') ?></td>
-                                <td>Rp<?= number_format($jumlahPaguAnggaran + $jumlahAnggaranDigunakan, 0, ',', '.') ?>
+                                <td>Rp<?= number_format($jumlahPaguAnggaran, 0, ',', '.') ?>
                                 </td>
                                 <td>Rp<?= number_format($jumlahAnggaranDigunakan, 0, ',', '.') ?></td>
-                                <td>Rp<?= number_format($jumlahPaguAnggaran, 0, ',', '.') ?></td>
+                                <td>Rp<?= number_format($jumlahPaguAnggaran - $jumlahAnggaranDigunakan, 0, ',', '.') ?>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

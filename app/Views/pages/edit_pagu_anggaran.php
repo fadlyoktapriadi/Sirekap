@@ -27,6 +27,11 @@
                                 value="<?= $pagu['jumlah_anggaran'] ?>" />
                             <label for="jumlah_anggaran">Jumlah Anggaran</label>
                         </div>
+                        <div class="form-floating my-3">
+                            <input type="text" class="form-control" id="balance" placeholder="Rp "
+                                aria-describedby="floatingInputHelp" name="balance" value="<?= $pagu['balance'] ?>" />
+                            <label for="balance">Balance</label>
+                        </div>
                         <div class="d-flex justify-content-end mt-4">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
@@ -39,6 +44,18 @@
 
 <script>
     document.getElementById('jumlah_anggaran').addEventListener('input', function (e) {
+        var value = e.target.value;
+        value = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+        if (value) {
+            value = parseInt(value, 10);
+            e.target.value = new Intl.NumberFormat('id-ID', {
+                minimumFractionDigits: 0
+            }).format(value);
+        } else {
+            e.target.value = '';
+        }
+    });
+    document.getElementById('balance').addEventListener('input', function (e) {
         var value = e.target.value;
         value = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
         if (value) {

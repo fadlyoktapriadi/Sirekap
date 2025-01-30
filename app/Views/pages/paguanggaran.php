@@ -27,6 +27,7 @@
                             <th>No</th>
                             <th>Tahun</th>
                             <th>Jumlah Anggaran</th>
+                            <th>Balance</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -38,6 +39,7 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $item['tahun_anggaran'] ?></td>
                                 <td>Rp<?= number_format($item['jumlah_anggaran'], 0, ',', '.') ?></td>
+                                <td>Rp<?= number_format($item['balance'], 0, ',', '.') ?></td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

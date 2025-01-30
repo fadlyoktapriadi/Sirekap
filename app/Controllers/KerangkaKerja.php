@@ -41,7 +41,7 @@ class KerangkaKerja extends BaseController
             'title' => 'Tambah Kerangka Acuan Kerja',
             'user_login' => $session,
             'breadcrumb' => ['Data Kerangka Acuan Kerja', 'Tambah Kerangka Acuan Kerja'],
-            'penanggung_jawab' => $this->KaryawanModel->getKaryawan($session['unit_kerja']),
+            'penanggung_jawab' => $this->KaryawanModel->getKaryawanByUnit($session['unit_kerja']),
         ];
 
         return view('pages/tambah_kak', $data);
@@ -107,7 +107,7 @@ class KerangkaKerja extends BaseController
             'user_login' => $this->session->get(),
             'breadcrumb' => ['Data Kerangka Acuan Kerja', 'Edit Kerangka Acuan Kerja'],
             'kak' => $this->KerangkaKerjaModel->getKerjangkaKerjaById($id),
-            'penanggung_jawab' => $this->KaryawanModel->getKaryawan(),
+            'penanggung_jawab' => $this->KaryawanModel->getKaryawanByUnit($this->session->get('unit_kerja')),
         ];
 
         return view('pages/edit_kak', $data);

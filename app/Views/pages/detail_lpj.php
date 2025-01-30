@@ -174,7 +174,7 @@
                                                     Hapus LPJ
                                                 </a>
                                             <?php else: ?>
-                                                <?php if ($user_login['role'] != 'Staf Unit'): ?>
+                                                <?php if ($user_login['role'] != 'Staf Unit' && $user_login['unit_kerja'] == $lpj['unit_kerja']): ?>
                                                     <?php if ($lpj['status'] == 'Selesai'): ?>
                                                         <button class="btn btn-danger" data-bs-toggle="modal"
                                                             data-bs-target="#modalCenter">Batal Validasi Lembar Pertanggung

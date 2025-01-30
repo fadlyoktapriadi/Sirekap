@@ -24,7 +24,7 @@ class UsersModel extends Model
     public function getUserKaryawan($nik)
     {
         return $this->db->table($this->table)
-            ->select('tbl_users.username, tbl_users.role, tbl_karyawan.nama_karyawan, tbl_karyawan.unit_kerja')
+            ->select('tbl_users.id_user, tbl_users.username, tbl_users.role, tbl_karyawan.nama_karyawan, tbl_karyawan.unit_kerja')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_users.NIP')
             ->where('tbl_users.NIP', $nik)
             ->get()

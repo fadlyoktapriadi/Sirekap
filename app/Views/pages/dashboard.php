@@ -10,7 +10,7 @@
             <h5 class="card-title text-primary">Selamat Datang, <?= $user_login['nama_karyawan'] ?>! 🎉</h5>
             <p class="mb-4">
               Sistem Informasi Rencana Kerja Puskesmas (Sirekap) <span class="fw-bold">Jatiwangi</span>
-              adalah aplikasi yang digunakan untuk melakukan managemen kegiatan Puskesmas <span
+              adalah aplikasi yang digunakan untuk melakukan manajemen kegiatan Puskesmas <span
                 class="fw-bold">Jatiwangi</span>.
             </p>
           </div>
@@ -72,7 +72,7 @@
                   <span class="avatar-initial rounded bg-label-info"><i class="bx bx-select-multiple"></i></span>
                 </div>
               </div>
-              <span class="fw-semibold d-block mb-1">Jumlah Kerangka Acuan Kerja Berjalan</span>
+              <span class="fw-semibold d-block mb-1">Jumlah Kegiatan Berjalan</span>
               <h4 class="card-title mb-2"><?= $total_kak_berjalan ?></h4>
             </div>
           </div>
@@ -239,8 +239,23 @@
                   class="rounded" />
               </div>
             </div>
-            <span class="fw-semibold d-block mb-1">Jumlah Pagu Anggaran Tahun 2025</span>
-            <h4 class="card-title mb-2">Rp<?= number_format($jumlahPaguAnggaran, 0, ',', '.') ?></h4>
+            <span class="fw-semibold d-block mb-1">Sisa Pagu Anggaran Tahun 2025</span>
+            <h4 class="card-title mb-2">Rp<?= number_format($jumlahPaguAnggaran['balance'], 0, ',', '.') ?></h4>
+            <small>Pagu Anggaran: Rp<?= number_format($jumlahPaguAnggaran['jumlah_anggaran'], 0, ',', '.') ?></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0 me-3">
+                <span class="avatar-initial rounded bg-label-info"><i class="bx bx-money"></i></span>
+              </div>
+            </div>
+            <span class="fw-semibold d-block mb-1">Jumlah Anggaran Kegiatan Yang Disetujui</span>
+            <h4 class="card-title mb-2">Rp<?= number_format($jumlahAnggaranSetuju, 0, ',', '.') ?></h4>
           </div>
         </div>
       </div>
@@ -254,7 +269,7 @@
                   class="rounded" />
               </div>
             </div>
-            <span class="fw-semibold d-block mb-1">Jumlah Anggaran Yang Digunakan</span>
+            <span class="fw-semibold d-block mb-1">Jumlah Anggaran Kegiatan Yang Selesai</span>
             <h4 class="card-title mb-2">Rp<?= number_format($jumlahAnggaranDigunakan, 0, ',', '.') ?></h4>
           </div>
         </div>

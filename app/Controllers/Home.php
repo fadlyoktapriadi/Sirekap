@@ -9,8 +9,13 @@ class Home extends BaseController
         $this->session = \Config\Services::session();
     }
 
-    public function index(): string
+    public function index()
     {
+
+        if (session()->get('logged_in')) {
+            return redirect()->to('/dashboard');
+        }
+
         $data = [
             'title' => 'Login | Sirekap',
         ];
@@ -36,6 +41,7 @@ class Home extends BaseController
 
                 $ses_data = [
                     'username' => $user_login['username'],
+                    'id_user' => $user_login['id_user'],
                     'nama_karyawan' => $user_login['nama_karyawan'],
                     'unit_kerja' => $user_login['unit_kerja'],
                     'role' => $user_login['role'],
@@ -66,8 +72,9 @@ class Home extends BaseController
             'total_kak_berjalan' => $this->KerangkaKerjaModel->countKakBerjalan(),
             'total_kak_selesai' => $this->KerangkaKerjaModel->countKakSelesai(),
             'statusKegiatan' => $this->KerangkaKerjaModel->statusKegiatan(),
-            'jumlahPaguAnggaran' => $this->PaguAnggaranModel->getPaguAnggaran(date('Y'))['jumlah_anggaran'] ?? 0,
+            'jumlahPaguAnggaran' => $this->PaguAnggaranModel->getPaguAnggaran(date('Y')) ?? 0,
             'jumlahAnggaranDigunakan' => $this->LpjModel->jumlahAnggaranDigunakan()['anggaran_digunakan'],
+            'jumlahAnggaranSetuju' => $this->KerangkaKerjaModel->anggaranSetuju()['anggaran_disetujui'],
             'jumlahKegiatanUnitEKKM' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Esensial dan Keperawatan Kesehatan Masyarakat'),
             'jumlahKegiatanUnitPengembangan' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Pengembangan'),
             'jumlahKegiatanUnitKL' => $this->KerangkaKerjaModel->getKerjangkaKerjaUnit('Kefarmasian & Laboratorium'),
@@ -75,6 +82,57 @@ class Home extends BaseController
         ];
 
         return view('pages/dashboard', $data);
+    }
+
+    public function profile()
+    {
+        // dd($this->UsersModel->getUserKaryawanById($this->session->get('id_user')));
+        $data = [
+            'title' => 'Dashboard',
+            'user_login' => $this->session->get(),
+            'user' => $this->UsersModel->getUserKaryawanById($this->session->get('id_user'))
+        ];
+
+        return view('pages/profile', $data);
+
+    }
+
+    public function profileUpdate()
+    {
+
+        // dd($this->request->getVar());
+        $id = $this->request->getVar('id_user');
+
+        $validation = \Config\Services::validation();
+
+        $validation->setRules([
+            'nama_karyawan' => 'required',
+            'alamat' => 'required',
+            'username' => 'required|min_length[5]',
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('validation', $validation->getErrors());
+        }
+
+        $data_user = [
+            'username' => $this->request->getVar('username'),
+        ];
+
+        $data_karyawan = [
+            'nama_karyawan' => $this->request->getVar('nama_karyawan'),
+            'alamat' => $this->request->getVar('alamat'),
+        ];
+
+        if ($this->request->getVar('password')) {
+            $data_user['password'] = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
+        }
+
+        $this->UsersModel->update($id, $data_user);
+
+        $this->KaryawanModel->update($this->request->getVar('NIP'), $data_karyawan);
+
+        return redirect()->to('/profile')->with('success', 'Data profile berhasil diubah');
     }
 
     public function getKakDataJson($year)
@@ -135,5 +193,11 @@ class Home extends BaseController
         $session = session();
         $session->destroy();
         return redirect()->to('/');
+    }
+
+    public function show404()
+    {
+        $data['title'] = '404 Page Not Found';
+        return view('pages/error404', $data);
     }
 }

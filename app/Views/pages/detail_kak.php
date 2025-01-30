@@ -50,6 +50,10 @@
                     <td><?= $kak['nama_karyawan'] ?></td>
                 </tr>
                 <tr>
+                    <td>Unit Kerja</td>
+                    <td><?= $kak['unit_kerja'] ?></td>
+                </tr>
+                <tr>
                     <td>Sasaran</td>
                     <td><?= $kak['sasaran'] ?></td>
                 </tr>
@@ -88,7 +92,7 @@
             </table>
         </div>
     </div>
-    <?php if ($user_login['role'] != 'Staf Unit'): ?>
+    <?php if ($user_login['role'] != 'Staf Unit' && $user_login['unit_kerja'] == $kak['unit_kerja']): ?>
         <div class="row">
             <div class="col">
                 <div class="d-flex justify-content-end mt-3 mx-4">

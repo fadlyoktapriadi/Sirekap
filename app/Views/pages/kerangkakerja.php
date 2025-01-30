@@ -78,7 +78,7 @@
                                     <a class="dropdown-item" href="<?= base_url('kak/detail/') . $item['id_kak'] ?>"><i
                                             class="bx bx-detail me-1"></i>
                                         Detail</a>
-                                    <?php if ($user_login['role'] == 'Staf Unit' && $item['status'] == 'Diproses'): ?>
+                                    <?php if (($user_login['role'] == 'Staf Unit' && $user_login['unit_kerja'] == $item['unit_kerja']) && ($item['status'] == 'Diproses' || $item['status'] == 'Perlu Perbaikan KAK')): ?>
                                         <a class="dropdown-item" href="<?= base_url('kak/edit/') . $item['id_kak'] ?>"><i
                                                 class="bx bx-edit-alt me-1"></i>
                                             Edit</a>

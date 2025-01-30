@@ -8,6 +8,8 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->post('/login', 'Home::login');
 $routes->get('/logout', 'Home::logout');
+$routes->get('/profile', 'Home::profile');
+$routes->post('/profile/update', 'Home::profileUpdate');
 
 $routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/dashboard/getKakDataJson/(:any)', 'Home::getKakDataJson/$1');
@@ -59,4 +61,4 @@ $routes->get('/laporan/realisasi-kegiatan', 'Laporan::realisasiKegiatan');
 $routes->get('/laporan/detail-realisasi-kegiatan', 'Laporan::kegiatan');
 $routes->get('/laporan/realisasi-anggaran', 'Laporan::anggaran');
 
-
+$routes->set404Override('App\Controllers\Home::show404');

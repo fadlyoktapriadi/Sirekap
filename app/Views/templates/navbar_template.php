@@ -97,7 +97,7 @@
 
           <?php if ($user_login['role'] != 'Administrator'): ?>
             <li
-              class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja' || $title == 'Data LPJ KAK') || $title == 'Pengisian LPJ' || $title == 'Detail LPJ' || $title == 'Data Riwayat KAK' ? 'active open' : '' ?>">
+              class="menu-item <?= ($title == 'Data Kerangka Acuan Kerja' || $title == 'Detail Kerangka Acuan Kerja' || $title == 'Tambah Kerangka Acuan Kerja' || $title == 'Edit Kerangka Acuan Kerja' || $title == 'Data LPJ KAK') || $title == 'Pengisian LPJ' || $title == 'Detail LPJ' || $title == 'Data Riwayat Kegiatan' ? 'active open' : '' ?>">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-task"></i>
                 <div data-i18n="Layouts">Kegiatan</div>
@@ -116,9 +116,9 @@
                     <div data-i18n="Without navbar">LPJ KAK</div>
                   </a>
                 </li>
-                <li class="menu-item <?= ($title == 'Data Riwayat KAK') ? 'active' : '' ?>">
+                <li class="menu-item <?= ($title == 'Data Riwayat Kegiatan') ? 'active' : '' ?>">
                   <a href=" <?= base_url('lpj/riwayat') ?>" class="menu-link">
-                    <div data-i18n="Container">Riwayat KAK</div>
+                    <div data-i18n="Container">Riwayat Kegiatan</div>
                   </a>
                 </li>
               </ul>
@@ -134,27 +134,29 @@
             </li>
           <?php endif; ?>
 
-          <li
-            class="menu-item <?= ($title == 'Realisasi Kegiatan' || $title == 'Detail Realisasi Kegiatan' || $title == 'Realisasi Anggaran') ? 'active open' : '' ?>">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-archive"></i>
-              <div data-i18n="Layouts">Laporan</div>
-            </a>
+          <?php if ($user_login['role'] != 'Staf Unit' && $user_login['role'] != 'Administrator'): ?>
+            <li
+              class="menu-item <?= ($title == 'Realisasi Kegiatan' || $title == 'Detail Realisasi Kegiatan' || $title == 'Realisasi Anggaran') ? 'active open' : '' ?>">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-archive"></i>
+                <div data-i18n="Layouts">Laporan</div>
+              </a>
 
-            <ul class="menu-sub">
-              <li
-                class="menu-item <?= ($title == 'Realisasi Kegiatan' || $title == 'Detail Realisasi Kegiatan') ? 'active open' : '' ?>">
-                <a href="<?= base_url('laporan/realisasi-kegiatan') ?>" class="menu-link">
-                  <div data-i18n="Without menu">Realisasi Kegiatan</div>
-                </a>
-              </li>
-              <li class="menu-item <?= ($title == 'Realisasi Anggaran') ? 'active open' : '' ?>">
-                <a href="<?= base_url('laporan/realisasi-anggaran') ?>" class="menu-link">
-                  <div data-i18n="Without navbar">Realisasi Anggaran</div>
-                </a>
-              </li>
-            </ul>
-          </li>
+              <ul class="menu-sub">
+                <li
+                  class="menu-item <?= ($title == 'Realisasi Kegiatan' || $title == 'Detail Realisasi Kegiatan') ? 'active open' : '' ?>">
+                  <a href="<?= base_url('laporan/realisasi-kegiatan') ?>" class="menu-link">
+                    <div data-i18n="Without menu">Realisasi Kegiatan</div>
+                  </a>
+                </li>
+                <li class="menu-item <?= ($title == 'Realisasi Anggaran') ? 'active open' : '' ?>">
+                  <a href="<?= base_url('laporan/realisasi-anggaran') ?>" class="menu-link">
+                    <div data-i18n="Without navbar">Realisasi Anggaran</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          <?php endif ?>
 
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Account</span></li>
 
@@ -213,7 +215,8 @@
                         </div>
                         <div class="flex-grow-1">
                           <span class="fw-semibold d-block"><?= $user_login['nama_karyawan'] ?></span>
-                          <small class="text-muted"><?= $user_login['role'] ?></small>
+                          <small class="text-muted"><?= $user_login['role'] ?></small><br>
+                          <small class="text-muted"><?= $user_login['unit_kerja'] ?></small>
                         </div>
                       </div>
                     </a>
@@ -222,7 +225,7 @@
                     <div class="dropdown-divider"></div>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="<?= base_url('profile') ?>">
                       <i class="bx bx-user me-2"></i>
                       <span class="align-middle">My Profile</span>
                     </a>

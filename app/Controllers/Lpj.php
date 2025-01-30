@@ -130,6 +130,7 @@ class Lpj extends BaseController
             'dokumentasi' => $file_dokumentasi,
         ]);
 
+
         $this->KerangkaKerjaModel->update($id_kak, ['status' => 'Menunggu Persetujuan LPJ']);
 
         session()->setFlashdata('success', 'Lembar Pertanggung Jawaban berhasil disimpan!');
@@ -139,7 +140,18 @@ class Lpj extends BaseController
 
     public function batal($id_kak)
     {
-        $this->KerangkaKerjaModel->update($id_kak, ['status' => 'Diproses', 'tanggal_diterima' => null]);
+        $anggaran_sebelumnya = $this->KerangkaKerjaModel->getKerjangkaKerjaById($id_kak)['anggaran_disetujui'];
+
+        $pagu_anggaran = (int) $this->PaguAnggaranModel->getPaguAnggaran(date('Y'))['balance'];
+
+        $anggaran = $pagu_anggaran + $anggaran_sebelumnya;
+
+        $this->PaguAnggaranModel->updatePaguAnggaran(date('Y'), $anggaran);
+
+        $this->RiwayatAnggaranModel->where('id_kak', $id_kak)->where('label_anggaran', 'Keluar')->delete();
+
+        $this->KerangkaKerjaModel->update($id_kak, ['status' => 'Diproses', 'tanggal_diterima' => null, 'anggaran_disetujui' => null]);
+
         session()->setFlashdata('success', 'Pengajuan Validasi KAK berhasil dibatalkan!');
         return redirect()->to('/kak');
 
@@ -320,9 +332,9 @@ class Lpj extends BaseController
     public function riwayatLpj()
     {
         $data = [
-            'title' => 'Data Riwayat KAK',
+            'title' => 'Data Riwayat Kegiatan',
             'user_login' => $this->session->get(),
-            'breadcrumb' => ['Data Riwayat KAK'],
+            'breadcrumb' => ['Data Riwayat Kegiatan'],
             'kak' => $this->KerangkaKerjaModel->getRiwayatLpj(),
         ];
 
@@ -332,9 +344,9 @@ class Lpj extends BaseController
     public function riwayatLpjFilter()
     {
         $data = [
-            'title' => 'Data Riwayat KAK',
+            'title' => 'Data Riwayat Kegiatan',
             'user_login' => $this->session->get(),
-            'breadcrumb' => ['Data Riwayat KAK'],
+            'breadcrumb' => ['Data Riwayat Kegiatan'],
             'kak' => $this->KerangkaKerjaModel->getRiwayatLpjWithFilter($this->request->getVar('unit_kerja')),
         ];
 
