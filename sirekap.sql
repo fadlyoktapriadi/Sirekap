@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 27 Jan 2025 pada 12.25
+-- Waktu pembuatan: 30 Jan 2025 pada 11.00
 -- Versi server: 8.0.30
 -- Versi PHP: 8.1.10
 
@@ -43,13 +43,13 @@ CREATE TABLE `tbl_karyawan` (
 
 INSERT INTO `tbl_karyawan` (`NIP`, `nama_karyawan`, `alamat`, `unit_kerja`, `jabatan`, `created_at`, `updated_at`) VALUES
 ('0', 'Administrator', '-', '', 'Admin', '2024-12-23', '2024-12-23'),
-('196912312000023456', 'Wawan Supriatno', 'Perum Griya Asri, Jl. Mawar, Kota Bandung', 'Kefarmasian & Laboratorium', 'Staf', '2024-12-23', '2025-01-18'),
+('196912312000023456', 'Wawan Supriatno', 'Perum Griya Asri, Jl. Mawar, Kota Bandung', 'Esensial dan Keperawatan Kesehatan Masyarakat', 'Staf', '2024-12-23', '2025-01-28'),
 ('197011011995011002', 'Rere Jayabaya Sitepu, S.Kes.', 'Komp. Citra Damai Indah Blok.A4, Ciamis, Bekasi Barat', 'Kefarmasian & Laboratorium', 'Staf', '2025-01-17', '2025-01-18'),
 ('197501221991041001', 'Herman Gultom, S.Kes', 'Jl. Merdeka Barat Daya No.33, Buah Batu, Bandung', 'Kefarmasian & Laboratorium', 'Kepala Unit', '2025-01-17', '2025-01-17'),
 ('198501012008121001', 'Dr. Siti Nurhaliza, Sp.M', 'Jl. Kesehatan No. 12, Kota Medan', 'Pengembangan', 'Kepala Unit', '2025-01-18', '2025-01-18'),
 ('198503122010011234', 'dr. Jajang Nurohmat', 'Komplek Bumi Asri, Blok B No. 5, Kecamatan Medan Satria, Kota Bekasi', '', 'Kepala Puskesmas', '2024-12-23', '2024-12-23'),
 ('199002022015032002', 'Siska Sihotang, S.Kep., Ners', 'Perumahan Griya Sehat Blok A No. 5, Kabupaten Bogor', 'Pengembangan', 'Staf  Unit', '2025-01-18', '2025-01-18'),
-('199207082001801901', 'Pipiw Rosmana Dewi, S.kes', 'Jl. Anggrek Raya No. 12, Perumahan Harmoni Indah, Kota Bekasi', 'Esensial dan Keperawatan Kesehatan Masyarakat', 'Kepala Unit', '2024-12-23', '2025-01-18');
+('199207082001801901', 'Pipiw Rosmana Dewi, S.kes', 'Jl. Anggrek Raya No. 12, Perumahan Harmoni Indah, Kota Bekasi', 'Esensial dan Keperawatan Kesehatan Masyarakat', 'Kepala Unit', '2024-12-23', '2025-01-30');
 
 -- --------------------------------------------------------
 
@@ -81,9 +81,9 @@ CREATE TABLE `tbl_kerangka_kerja` (
 --
 
 INSERT INTO `tbl_kerangka_kerja` (`id_kak`, `program_kerja`, `nama_kegiatan`, `tanggal_mulai`, `tanggal_selesai`, `anggaran_dibutuhkan`, `anggaran_disetujui`, `penanggung_jawab`, `sasaran`, `target`, `file`, `status`, `catatan_status`, `tanggal_diterima`, `created_at`, `updated_at`) VALUES
-(16, 'Pencegahan Obat non BPOM', 'Konseling Obat Keliling ', '2025-01-01', '2025-01-31', 9000000, 8000000, '197501221991041001', 'Umum', 120, 'Konseling_Obat_Keliling_678ae61534110.pdf', 'Selesai', NULL, '2025-01-18', '2025-01-17', '2025-01-18'),
-(17, 'Pencegahan Stunting', 'Imunisasi Vitamin B', '2025-01-01', '2025-01-31', 12000000, 4000000, '199207082001801901', 'Balita dan Dibawah Anak Usia 12 Tahun', 150, 'Imunisasi_Vitamin_B678aeb6803e77.pdf', 'Diterima', NULL, '2025-01-18', '2025-01-17', '2025-01-18'),
-(18, 'Pencegahan Tunawicara Anak', 'Pelatihan Dasar Melatih Berbicara Anak', '2025-01-01', '2025-01-31', 5000000, NULL, '198501012008121001', 'Balita', 50, 'Pelatihan_Dasar_Melatih_Berbicara_Anak678af3b0c2a55.pdf', 'Diproses', NULL, NULL, '2025-01-18', '2025-01-18');
+(1, 'Pencegahan Tunawicara Anak', 'Imunisasi Vitamin B', '2025-02-01', '2025-02-28', 10000000, NULL, '199002022015032002', 'Balita dan Dibawah Anak Usia 12 Tahun', 150, 'Imunisasi_Vitamin_B67991bdcb9b9d.docx', 'Diproses', NULL, NULL, '2025-01-28', '2025-01-28'),
+(2, 'Pencegahan Obat non BPOM', 'Penyuluhan Obat Herbal', '2025-02-01', '2025-02-28', 15000000, 13000000, '197501221991041001', 'Umum', 100, 'Penyuluhan_Obat_Herbal67991ef2ad936.docx', 'Diterima', NULL, '2025-01-28', '2025-01-28', '2025-01-28'),
+(3, 'Pencegahan Stunting', 'Imunisasi Vitamin A', '2025-02-20', '2025-02-28', 8000000, 8000000, '199207082001801901', 'Balita dan Dibawah Anak Usia 12 Tahun', 120, 'Imunisasi_Vitamin_C67991f8de3876.docx', 'Selesai', NULL, '2025-01-28', '2025-01-28', '2025-01-28');
 
 -- --------------------------------------------------------
 
@@ -105,14 +105,14 @@ CREATE TABLE `tbl_kunjungan` (
 --
 
 INSERT INTO `tbl_kunjungan` (`id_kunjungan`, `id_kak`, `nama_desa`, `jumlah_kunjungan`, `created_at`, `updated_at`) VALUES
-(1, 16, 'Burujul Kulon', 12, '2025-01-18', '2025-01-18'),
-(2, 16, 'Burujul Wetan', 13, '2025-01-18', '2025-01-18'),
-(3, 16, 'Cicadas', 10, '2025-01-18', '2025-01-18'),
-(4, 16, 'Jatisura', 10, '2025-01-18', '2025-01-18'),
-(5, 16, 'Jatiwangi', 10, '2025-01-18', '2025-01-18'),
-(6, 16, 'Mekarsari', 10, '2025-01-18', '2025-01-18'),
-(7, 16, 'Surawangi', 10, '2025-01-18', '2025-01-18'),
-(8, 16, 'Sutawangi', 5, '2025-01-18', '2025-01-18');
+(1, 3, 'Burujul Kulon', 15, '2025-01-28', '2025-01-28'),
+(2, 3, 'Burujul Wetan', 15, '2025-01-28', '2025-01-28'),
+(3, 3, 'Cicadas', 20, '2025-01-28', '2025-01-28'),
+(4, 3, 'Jatisura', 15, '2025-01-28', '2025-01-28'),
+(5, 3, 'Jatiwangi', 10, '2025-01-28', '2025-01-28'),
+(6, 3, 'Mekarsari', 10, '2025-01-28', '2025-01-28'),
+(7, 3, 'Surawangi', 15, '2025-01-28', '2025-01-28'),
+(8, 3, 'Sutawangi', 10, '2025-01-28', '2025-01-28');
 
 -- --------------------------------------------------------
 
@@ -138,7 +138,7 @@ CREATE TABLE `tbl_lpj` (
 --
 
 INSERT INTO `tbl_lpj` (`id_lpj`, `id_kak`, `anggaran_digunakan`, `keterangan`, `catatan`, `file_lpj`, `dokumentasi`, `lpj_selesai`, `created_at`, `updated_at`) VALUES
-(1, 16, 8000000, 'hahahaha ga ada', 'Aman hehe', 'LPJ_678bf09314428.pdf', 'Dokumentasi_678bf0931514e.jpg', '2025-01-18', '2025-01-18', '2025-01-18');
+(1, 3, 8000000, 'ngga ada hehe', 'Aman bang', 'LPJ_679958d87e88d.docx', 'Dokumentasi_679958d87f0c3.jpg', '2025-01-28', '2025-01-28', '2025-01-28');
 
 -- --------------------------------------------------------
 
@@ -149,6 +149,7 @@ INSERT INTO `tbl_lpj` (`id_lpj`, `id_kak`, `anggaran_digunakan`, `keterangan`, `
 CREATE TABLE `tbl_pagu_anggaran` (
   `id_pagu_anggaran` int NOT NULL,
   `jumlah_anggaran` int NOT NULL,
+  `balance` int NOT NULL,
   `tahun_anggaran` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
@@ -158,8 +159,8 @@ CREATE TABLE `tbl_pagu_anggaran` (
 -- Dumping data untuk tabel `tbl_pagu_anggaran`
 --
 
-INSERT INTO `tbl_pagu_anggaran` (`id_pagu_anggaran`, `jumlah_anggaran`, `tahun_anggaran`, `created_at`, `updated_at`) VALUES
-(1, 88000000, '2025', '2025-01-17', '2025-01-18');
+INSERT INTO `tbl_pagu_anggaran` (`id_pagu_anggaran`, `jumlah_anggaran`, `balance`, `tahun_anggaran`, `created_at`, `updated_at`) VALUES
+(2, 100000000, 87000000, '2025', '2025-01-27', '2025-01-28');
 
 -- --------------------------------------------------------
 
@@ -181,8 +182,8 @@ CREATE TABLE `tbl_riwayat_anggaran` (
 --
 
 INSERT INTO `tbl_riwayat_anggaran` (`id_riwayat_anggaran`, `id_kak`, `jumlah_anggaran`, `label_anggaran`, `created_at`, `updated_at`) VALUES
-(4, 16, 8000000, 'Keluar', '2025-01-18', '2025-01-18'),
-(5, 17, 4000000, 'Keluar', '2025-01-18', '2025-01-18');
+(6, 3, 8000000, 'Keluar', '2025-01-28', '2025-01-28'),
+(7, 2, 13000000, 'Keluar', '2025-01-28', '2025-01-28');
 
 -- --------------------------------------------------------
 
@@ -207,8 +208,8 @@ CREATE TABLE `tbl_users` (
 INSERT INTO `tbl_users` (`id_user`, `NIP`, `username`, `password`, `role`, `created_at`, `updated_at`) VALUES
 (1, '0', 'admin', '$2y$10$YMaizMZysm9CQHeFuL/L3uoAtGsLMepOdqZF6xGzJ4X3Uotp8f8AG', 'Administrator', '2024-12-23', '2024-12-23'),
 (2, '198503122010011234', 'kepala_puskesmas', '$2y$10$hmutOTF5Qd60wY1PUZqADuYW62h1oT6YK64CaoO7MSNHKwdC5GTaO', 'Kepala Puskesmas', '2024-12-23', '2024-12-23'),
-(3, '199207082001801901', 'kepala_pipiw', '$2y$10$dvquP5BijVCCVRhh/riZo.xI/9JBqo7P9YzJIBKQhhmOT8hv4g0.C', 'Kepala Unit', '2024-12-23', '2025-01-18'),
-(4, '196912312000023456', 'staf_wawan', '$2y$10$1PCPNZtbMOm.tt446ZK81ukhlnyGuRXIQ1pWT.VSK.6zZfP/rsy9q', 'Staf Unit', '2024-12-23', '2025-01-18'),
+(3, '199207082001801901', 'kepala_pipiw', '$2y$10$CXmlMpgjoxxNdm.U.I9peunpJ2hWQCEP86sJyQiFNaU9fjjeQESzW', 'Kepala Unit', '2024-12-23', '2025-01-30'),
+(4, '196912312000023456', 'staf_wawan', '$2y$10$1PCPNZtbMOm.tt446ZK81ukhlnyGuRXIQ1pWT.VSK.6zZfP/rsy9q', 'Staf Unit', '2024-12-23', '2025-01-28'),
 (7, '197501221991041001', 'kepala_herman', '$2y$10$Y884yCPsljRChTW4P59dJeQVNQmBC79Vt9tw3JIb7rFyb5JrPEhXG', 'Kepala Unit', '2025-01-17', '2025-01-17'),
 (8, '197011011995011002', 'staf_rere', '$2y$10$D0QKrW8U5TjXOVo.Ciegjes0HrGbng8nPtC94YcEPBDCFcsZZ7q4O', 'Staf Unit', '2025-01-17', '2025-01-18'),
 (9, '198501012008121001', 'kepala_siti', '$2y$10$H5i96nNivqarEXvNVv0FlODR/GfEV5VbcbwjX215Lz4HnU38Rczku', 'Kepala Unit', '2025-01-18', '2025-01-18'),
@@ -272,7 +273,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT untuk tabel `tbl_kerangka_kerja`
 --
 ALTER TABLE `tbl_kerangka_kerja`
-  MODIFY `id_kak` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_kak` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_kunjungan`
@@ -290,13 +291,13 @@ ALTER TABLE `tbl_lpj`
 -- AUTO_INCREMENT untuk tabel `tbl_pagu_anggaran`
 --
 ALTER TABLE `tbl_pagu_anggaran`
-  MODIFY `id_pagu_anggaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pagu_anggaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_riwayat_anggaran`
 --
 ALTER TABLE `tbl_riwayat_anggaran`
-  MODIFY `id_riwayat_anggaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_riwayat_anggaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_users`
