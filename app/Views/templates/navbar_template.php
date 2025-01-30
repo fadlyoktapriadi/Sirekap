@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
-  data-assets-path="<?= base_url('assets') ?>/assets/" data-template="vertical-menu-template-free">
+  data-assets-path="<?= base_url('assets') ?>/" data-template="vertical-menu-template-free">
 
 <head>
   <meta charset="utf-8" />
@@ -23,30 +23,29 @@
     rel="stylesheet" />
 
   <!-- Icons. Uncomment required icon fonts -->
-  <link rel="stylesheet" href="<?= base_url('assets') ?>/assets/vendor/fonts/boxicons.css" />
+  <link rel="stylesheet" href="<?= base_url('assets') ?>/vendor/fonts/boxicons.css" />
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="<?= base_url('assets') ?>/assets/vendor/css/core.css"
-    class="template-customizer-core-css" />
-  <link rel="stylesheet" href="<?= base_url('assets') ?>/assets/vendor/css/theme-default.css"
+  <link rel="stylesheet" href="<?= base_url('assets') ?>/vendor/css/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="<?= base_url('assets') ?>/vendor/css/theme-default.css"
     class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="<?= base_url('assets') ?>/assets/css/demo.css" />
+  <link rel="stylesheet" href="<?= base_url('assets') ?>/css/demo.css" />
 
   <!-- Vendors CSS -->
-  <link rel="stylesheet" href="<?= base_url('assets') ?>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="<?= base_url('assets') ?>/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-  <link rel="stylesheet" href="<?= base_url('assets') ?>/assets/vendor/libs/apex-charts/apex-charts.css" />
+  <link rel="stylesheet" href="<?= base_url('assets') ?>/vendor/libs/apex-charts/apex-charts.css" />
 
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
 
   <!-- Page CSS -->
 
   <!-- Helpers -->
-  <script src="<?= base_url('assets') ?>/assets/vendor/js/helpers.js"></script>
+  <script src="<?= base_url('assets') ?>/vendor/js/helpers.js"></script>
 
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="<?= base_url('assets') ?>/assets/js/config.js"></script>
+  <script src="<?= base_url('assets') ?>/js/config.js"></script>
 </head>
 
 <body>
@@ -295,19 +294,19 @@
 
   <!-- Core JS -->
   <!-- build:js assets/vendor/js/core.js -->
-  <script src="<?= base_url('assets') ?>/assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="<?= base_url('assets') ?>/assets/vendor/libs/popper/popper.js"></script>
-  <script src="<?= base_url('assets') ?>/assets/vendor/js/bootstrap.js"></script>
-  <script src="<?= base_url('assets') ?>/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="<?= base_url('assets') ?>/vendor/libs/jquery/jquery.js"></script>
+  <script src="<?= base_url('assets') ?>/vendor/libs/popper/popper.js"></script>
+  <script src="<?= base_url('assets') ?>/vendor/js/bootstrap.js"></script>
+  <script src="<?= base_url('assets') ?>/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-  <script src="<?= base_url('assets') ?>/assets/vendor/js/menu.js"></script>
+  <script src="<?= base_url('assets') ?>/vendor/js/menu.js"></script>
   <!-- endbuild -->
 
   <!-- Vendors JS -->
-  <script src="<?= base_url('assets') ?>/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+  <script src="<?= base_url('assets') ?>/vendor/libs/apex-charts/apexcharts.js"></script>
 
   <!-- Main JS -->
-  <script src="<?= base_url('assets') ?>/assets/js/main.js"></script>
+  <script src="<?= base_url('assets') ?>/js/main.js"></script>
 
   <!-- Page JS -->
   <?= $this->renderSection('jscart') ?>
