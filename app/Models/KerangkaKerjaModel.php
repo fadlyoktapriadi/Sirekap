@@ -27,6 +27,7 @@ class KerangkaKerjaModel extends Model
         return $this->select('tbl_kerangka_kerja.*, tbl_karyawan.NIP, tbl_karyawan.nama_karyawan')
             ->join('tbl_karyawan', 'tbl_karyawan.NIP = tbl_kerangka_kerja.penanggung_jawab')
             ->where('tbl_karyawan.unit_kerja', $filter)
+            ->where('status', "Diproses")
             ->orWhere("status", "Perlu Perbaikan KAK")
             ->orWhere("status", "Ditolak")
             ->orderBy("created_at", "asc")

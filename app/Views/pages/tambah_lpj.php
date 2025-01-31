@@ -60,9 +60,8 @@
                                 <td>Target</td>
                                 <td><?= $kak['target'] ?> Kunjungan</td>
                             </tr>
-
                         </table>
-                        <?php if ($user_login['role'] == 'Staf Unit' || $user_login['role'] == 'Kepala Unit'): ?>
+                        <?php if ($kak['unit_kerja'] == $user_login['unit_kerja'] && $user_login['role'] == "Staf Unit"): ?>
                             <div class="row">
                                 <div class="col">
                                     <h4 class="mt-4">Lembar Pertanggung Jawaban</h4>

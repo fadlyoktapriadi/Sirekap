@@ -61,22 +61,24 @@
                                 } ?> me-1"><?= ($item['status'] == 'Diterima') ? 'Belum Mengisi LPJ' : $item['status'] ?></span>
                         </td>
                         <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <?php if ($item['status'] == 'Diterima'): ?>
-                                        <a class="dropdown-item" href="<?= base_url('lpj/tambah/') . $item['id_kak'] ?>"><i
-                                                class="bx bx-pencil me-1"></i>
-                                            Input LPJ</a>
-                                    <?php else: ?>
-                                        <a class="dropdown-item" href="<?= base_url('lpj/detail/') . $item['id_kak'] ?>"><i
-                                                class="bx bx-detail me-1"></i>
-                                            Detail</a>
-                                    <?php endif; ?>
+                            <?php if ($item['unit_kerja'] == $user_login['unit_kerja']): ?>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <?php if ($item['status'] == 'Diterima'): ?>
+                                            <a class="dropdown-item" href="<?= base_url('lpj/tambah/') . $item['id_kak'] ?>"><i
+                                                    class="bx bx-pencil me-1"></i>
+                                                Input LPJ</a>
+                                        <?php else: ?>
+                                            <a class="dropdown-item" href="<?= base_url('lpj/detail/') . $item['id_kak'] ?>"><i
+                                                    class="bx bx-detail me-1"></i>
+                                                Detail</a>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

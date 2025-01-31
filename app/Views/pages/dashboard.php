@@ -17,7 +17,7 @@
         </div>
         <div class="col-sm-5 text-center text-sm-left">
           <div class="card-body pb-0 px-0 px-md-4">
-            <img src="<?= base_url('assets') ?>/assets/img/illustrations/man-with-laptop-light.png" height="140"
+            <img src="<?= base_url('assets') ?>/img/illustrations/man-with-laptop-light.png" height="140"
               alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png"
               data-app-light-img="illustrations/man-with-laptop-light.png" />
           </div>
@@ -235,7 +235,7 @@
           <div class="card-body">
             <div class="card-title d-flex align-items-start justify-content-between">
               <div class="avatar flex-shrink-0">
-                <img src="<?= base_url('assets') ?>/assets/img/icons/unicons/cc-warning.png" alt="chart success"
+                <img src="<?= base_url('assets') ?>/img/icons/unicons/cc-warning.png" alt="chart success"
                   class="rounded" />
               </div>
             </div>
@@ -265,7 +265,7 @@
           <div class="card-body">
             <div class="card-title d-flex align-items-start justify-content-between">
               <div class="avatar flex-shrink-0">
-                <img src="<?= base_url('assets') ?>/assets/img/icons/unicons/cc-success.png" alt="chart success"
+                <img src="<?= base_url('assets') ?>/img/icons/unicons/cc-success.png" alt="chart success"
                   class="rounded" />
               </div>
             </div>
@@ -280,5 +280,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('jscart') ?>
-<script src="<?= base_url('assets') ?>/assets/js/chartConfig.js"></script>
+<script src="<?= base_url('assets') ?>/js/chartConfig.js"></script>
 <?= $this->endSection() ?>
