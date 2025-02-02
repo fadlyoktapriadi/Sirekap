@@ -92,7 +92,7 @@
             </table>
         </div>
     </div>
-    <?php if ($user_login['role'] != 'Staf Unit' && $user_login['unit_kerja'] == $kak['unit_kerja']): ?>
+    <?php if (($user_login['role'] != 'Staf Unit' && $user_login['unit_kerja'] == $kak['unit_kerja']) || $user_login['role'] == 'Kepala Puskesmas'): ?>
         <div class="row">
             <div class="col">
                 <div class="d-flex justify-content-end mt-3 mx-4">

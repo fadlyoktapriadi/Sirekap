@@ -162,7 +162,7 @@
                                 <div class="row">
                                     <div class="col mt-4">
                                         <div class="d-flex justify-content-end mt-4">
-                                            <?php if ($user_login['role'] == 'Staf Unit' && $lpj['status'] != 'Selesai'): ?>
+                                            <?php if ($user_login['role'] == 'Staf Unit' && ($lpj['status'] == 'Menunggu Persetujuan LPJ' || $lpj['status'] == 'Perlu Perbaikan LPJ' || $lpj['status'] == 'LPJ Ditolak') && $lpj['unit_kerja'] == $user_login['unit_kerja']): ?>
                                                 <a href="<?= base_url('lpj/edit/') . $lpj['id_kak'] ?>"
                                                     class="btn btn-sm btn-primary mx-2">
                                                     <i class="bx bx-pencil me-1"></i>
@@ -174,7 +174,7 @@
                                                     Hapus LPJ
                                                 </a>
                                             <?php else: ?>
-                                                <?php if ($user_login['role'] != 'Staf Unit' && $user_login['unit_kerja'] == $lpj['unit_kerja']): ?>
+                                                <?php if (($user_login['role'] != 'Staf Unit' && $user_login['unit_kerja'] == $lpj['unit_kerja']) || $user_login['role'] == 'Kepala Puskesmas'): ?>
                                                     <?php if ($lpj['status'] == 'Selesai'): ?>
                                                         <button class="btn btn-danger" data-bs-toggle="modal"
                                                             data-bs-target="#modalCenter">Batal Validasi Lembar Pertanggung
