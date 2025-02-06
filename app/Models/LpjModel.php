@@ -23,6 +23,8 @@ class LpjModel extends Model
     public function jumlahAnggaranDigunakan()
     {
         return $this->selectSum('anggaran_digunakan')
+            ->join('tbl_kerangka_kerja', 'tbl_lpj.id_kak = tbl_kerangka_kerja.id_kak')
+            ->where('tbl_kerangka_kerja.status', 'Selesai')
             ->first();
     }
 }
